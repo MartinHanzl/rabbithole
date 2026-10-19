@@ -28,7 +28,7 @@ nonisolated enum WikipediaParser {
     }
 
     struct CategoryPage: Sendable, Equatable {
-        var articles: [String]
+        var articles: [ArticleReference]
         var subcategories: [String]
         var continuation: String?
     }
@@ -40,7 +40,7 @@ nonisolated enum WikipediaParser {
         for member in dto.query?.categorymembers ?? [] {
             switch member.ns {
             case 0:
-                page.articles.append(member.title)
+                page.articles.append(ArticleReference(pageID: member.pageid, title: member.title))
             case 14:
                 page.subcategories.append(stripCategoryPrefix(member.title))
             default:

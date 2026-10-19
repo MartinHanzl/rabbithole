@@ -1,5 +1,11 @@
 import Foundation
 
+/// Minimal pointer to an article, as listed in a category.
+nonisolated struct ArticleReference: Codable, Hashable, Sendable {
+    let pageID: Int
+    let title: String
+}
+
 /// A short article shown on a feed card.
 nonisolated struct ArticleSummary: Identifiable, Hashable, Sendable {
     enum PageType: String, Sendable {

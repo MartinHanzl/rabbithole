@@ -58,7 +58,7 @@ struct WikipediaParserTests {
         let page = try WikipediaParser.categoryMembers(from: Fixtures.data("categorymembers"))
 
         #expect(page.articles.count == 8)
-        #expect(page.articles.first == "Planeta")
+        #expect(page.articles.first == ArticleReference(pageID: 797, title: "Planeta"))
         #expect(page.subcategories.isEmpty)
         #expect(page.continuation != nil)
     }
@@ -73,7 +73,7 @@ struct WikipediaParserTests {
         """
         let page = try WikipediaParser.categoryMembers(from: Data(json.utf8))
 
-        #expect(page.articles == ["Jupiter (planeta)"])
+        #expect(page.articles == [ArticleReference(pageID: 1, title: "Jupiter (planeta)")])
         #expect(page.subcategories == ["Exoplanety"])
         #expect(page.continuation == nil)
     }
