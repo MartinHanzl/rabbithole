@@ -1,23 +1,65 @@
 {
   "sourceLanguage" : "cs",
   "strings" : {
-    "Bez připojení" : {},
-    "Bez připojení se zobrazuje jen úvod článku." : {},
-    "Biologie" : {},
-    "Celý článek se nepodařilo načíst." : {},
-    "Co tě zajímá?" : {},
-    "Další články se nepodařilo načíst." : {},
+    "· Mimo tvá témata" : {
+
+    },
+    "3–24 znaků: písmena bez diakritiky, číslice, _ a tečka." : {
+
+    },
+    "Bez hesla – stačí odkaz z e-mailu." : {
+
+    },
+    "Bez připojení" : {
+
+    },
+    "Bez připojení se zobrazuje jen úvod článku." : {
+
+    },
+    "Biologie" : {
+
+    },
+    "Čas na malou pauzu?" : {
+
+    },
+    "Celý článek se nepodařilo načíst." : {
+
+    },
+    "Číst dál" : {
+
+    },
+    "Články se načítají z Wikipedie. Zkontroluj připojení k internetu a zkus to znovu." : {
+
+    },
+    "Články se nepodařilo načíst. Zkus to prosím za chvíli znovu." : {
+
+    },
+    "Články, které si ve feedu uložíš, najdeš tady – i bez připojení." : {
+
+    },
+    "Co tě zajímá?" : {
+
+    },
+    "Co ukládáme na server, když máš účet" : {
+
+    },
+    "Co zůstává jen v zařízení" : {
+
+    },
+    "Čtení" : {
+
+    },
+    "Další články se nepodařilo načíst." : {
+
+    },
+    "Data jsou uložena u služby Supabase v datovém centru v EU (Irsko)." : {
+
+    },
     "Dnes už víš o %lld věcí víc. Možná je dobrá chvíle se protáhnout, nebo o něčem z toho říct někomu dalšímu." : {
       "localizations" : {
         "cs" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Dnes už víš o %lld věc víc. Možná je dobrá chvíle se protáhnout, nebo o něčem z toho říct někomu dalšímu."
-                }
-              },
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -28,6 +70,12 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "Dnes už víš o %lld věci víc. Možná je dobrá chvíle se protáhnout, nebo o něčem z toho říct někomu dalšímu."
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Dnes už víš o %lld věc víc. Možná je dobrá chvíle se protáhnout, nebo o něčem z toho říct někomu dalšímu."
                 }
               },
               "other" : {
@@ -41,42 +89,131 @@
         }
       }
     },
-    "Doporučování probíhá jen v tomto zařízení. Ukládání a delší čtení zvyšují váhu tématu, „Nezajímá mě“ ji snižuje. Zhruba každý desátý článek je z tématu, které nemáš vybrané." : {},
-    "Filozofie" : {},
-    "Geografie" : {},
-    "Historie" : {},
-    "Hledám zajímavé články…" : {},
-    "Hudba" : {},
-    "Jazyk" : {},
-    "Krátké a zajímavé články podle tvých zájmů místo nekonečného scrollování." : {},
-    "Licence CC BY-SA 4.0" : {},
-    "Licenční podmínky Wikipedie" : {},
-    "Moje témata" : {},
-    "Nastavení" : {},
-    "Nezajímá mě" : {},
-    "Něco se pokazilo" : {},
-    "O aplikaci a licence" : {},
-    "Objevuj" : {},
-    "Obnovit" : {},
-    "Obnovit doporučování" : {},
-    "Obrázek: autor a licence" : {},
-    "Obrázky" : {},
-    "Obrázky mají vlastní licence a autory. U každého obrázku najdeš odkaz „Obrázek: autor a licence“, který vede na jeho stránku na Wikimedia Commons nebo Wikipedii s úplnými údaji." : {},
-    "Obsah se načítá přes veřejná API Wikimedia (REST API a Action API české Wikipedie). Odpovědi se ukládají do mezipaměti v zařízení, aby aplikace zbytečně nezatěžovala servery." : {},
-    "Odebrat" : {},
-    "Odebrat z uložených" : {},
-    "Otevřít původní článek na Wikipedii" : {},
+    "Dokonči nastavení profilu." : {
+
+    },
+    "Dokončit" : {
+
+    },
+    "Doporučování probíhá jen v tomto zařízení. Ukládání a delší čtení zvyšují váhu tématu, „Nezajímá mě“ ji snižuje. Zhruba každý desátý článek je z tématu, které nemáš vybrané." : {
+
+    },
+    "E-mail" : {
+
+    },
+    "Filozofie" : {
+
+    },
+    "Geografie" : {
+
+    },
+    "Historie" : {
+
+    },
+    "Hledám zajímavé články…" : {
+
+    },
+    "Hudba" : {
+
+    },
+    "Jak tě najdou přátelé" : {
+
+    },
+    "Jazyk" : {
+
+    },
+    "Jen písmena bez diakritiky, číslice, podtržítko a tečka." : {
+
+    },
+    "K přihlášení používáme e-mail nebo účet Google. E-mail neukazujeme ostatním uživatelům." : {
+
+    },
+    "Kdo data vidí" : {
+
+    },
+    "Kód z e-mailu" : {
+
+    },
+    "Krátké a zajímavé články podle tvých zájmů místo nekonečného scrollování." : {
+
+    },
+    "Licence CC BY-SA 4.0" : {
+
+    },
+    "Licenční podmínky Wikipedie" : {
+
+    },
+    "Moje témata" : {
+
+    },
+    "Nastavení" : {
+
+    },
+    "Návrh – finální znění zásad ochrany osobních údajů doplníme před vydáním." : {
+
+    },
+    "Nebo e-mailem" : {
+
+    },
+    "Něco se nepovedlo. Zkus to prosím znovu." : {
+
+    },
+    "Něco se pokazilo" : {
+
+    },
+    "Nejsi připojený k internetu." : {
+
+    },
+    "Nejvýš 24 znaků." : {
+
+    },
+    "Nezajímá mě" : {
+
+    },
+    "O aplikaci a licence" : {
+
+    },
+    "Objevuj" : {
+
+    },
+    "Obnovit" : {
+
+    },
+    "Obnovit doporučování" : {
+
+    },
+    "Obrázek: autor a licence" : {
+
+    },
+    "Obrázky" : {
+
+    },
+    "Obrázky mají vlastní licence a autory. U každého obrázku najdeš odkaz „Obrázek: autor a licence“, který vede na jeho stránku na Wikimedia Commons nebo Wikipedii s úplnými údaji." : {
+
+    },
+    "Obsah se načítá přes veřejná API Wikimedia (REST API a Action API české Wikipedie). Odpovědi se ukládají do mezipaměti v zařízení, aby aplikace zbytečně nezatěžovala servery." : {
+
+    },
+    "Ochrana soukromí" : {
+
+    },
+    "Odebrat" : {
+
+    },
+    "Odebrat z uložených" : {
+
+    },
+    "Odhlásit se" : {
+
+    },
+    "Otevřít původní článek na Wikipedii" : {
+
+    },
     "Pauza po %lld článcích" : {
       "localizations" : {
         "cs" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Pauza po %lld článku"
-                }
-              },
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -84,6 +221,12 @@
                 }
               },
               "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pauza po %lld článku"
+                }
+              },
+              "one" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "Pauza po %lld článku"
@@ -100,39 +243,140 @@
         }
       }
     },
-    "Pauzu nepřipomínat" : {},
-    "Personalizace" : {},
-    "Po daném počtu přečtených článků ti nabídneme krátkou pauzu." : {},
-    "Pokračovat" : {},
-    "Pokračovat ve čtení" : {},
-    "Pro vybraná témata jsme nenašli nic nového. Zkus v nastavení přidat další témata." : {},
-    "Psychologie" : {},
-    "Sdílet" : {},
-    "Soukromí" : {},
-    "Sport" : {},
-    "Technika" : {},
-    "Text pochází z české Wikipedie a je dostupný pod licencí Creative Commons Uveďte původ – Zachovejte licenci 4.0. Zobrazení je zjednodušené – tabulky, vzorce a obrázky v textu najdeš v původním článku." : {},
-    "Texty" : {},
-    "Texty článků pocházejí z české Wikipedie a jsou dostupné pod licencí Creative Commons Uveďte původ – Zachovejte licenci 4.0 (CC BY-SA 4.0). U každého článku je uveden odkaz na původní stránku, kde najdeš i seznam autorů a historii úprav." : {},
-    "Uloženo" : {},
-    "Uložené" : {},
-    "Uložit" : {},
-    "Umění" : {},
-    "Ve feedu se mohou znovu objevit články, které už jsi viděl/a." : {},
-    "Verze %@" : {},
-    "Vesmír" : {},
-    "Vyber aspoň tři témata." : {},
+    "Pauzu nepřipomínat" : {
+
+    },
+    "Personalizace" : {
+
+    },
+    "Po daném počtu přečtených článků ti nabídneme krátkou pauzu." : {
+
+    },
+    "Pokračovat" : {
+
+    },
+    "Pokračovat přes Google" : {
+
+    },
+    "Pokračovat ve čtení" : {
+
+    },
+    "Poslali jsme e-mail na %@. Klepni v něm na odkaz – otevře se aplikace a budeš přihlášený." : {
+
+    },
+    "Poslat přihlašovací e-mail" : {
+
+    },
+    "Použít jiný e-mail" : {
+
+    },
+    "Přátelé pak uvidí tvoje uložené články v záložce Od přátel. Můžeš to kdykoli změnit v nastavení." : {
+
+    },
+    "Přezdívka" : {
+
+    },
+    "Přezdívku a avatar vidí ostatní přihlášení uživatelé (kromě těch, které blokuješ). Témata a uložené články jen tví přátelé, zprávy jen účastníci konverzace." : {
+
+    },
+    "Přezdívku, avatar, vybraná témata, seznam přátel a blokovaných uživatelů, články, které posíláš přátelům, a zprávy k nim. Uložené články jen tehdy, když povolíš, aby je přátelé viděli." : {
+
+    },
+    "Přihlášení" : {
+
+    },
+    "Přihlásit kódem" : {
+
+    },
+    "Přihlásit se" : {
+
+    },
+    "Pro vybraná témata jsme nenašli nic nového. Zkus v nastavení přidat další témata." : {
+
+    },
+    "Profil se nepodařilo načíst." : {
+
+    },
+    "Psychologie" : {
+
+    },
+    "S účtem můžeš přidávat přátele a posílat si články." : {
+
+    },
+    "Sdílet" : {
+
+    },
+    "Smazání" : {
+
+    },
+    "Soukromí" : {
+
+    },
+    "Sport" : {
+
+    },
+    "Tahle přezdívka už je obsazená." : {
+
+    },
+    "Technika" : {
+
+    },
+    "Text pochází z české Wikipedie a je dostupný pod licencí Creative Commons Uveďte původ – Zachovejte licenci 4.0. Zobrazení je zjednodušené – tabulky, vzorce a obrázky v textu najdeš v původním článku." : {
+
+    },
+    "Texty" : {
+
+    },
+    "Texty článků pocházejí z české Wikipedie a jsou dostupné pod licencí Creative Commons Uveďte původ – Zachovejte licenci 4.0 (CC BY-SA 4.0). U každého článku je uveden odkaz na původní stránku, kde najdeš i seznam autorů a historii úprav." : {
+
+    },
+    "Tvůj profil" : {
+
+    },
+    "Účet" : {
+
+    },
+    "Účet můžeš kdykoli smazat přímo v aplikaci. Smažou se tím všechna data na serveru, včetně tvých zpráv." : {
+
+    },
+    "Účet potřebuješ jen pro přátele a sdílení článků. Feed a uložené články fungují i bez něj." : {
+
+    },
+    "Ukazovat přátelům, co si ukládám" : {
+
+    },
+    "Uložené" : {
+
+    },
+    "Uloženo" : {
+
+    },
+    "Uložit" : {
+
+    },
+    "Umění" : {
+
+    },
+    "Ve feedu se mohou znovu objevit články, které už jsi viděl/a." : {
+
+    },
+    "Verze %@" : {
+
+    },
+    "Vesmír" : {
+
+    },
+    "Všechna témata budou mít znovu stejnou váhu." : {
+
+    },
+    "Vyber aspoň tři témata." : {
+
+    },
     "Vyber ještě %lld" : {
       "localizations" : {
         "cs" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Vyber ještě %lld téma"
-                }
-              },
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -143,6 +387,12 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "Vyber ještě %lld tématu"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Vyber ještě %lld téma"
                 }
               },
               "other" : {
@@ -156,27 +406,57 @@
         }
       }
     },
-    "Vyber si aspoň tři témata. Podle nich ti budeme nabízet krátké články z Wikipedie. Výběr můžeš kdykoli změnit v nastavení." : {},
-    "Vybraná témata, uložené články a historie zobrazených článků zůstávají jen v tomto zařízení. Aplikace nemá účty a nesbírá žádná osobní data." : {},
-    "Všechna témata budou mít znovu stejnou váhu." : {},
-    "Wikipedie" : {},
-    "Wikipedie® je ochranná známka nadace Wikimedia Foundation. Tato aplikace není s nadací Wikimedia Foundation nijak spojena." : {},
-    "Zajímavosti" : {},
-    "Zapomenout" : {},
-    "Zapomenout zobrazené články" : {},
-    "Zatím nic uloženého" : {},
-    "Zdroj dat" : {},
-    "Zdroj:" : {},
-    "Zkusit znovu" : {},
-    "Znění licence CC BY-SA 4.0" : {},
-    "· Mimo tvá témata" : {},
-    "Čas na malou pauzu?" : {},
-    "Články se načítají z Wikipedie. Zkontroluj připojení k internetu a zkus to znovu." : {},
-    "Články se nepodařilo načíst. Zkus to prosím za chvíli znovu." : {},
-    "Články, které si ve feedu uložíš, najdeš tady – i bez připojení." : {},
-    "Čtení" : {},
-    "Číst dál" : {},
-    "Žádné články" : {}
+    "Vyber si aspoň tři témata. Podle nich ti budeme nabízet krátké články z Wikipedie. Výběr můžeš kdykoli změnit v nastavení." : {
+
+    },
+    "Vybraná témata a jejich váhy, historie zobrazených článků, doba čtení a uložené články (pokud nemáš účet)." : {
+
+    },
+    "Vybraná témata, uložené články a historie zobrazených článků zůstávají jen v tomto zařízení. Aplikace nemá účty a nesbírá žádná osobní data." : {
+
+    },
+    "Wikipedie" : {
+
+    },
+    "Wikipedie® je ochranná známka nadace Wikimedia Foundation. Tato aplikace není s nadací Wikimedia Foundation nijak spojena." : {
+
+    },
+    "Žádné články" : {
+
+    },
+    "Zajímavosti" : {
+
+    },
+    "Zapomenout" : {
+
+    },
+    "Zapomenout zobrazené články" : {
+
+    },
+    "Zásady ochrany osobních údajů" : {
+
+    },
+    "Zatím nic uloženého" : {
+
+    },
+    "Zavřít" : {
+
+    },
+    "Zdroj dat" : {
+
+    },
+    "Zdroj:" : {
+
+    },
+    "Zkusit znovu" : {
+
+    },
+    "Znění licence CC BY-SA 4.0" : {
+
+    },
+    "Zpracovatel" : {
+
+    }
   },
   "version" : "1.0"
 }

@@ -165,6 +165,15 @@ select is_empty(
   'blocked user cannot see blocker''s profile');
 select is_empty($$ select * from public.search_profiles('bo') $$, 'blocker is hidden from search');
 select is_empty($$ select * from public.user_topics $$, 'topics hidden after block');
+
+set local request.jwt.claims = '{"sub": "22222222-2222-2222-2222-222222222222"}';
+select results_eq(
+  $$ select nickname::text from public.profiles where id = '11111111-1111-1111-1111-111111111111' $$,
+  array['alice'], 'blocker still sees the blocked profile (for the unblock list)');
+select is_empty($$ select * from public.search_profiles('al') $$, 'blocked user is hidden from blocker''s search');
+select results_eq(
+  $$ select count(*)::int from public.blocks $$, array[1], 'blocker sees own block');
+set local request.jwt.claims = '{"sub": "11111111-1111-1111-1111-111111111111"}';
 select throws_ok(
   $$ insert into public.messages (share_id, author_id, body)
      values ('aaaaaaaa-0000-0000-0000-000000000001', '11111111-1111-1111-1111-111111111111', 'proč?') $$,
