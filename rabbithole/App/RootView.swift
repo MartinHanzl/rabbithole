@@ -84,12 +84,8 @@ struct MainTabView: View {
                 saved: SavedArticlesRepository(context: modelContext),
                 seenVideos: SeenVideosRepository(context: modelContext),
                 savedVideos: SavedVideosRepository(context: modelContext),
-                breakInterval: {
-                    UserDefaults.standard.object(forKey: SettingsKey.breakInterval) as? Int ?? AppConfig.defaultBreakInterval
-                },
-                videoInterval: {
-                    UserDefaults.standard.object(forKey: SettingsKey.videoInterval) as? Int ?? FeedSlotPlanner.defaultVideoInterval
-                }
+                breakInterval: { Self.integer(SettingsKey.breakInterval, default: AppConfig.defaultBreakInterval) },
+                videoInterval: { Self.integer(SettingsKey.videoInterval, default: FeedSlotPlanner.defaultVideoInterval) }
             ))
             .tabItem { Label("Objevuj", systemImage: "rectangle.stack") }
             .tag(Tab.feed)
@@ -112,6 +108,11 @@ struct MainTabView: View {
             let topics = TopicPreferencesRepository(context: modelContext).selectedTopicIDs()
             Task { try? await auth.syncTopics(topics) }
         }
+    }
+
+    /// `integer(forKey:)` also accepts string values, e.g. from `-videoInterval 1` launch arguments.
+    private static func integer(_ key: String, default defaultValue: Int) -> Int {
+        UserDefaults.standard.object(forKey: key) == nil ? defaultValue : UserDefaults.standard.integer(forKey: key)
     }
 
     /// DEBUG: `-demoTab settings` opens a tab directly – used for simulator screenshots.
