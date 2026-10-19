@@ -5,6 +5,8 @@ struct AccountSection: View {
     @Environment(AuthService.self) private var auth
     @State private var showsSignIn = false
     @State private var errorMessage: String?
+    @State private var confirmsDeletion = false
+    @State private var isDeleting = false
 
     var body: some View {
         switch auth.state {
@@ -60,8 +62,39 @@ struct AccountSection: View {
                     PrivacyPolicyView()
                 }
                 signOutButton
+                Button(role: .destructive) {
+                    confirmsDeletion = true
+                } label: {
+                    HStack {
+                        Text("Smazat účet")
+                        if isDeleting {
+                            Spacer()
+                            ProgressView()
+                        }
+                    }
+                }
+                .disabled(isDeleting)
             } header: {
                 Text("Účet")
+            }
+            .alert("Smazat účet?", isPresented: $confirmsDeletion) {
+                Button("Smazat natrvalo", role: .destructive, action: deleteAccount)
+                Button("Zrušit", role: .cancel) {}
+            } message: {
+                Text("Ze serveru se smaže tvůj profil, přátelé, sdílené články i všechny tvoje zprávy. Nejde to vrátit. Témata a uložené články v tomto zařízení zůstanou.")
+            }
+        }
+    }
+
+    private func deleteAccount() {
+        isDeleting = true
+        Task {
+            defer { isDeleting = false }
+            do {
+                try await auth.deleteAccount()
+                errorMessage = nil
+            } catch {
+                errorMessage = error.localizedDescription
             }
         }
     }

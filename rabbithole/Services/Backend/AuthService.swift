@@ -127,6 +127,20 @@ final class AuthService {
         state = .signedOut
     }
 
+    /// Permanently deletes the account and all its server data (Edge Function `delete-account`).
+    /// Local data – topics, saved articles, reading history – stays on the device.
+    func deleteAccount() async throws {
+        guard let client else { return }
+        do {
+            try await client.functions.invoke("delete-account")
+        } catch {
+            throw Self.map(error)
+        }
+        // The session belongs to a deleted user now; drop it locally.
+        try? await client.auth.signOut(scope: .local)
+        state = .signedOut
+    }
+
     // MARK: Profile
 
     func retryLoadingProfile() async {

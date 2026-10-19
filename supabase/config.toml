@@ -432,3 +432,7 @@ enabled = true
 # [auth.email.template.confirmation]
 # subject = "Tvůj kód pro dokončení registrace do Rabbithole"
 # content_path = "./supabase/templates/confirmation.html"
+
+# The function authenticates the caller from the access token itself.
+[functions.delete-account]
+verify_jwt = false
