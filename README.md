@@ -86,6 +86,28 @@ Klíč je teď v aplikaci, takže se dá z binárky vytáhnout a všichni uživa
    - RLS: `video_cache` čte jen funkce (service role), klient tabulku nevidí.
 5. **V aplikaci** se `YouTubeClient` nahradí implementací `YouTubeService`, která volá funkci. `VideoPool` a celý zbytek zůstanou beze změny, protože protokol je stejný.
 
+## Fáze 2: přátelé, sdílení, výzvy
+
+- **Backend** běží na Supabase (free tier). Schéma je v `supabase/migrations/`, testy RLS v pgTAP v `supabase/tests/database/` (`npx supabase test db`).
+- **Sdílení a chat:**
+  - článek se pošle příteli s volitelnou zprávou;
+  - ke každému sdílení patří chat;
+  - realtime běží jen pro otevřený chat;
+  - seznamy se stránkují po 20 položkách.
+- **Výzvy:**
+  - otázka k článku se třemi možnostmi nebo otevřená otázka;
+  - zapisuje se jen přes RPC `create_challenge` a `answer_challenge`;
+  - správná odpověď je v tabulce `challenge_solutions`, kterou příjemce vidí až po své odpovědi;
+  - výzvy jde v Nastavení vypnout.
+- **Hotové otázky** poskytuje Edge Function `article-questions`: nejdřív šablony z Wikidat, a když nic nevyjde, Gemini z úvodu článku. Výsledek se ukládá do sdílené cache `article_questions`.
+  - Tajné proměnné: `npx supabase secrets set GEMINI_API_KEY=…`, volitelně `GEMINI_MODEL` (výchozí `gemini-3.1-flash-lite`).
+  - Testy: `docker run --rm -v "$PWD/supabase/functions/article-questions:/app:ro" -w /app denoland/deno:2.1.4 test --no-prompt questions_test.ts`
+- **Notifikace bez APNs:** push vyžaduje placený Apple Developer účet. Místo něj iOS občas probudí aplikaci na pozadí (Background App Refresh, `ActivityNotifier`). Aplikace se zeptá na novinky a zobrazí lokální notifikaci.
+  - Notifikace může přijít se zpožděním a doručení není zaručené.
+  - Zprávy se v notifikacích kvůli soukromí nezobrazují, ukazuje se jen otázka výzvy.
+  - Na záložce „Od přátel“ je odznak s počtem novinek.
+- **Smazání účtu** řeší Edge Function `delete-account`. Integrační test: `bash supabase/tests/functions/delete-account.sh`.
+
 ## Kde upravit mapování témat na kategorie
 
 Všechno je v jednom souboru: **`rabbithole/Config/TopicCatalog.swift`**.

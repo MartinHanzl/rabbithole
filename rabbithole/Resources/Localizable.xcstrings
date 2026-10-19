@@ -37,6 +37,9 @@
         }
       }
     },
+    "%@ tě vyzývá" : {
+
+    },
     "%@ tě vyzývá: %@" : {
       "localizations" : {
         "cs" : {
@@ -221,6 +224,9 @@
     "K tomuto článku už výzva je." : {
 
     },
+    "K článku „%@“" : {
+
+    },
     "Každá %lld. karta" : {
 
     },
@@ -330,6 +336,9 @@
 
     },
     "Nikoho neblokuješ." : {
+
+    },
+    "Nová zpráva od %@" : {
 
     },
     "Návrh – finální znění zásad ochrany osobních údajů doplníme před vydáním." : {

@@ -22,9 +22,9 @@
 
 /* Begin PBXFileReference section */
 		983560973086034D0082D65F /* rabbithole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rabbithole.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		98356B013086034F0082D65F /* rabbitholeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rabbitholeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		98356C043086034F0082D65F /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		98356C063086034F0082D65F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		98356B013086034F0082D65F /* rabbitholeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rabbitholeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */

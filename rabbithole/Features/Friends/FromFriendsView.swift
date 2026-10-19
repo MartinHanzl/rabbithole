@@ -71,6 +71,8 @@ private struct SignedInContent: View {
             await friendsModel.load()
             await feed.loadFirstPageIfNeeded()
             await threads.loadFirstPageIfNeeded()
+            // Local notifications for challenges and messages (no APNs on the free setup).
+            await ActivityNotifier.requestPermissionIfNeeded()
         }
         .navigationDestination(for: UUID.self) { shareID in
             ChatView(viewModel: ChatViewModel(shareID: shareID, service: sharing, friends: friendsModel.service,

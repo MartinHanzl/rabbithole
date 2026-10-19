@@ -76,6 +76,23 @@ final class AuthService {
         state = .signedIn(profile)
     }
 
+    /// Unread conversations (first page) plus unanswered challenges – for the tab badge.
+    func activityBadgeCount() async -> Int {
+        guard let sharing = sharingService else { return 0 }
+        let unread = ((try? await sharing.threads(page: 0)) ?? []).filter { $0.isUnread(for: sharing.me) }
+        var pendingChallenges = 0
+        if let client, challengeService != nil {
+            struct Row: Decodable { let share_id: UUID }
+            let rows: [Row] = (try? await client.from("challenges").select("share_id")
+                .eq("recipient_id", value: sharing.me).is("answered_at", value: nil)
+                .limit(50).execute().value) ?? []
+            // A challenge in an already unread thread counts once.
+            let unreadIDs = Set(unread.map(\.id))
+            pendingChallenges = rows.filter { !unreadIDs.contains($0.share_id) }.count
+        }
+        return unread.count + pendingChallenges
+    }
+
     /// Mirrors local saves to the server while the user lets friends see them.
     func observeSavedArticleChanges() async {
         for await notification in NotificationCenter.default.notifications(named: .savedArticleChanged) {

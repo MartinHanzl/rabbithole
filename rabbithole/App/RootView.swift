@@ -70,6 +70,8 @@ struct MainTabView: View {
     @Environment(AuthService.self) private var auth
     @AppStorage(SettingsKey.topicsVersion) private var topicsVersion = 0
     @State private var selectedTab = MainTabView.initialTab
+    @State private var friendsBadge = 0
+    @Environment(\.scenePhase) private var scenePhase
 
     enum Tab: String {
         case feed, friends, saved, settings
@@ -93,6 +95,7 @@ struct MainTabView: View {
                 FromFriendsView()
                     .tabItem { Label("Od přátel", systemImage: "person.2") }
                     .tag(Tab.friends)
+                    .badge(friendsBadge)
             }
             SavedArticlesView()
                 .tabItem { Label("Uložené", systemImage: "bookmark") }
@@ -104,10 +107,20 @@ struct MainTabView: View {
         .fullScreenCover(isPresented: .constant(needsProfile)) {
             ProfileSetupView()
         }
+        .task(id: BadgeTrigger(phase: scenePhase, tab: selectedTab, signedIn: auth.profile?.id)) {
+            friendsBadge = await auth.activityBadgeCount()
+        }
         .onChange(of: topicsVersion) {
             let topics = TopicPreferencesRepository(context: modelContext).selectedTopicIDs()
             Task { try? await auth.syncTopics(topics) }
         }
+    }
+
+    /// Re-count the badge when the app becomes active, the tab changes or the account changes.
+    private struct BadgeTrigger: Equatable {
+        let phase: ScenePhase
+        let tab: Tab
+        let signedIn: UUID?
     }
 
     /// `integer(forKey:)` also accepts string values, e.g. from `-videoInterval 1` launch arguments.
