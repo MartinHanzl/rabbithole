@@ -1,0 +1,19 @@
+{
+  "kind": "youtube#channelListResponse",
+  "etag": "hand-written-per-api-reference",
+  "pageInfo": { "totalResults": 2, "resultsPerPage": 5 },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "a",
+      "id": "UCaaaaaaaaaaaaaaaaaaaaaa",
+      "contentDetails": { "relatedPlaylists": { "likes": "", "uploads": "UUaaaaaaaaaaaaaaaaaaaaaa" } }
+    },
+    {
+      "kind": "youtube#channel",
+      "etag": "b",
+      "id": "UCbbbbbbbbbbbbbbbbbbbbbb",
+      "contentDetails": { "relatedPlaylists": { "likes": "", "uploads": "UUbbbbbbbbbbbbbbbbbbbbbb" } }
+    }
+  ]
+}

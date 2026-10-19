@@ -1,0 +1,23 @@
+{
+  "kind": "youtube#playlistItemListResponse",
+  "etag": "hand-written-per-api-reference",
+  "nextPageToken": "EAAaBlBUOkNESQ",
+  "pageInfo": { "totalResults": 120, "resultsPerPage": 3 },
+  "items": [
+    {
+      "kind": "youtube#playlistItem", "etag": "1", "id": "VVVhYWFh",
+      "contentDetails": { "videoId": "vid00000001", "videoPublishedAt": "2026-09-01T10:00:00Z" },
+      "status": { "privacyStatus": "public" }
+    },
+    {
+      "kind": "youtube#playlistItem", "etag": "2", "id": "VVVhYWFi",
+      "contentDetails": { "videoId": "vid00000002" },
+      "status": { "privacyStatus": "private" }
+    },
+    {
+      "kind": "youtube#playlistItem", "etag": "3", "id": "VVVhYWFj",
+      "contentDetails": { "videoId": "vid00000003", "videoPublishedAt": "2026-08-20T10:00:00Z" },
+      "status": { "privacyStatus": "public" }
+    }
+  ]
+}

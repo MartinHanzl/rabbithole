@@ -1,0 +1,435 @@
+{
+ "kind": "youtube#videoListResponse",
+ "etag": "hand-written-per-api-reference",
+ "pageInfo": {
+  "totalResults": 9,
+  "resultsPerPage": 9
+ },
+ "items": [
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000001",
+   "id": "vid00000001",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Proč je Mars červený?",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000001/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000001/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000001/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT8M21S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000003",
+   "id": "vid00000003",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Není embeddable",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000003/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000003/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000003/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT5M",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": false,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000004",
+   "id": "vid00000004",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Příliš krátké",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000004/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000004/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000004/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT45S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000005",
+   "id": "vid00000005",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Příliš dlouhé",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000005/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000005/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000005/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT1H2M",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000006",
+   "id": "vid00000006",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Živé vysílání",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000006/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000006/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000006/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "live"
+   },
+   "contentDetails": {
+    "duration": "PT0S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000007",
+   "id": "vid00000007",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Věkově omezené",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000007/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000007/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000007/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT10M",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {
+     "ytRating": "ytAgeRestricted"
+    },
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000008",
+   "id": "vid00000008",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Neveřejné",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000008/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000008/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000008/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT10M",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "unlisted",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000009",
+   "id": "vid00000009",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Ještě se zpracovává",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000009/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000009/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000009/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT10M",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "uploaded",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  },
+  {
+   "kind": "youtube#video",
+   "etag": "vid00000010",
+   "id": "vid00000010",
+   "snippet": {
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "channelId": "UCaaaaaaaaaaaaaaaaaaaaaa",
+    "title": "Jak funguje paměť",
+    "description": "…",
+    "channelTitle": "Vědecký kanál",
+    "thumbnails": {
+     "default": {
+      "url": "https://i.ytimg.com/vi/vid00000010/default.jpg",
+      "width": 120,
+      "height": 90
+     },
+     "medium": {
+      "url": "https://i.ytimg.com/vi/vid00000010/mqdefault.jpg",
+      "width": 320,
+      "height": 180
+     },
+     "high": {
+      "url": "https://i.ytimg.com/vi/vid00000010/hqdefault.jpg",
+      "width": 480,
+      "height": 360
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT19M59S",
+    "dimension": "2d",
+    "definition": "hd",
+    "caption": "false",
+    "licensedContent": true,
+    "contentRating": {},
+    "projection": "rectangular"
+   },
+   "status": {
+    "uploadStatus": "processed",
+    "privacyStatus": "public",
+    "license": "youtube",
+    "embeddable": true,
+    "publicStatsViewable": true,
+    "madeForKids": false
+   }
+  }
+ ]
+}
