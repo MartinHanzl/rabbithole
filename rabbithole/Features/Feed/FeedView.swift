@@ -2,6 +2,7 @@ import SwiftUI
 
 struct FeedView: View {
     @State var viewModel: FeedViewModel
+    @AppStorage(SettingsKey.topicsVersion) private var topicsVersion = 0
 
     var body: some View {
         NavigationStack {
@@ -15,6 +16,9 @@ struct FeedView: View {
                 .onAppear { viewModel.refreshSavedState() }
         }
         .task { await viewModel.start() }
+        .onChange(of: topicsVersion) {
+            Task { await viewModel.topicsChanged() }
+        }
     }
 
     @ViewBuilder private var content: some View {

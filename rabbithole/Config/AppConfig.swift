@@ -21,4 +21,6 @@ enum AppConfig {
 enum SettingsKey {
     static let hasCompletedOnboarding = "hasCompletedOnboarding"
     static let breakInterval = "breakInterval"
+    /// Bumped whenever topic selection changes so the feed reloads.
+    static let topicsVersion = "topicsVersion"
 }

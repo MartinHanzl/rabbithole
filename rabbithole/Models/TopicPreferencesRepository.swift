@@ -36,6 +36,13 @@ final class TopicPreferencesRepository {
         allPreferences().mapValues(\.weight)
     }
 
+    func resetWeights() {
+        for preference in allPreferences().values {
+            preference.weight = 1.0
+        }
+        try? context.save()
+    }
+
     func setWeight(_ weight: Double, for topicID: String) {
         allPreferences()[topicID]?.weight = weight
         try? context.save()
