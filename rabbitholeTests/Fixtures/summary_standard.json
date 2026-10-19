@@ -1,0 +1,39 @@
+{
+ "type": "standard",
+ "title": "Mars (planeta)",
+ "namespace": {
+  "id": 0,
+  "text": ""
+ },
+ "pageid": 771,
+ "thumbnail": {
+  "source": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/330px-OSIRIS_Mars_true_color.jpg?utm_source=cs.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+  "width": 330,
+  "height": 330
+ },
+ "originalimage": {
+  "source": "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg?utm_source=cs.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+  "width": 2205,
+  "height": 2205
+ },
+ "lang": "cs",
+ "dir": "ltr",
+ "timestamp": "2026-10-18T09:53:33Z",
+ "description": "planeta Sluneční soustavy",
+ "description_source": "central",
+ "content_urls": {
+  "desktop": {
+   "page": "https://cs.wikipedia.org/wiki/Mars_(planeta)",
+   "revisions": "https://cs.wikipedia.org/wiki/Mars_(planeta)?action=history",
+   "edit": "https://cs.wikipedia.org/wiki/Mars_(planeta)?action=edit",
+   "talk": "https://cs.wikipedia.org/wiki/Diskuse:Mars_(planeta)"
+  },
+  "mobile": {
+   "page": "https://cs.wikipedia.org/wiki/Mars_(planeta)",
+   "revisions": "https://cs.wikipedia.org/wiki/Special:History/Mars_(planeta)",
+   "edit": "https://cs.wikipedia.org/wiki/Mars_(planeta)?action=edit",
+   "talk": "https://cs.wikipedia.org/wiki/Diskuse:Mars_(planeta)"
+  }
+ },
+ "extract": "Mars je čtvrtá planeta sluneční soustavy, druhá nejmenší planeta soustavy po Merkuru. Byla pojmenována po římském bohu války Martovi. Jedná se o planetu terestrického typu, tj. s pevným horninovým povrchem pokrytým impaktními krátery, vysokými sopkami, hlubokými kaňony a dalšími útvary. Má dva drobné měsíce nepravidelného tvaru nazvané Phobos a Deimos."
+}

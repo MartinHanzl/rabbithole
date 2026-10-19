@@ -1,0 +1,29 @@
+{
+ "type": "disambiguation",
+ "title": "Merkur",
+ "namespace": {
+  "id": 0,
+  "text": ""
+ },
+ "pageid": 9601,
+ "lang": "cs",
+ "dir": "ltr",
+ "timestamp": "2022-06-26T14:05:48Z",
+ "description": "rozcestník na projektech Wikimedia",
+ "description_source": "central",
+ "content_urls": {
+  "desktop": {
+   "page": "https://cs.wikipedia.org/wiki/Merkur",
+   "revisions": "https://cs.wikipedia.org/wiki/Merkur?action=history",
+   "edit": "https://cs.wikipedia.org/wiki/Merkur?action=edit",
+   "talk": "https://cs.wikipedia.org/wiki/Diskuse:Merkur"
+  },
+  "mobile": {
+   "page": "https://cs.wikipedia.org/wiki/Merkur",
+   "revisions": "https://cs.wikipedia.org/wiki/Special:History/Merkur",
+   "edit": "https://cs.wikipedia.org/wiki/Merkur?action=edit",
+   "talk": "https://cs.wikipedia.org/wiki/Diskuse:Merkur"
+  }
+ },
+ "extract": "Slovo Merkur má více významů:Merkur (mytologie) – bůh obchodu, posel bohů etc. v římské mytologii\nMerkur (planeta) – první planeta sluneční soustavy\nMerkur (stavebnice) – česká mechanická stavebnice\nMuzeum Merkur – muzeum stavebnice Merkur v Polici nad Metují\nMerkur (filatelie) – rakousko-uherská poštovní známka z roku 1850\nMerkur – kosmická kabina vyvíjená v projektu SSSR Almaz\nMerkur (spolek) – organizace českých obchodníků\nMerkur – přírodní památka v okrese Chomutov\nMerkur (vydavatelství) – bývalé československé hudební vydavatelství z Prahy\nMerkur (televizor) – televizory Tesla 4160AB Merkur a 4162AB Merkur 2\nMerkur – kultivar jabloně domácí\nMerkur – obchodní řetězec v Rakousku\nPalác Merkur – funkcionalistická budova v Praze\nrtuť – chemický prvek označovaný v alchymii slovem merkurv kultuřeVe znamení Merkura – československý televizní seriál"
+}
