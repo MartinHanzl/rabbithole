@@ -8,40 +8,390 @@ import Foundation
 ///   `.id` is cheaper: ids are resolved in one request per 50 channels, handles one by one.
 /// - Topics without channels simply get articles in video slots.
 /// - Only public, embeddable, non-live videos within `durationRange` are shown.
+/// - Channels were checked against the YouTube API on 2026-10-19 (exists, size, recent uploads,
+///   no podcast channels). Many are in English. The same channel may serve several topics.
 enum VideoChannelCatalog {
     static let channelsByTopic: [String: [YouTubeChannelRef]] = [
         "space": [
-            // .handle("@nazevkanalu"),
+            .id("UCLA_DiR1FfKNvjuUpBHmylQ"), // NASA (@NASA)
+            .id("UCIBaDdAbGlFDeS33shmlD0A"), // European Space Agency, ESA (@EuropeanSpaceAgency)
+            .id("UC7_gcs09iThXybpVgjHZ_7g"), // PBS Space Time (@pbsspacetime)
+            .id("UC-9b7aDP6ZN0coj9-xFnrtw"), // Astrum (@astrumspace)
+            .id("UCxzC4EngIsMrPmbm6Nxvb-A"), // Scott Manley (@scottmanley)
+            .id("UCryGec9PdUCLjpJW2mgCuLw"), // NASA Jet Propulsion Laboratory (@NASAJPL)
+            .id("UCGHZpIpAWJQ-Jy_CeCdXhMA"), // Cool Worlds (@CoolWorldsLab)
+            .id("UCYNbYGl89UUowy8oXkipC-Q"), // Dr. Becky (@DrBecky)
+            .id("UCrMePiHCWG4Vwqv3t7W9EFg"), // SciShow Space (@SciShowSpace)
+            .id("UC6uKrU_WqJ1R2HMTY3LIx5Q"), // Everyday Astronaut (@EverydayAstronaut)
+            .id("UCciQ8wFcVoIIMi-lfu8-cjQ"), // Anton Petrov (@whatdamath)
+            .id("UCvBqzzvUBLCs8Y7Axb-jZew"), // Sixty Symbols (@sixtysymbols)
+            .id("UCVTomc35agH1SM6kCKzwW_g"), // VideoFromSpace (@VideoFromSpace)
+            .id("UCIhYoC2VIAJqCkoIWNHBQ3Q"), // European Southern Observatory (ESO) (@ESOobservatory)
         ],
         "history": [
-            // .id("UCxxxxxxxxxxxxxxxxxxxxxx"),
+            .id("UCNIuvl7V8zACPpTmmNIqP2A"), // OverSimplified (@OverSimplified)
+            .id("UC8MX9ECowgDMTOnFTE8EUJw"), // HistoryMarche (@HistoryMarche)
+            .id("UCMmaBzfCCwZ2KqaBJjkj0fw"), // Kings and Generals (@KingsandGenerals)
+            .id("UCv_vLHiWVBh_FR9vbeuiY-A"), // Historia Civilis (@HistoriaCivilis)
+            .id("UC4sEmXUuWIFlxRIFBRV6VXQ"), // The History Guy: History Deserves to Be Remembered (@TheHistoryGuyChannel)
+            .id("UCCODtTcd5M1JavPCOr_Uydg"), // Extra History (@extrahistory)
+            .id("UCLfMmOriSyPbd5JhHpnj4Ng"), // TimeGhost History (@TimeGhost)
+            .id("UCvPXiKxH-eH9xq-80vpgmKQ"), // Epic History (@EpicHistoryTV)
+            .id("UC510QYlOlKNyhy_zdQxnGYw"), // Simple History (@SimpleHistory)
+            .id("UC22BdTgxefuvUivrjesETjg"), // History Matters (@HistoryMatters)
+            .id("UCUcyEsEjhPEDf69RRVhRh4A"), // The Great War (@TheGreatWar)
+            .id("UCwO-UgquohXwoe7f0e6lMnw"), // Invicta (@InvictaHistory)
+            .id("UCx-dJoP9hFCBloY9qodykvw"), // BazBattles (@BazBattles)
+            .id("UCqBiWcuTF8IaLH7wBqnihsQ"), // toldinstone (@toldinstone)
+            .id("UC3qryaKUwImmlGY87piuaNQ"), // Vizuální Historie (@VizualniHistorie)
         ],
-        "biology": [],
-        "technology": [],
-        "art": [],
-        "geography": [],
-        "psychology": [],
-        "philosophy": [],
-        "music": [],
-        "sport": [],
-        "language": [],
-        "curiosities": [],
-        // Osobní rozvoj a vztahy – Wikipedia coverage is thin, channels help most here.
-        "accounting": [],
-        "emotional-stability": [],
-        "relational-intelligence": [],
-        "relationships": [],
-        "family": [],
-        "sales": [],
-        "negotiation": [],
-        "leadership": [],
-        "communication": [],
-        "character": [],
-        "motivation": [],
-        "productivity": [],
-        "health": [],
-        "fun": [],
-        "dreaming": [],
+        "biology": [
+            .id("UCZYTClx2T1of7BRZ86-8fow"), // SciShow (@SciShow)
+            .id("UCb2GCoLSBXjmI_Qj1vk-44g"), // Amoeba Sisters (@AmoebaSisters)
+            .id("UCBbnbBWJtwsf0jLGUwX5Q3g"), // Journey to the Microcosmos (@journeytomicro)
+            .id("UCwmZiChSryoWQCZMIQezgTg"), // BBC Earth (@BBCEarth)
+            .id("UC-3SbfTPJsL8fJAPKiVqBLg"), // Deep Look (@KQEDDeepLook)
+            .id("UC_cznB5YZZmvAmeq7Y3EriQ"), // Stated Clearly (@StatedClearly)
+            .id("UC6QYFutt9cluQ3uSM963_KQ"), // Ninja Nerd (@NinjaNerdOfficial)
+            .id("UCesNt4_Z-Pm41RzpAClfVcg"), // Armando Hasudungan (@armandohasudungan)
+            .id("UCeiYXex_fwgYDonaTcSIk6w"), // MinuteEarth (@MinuteEarth)
+            .id("UCkyfHZ6bY2TjqbJhiH8Y2QQ"), // thebrainscoop (@thebrainscoop)
+            .id("UCwg6_F2hDHYrqbNSGjmar4w"), // Animalogic (@Animalogic)
+            .id("UC176GAQozKKjhz62H8u9vQQ"), // Real Science (@RealScience)
+            .id("UC85VW73bQLEjs_taFKP7TwQ"), // Nucleus Medical Media (@nucleusmedicalmedia)
+        ],
+        "technology": [
+            .id("UCy0tKL1T7wFoYcxCe0xjN6Q"), // Technology Connections (@TechnologyConnections)
+            .id("UCR1IuLEqb6UEA_zQ81kwXfg"), // Real Engineering (@RealEngineering)
+            .id("UCMOqf8ab-42UUQIdVoKwjlQ"), // Practical Engineering (@PracticalEngineeringChannel)
+            .id("UC9-y-6csu5WGm29I7JiwpnA"), // Computerphile (@Computerphile)
+            .id("UCsBjURrPoezykLs9EqgamOA"), // Fireship (@Fireship)
+            .id("UCBJycsmduvYEL83R_U4JriQ"), // Marques Brownlee (@mkbhd)
+            .id("UC6107grRI4m0o2-emgoDnAA"), // SmarterEveryDay (@smartereveryday)
+            .id("UCCWeRTgd79JL0ilH0ZywSJA"), // AlphaPhoenix (@AlphaPhoenixChannel)
+            .id("UCk0fGHsCEzGig-rSzkfCjMw"), // The Engineering Mindset (@EngineeringMindset)
+            .id("UCdp4_l1vPmpN-gDbUwhaRUQ"), // Branch Education (@BranchEducation)
+            .id("UC1ZBQ-F-yktYD4m5AzM6pww"), // Mustard (@MustardChannel)
+            .id("UCj1VqrHhDte54oLgPG4xpuQ"), // Stuff Made Here (@StuffMadeHere)
+            .id("UC6n8I1UDTKP1IWjQMg6_TwA"), // The B1M (@TheB1M)
+            .id("UCtZO3K2p8mqFwiKWb9k7fXA"), // TechAltar (@TechAltar)
+            .id("UCHnyfMqiRRG1u-2MsSQLbXA"), // Veritasium (@veritasium)
+            .id("UCbiGcwDWZjz05njNPrJU7jA"), // ExplainingComputers (@ExplainingComputers)
+        ],
+        "art": [
+            .id("UCePDFpCr78_qmVtpoB1Axaw"), // Great Art Explained (@GreatArtExplained)
+            .id("UCJkMlOu7faDgqh4PfzbpLdg"), // Nerdwriter1 (@Nerdwriter1)
+            .id("UCDlz9C2bhSW6dcVn_PO5mYw"), // The Met (@metmuseum)
+            .id("UC2isDei-lrNSrgGYE4Np3PA"), // Tate (@tate)
+            .id("UCrPOgNsUldOtQsTf9Kjlm_A"), // The National Gallery (@NationalGallery)
+            .id("UC9CswYtb5rL31CHwyVoyJvQ"), // The Museum of Modern Art (@TheMuseumofModernArt)
+            .id("UCYAm24PkejQR2xMgJgn7xwg"), // Stewart Hicks (@StewartHicks)
+            .id("UCJ_2hNMxOzNjviJBiLWHMqg"), // DamiLee (@DamiLeeArch)
+            .id("UC0k238zFx-Z8xFH0sxCrPJg"), // Architectural Digest (@ArchDigest)
+            .id("UCTIoOLzT1jbxAcPW99xn0zQ"), // James Gurney (@JamesGurney)
+            .id("UClM2LuQ1q5WEc23462tQzBg"), // Proko (@ProkoTV)
+            .id("UCmQThz1OLYt8mb2PU540LOA"), // The Art Assignment (@TheArtAssignment)
+        ],
+        "geography": [
+            .id("UCmmPgObSUPw1HL2lq6H4ffA"), // Geography Now (@GeographyNow)
+            .id("UCP5tjEmvPItGyLhmjdwP7Ww"), // RealLifeLore (@RealLifeLore)
+            .id("UC9RM-iSvTu1uPJb8X5yp3EQ"), // Wendover Productions (@WendoverProductions)
+            .id("UCgNg3vwj3xt7QOrcIDaHdFg"), // PolyMatter (@PolyMatter)
+            .id("UCwnKziETDbHJtx78nIkfYug"), // CaspianReport (@CaspianReport)
+            .id("UCuCkxoKLYO_EQ2GeFtbM_bw"), // Half as Interesting (@HalfasInteresting)
+            .id("UCpVm7bg6pXKo1Pr6k5kxG9A"), // National Geographic (@NatGeo)
+            .id("UCmGSJVG3mCRXVOP4yZrU1Dw"), // Johnny Harris (@johnnyharris)
+            .id("UC2Cl2g2xFTZoAEldxYVzQFg"), // Geo History (@GeoHistory)
+            .id("UCSMqateX8OA2s1wsOR2EgJA"), // TLDR News (@TLDRnews)
+            .id("UC0Ize0RLIbGdH5x4wI45G-A"), // Drew Binsky (@drewbinsky)
+        ],
+        "psychology": [
+            .id("UCt_t6FwNsqr3WWoL6dFqG9w"), // BrainCraft (@braincraft)
+            .id("UCvQECJukTDE2i6aCoMnS-Vg"), // Big Think (@bigthink)
+            .id("UC-RKpEc4eE9PwJaupN91xYQ"), // Sprouts (@sprouts)
+            .id("UC_zQoiPtBDvsThGroagm3ww"), // Psych Hub (@psychhub)
+            .id("UCUdettijNYvLAm4AixZv4RA"), // SciShow Psych (@SciShowPsych)
+            .id("UC6Unpcb3T4QijIBs8hPfeyA"), // Psych Explained (@Psychexplained)
+            .id("UC7IcJI8PUf5Z3zKxnZvTBog"), // The School of Life (@theschooloflifetv)
+            .id("UCL2QpphEeZFYwk6-WXD6hpA"), // Dr. Tracey Marks (@DrTraceyMarks)
+            .id("UClHVl2N3jPEbkNJVx-ItQIQ"), // HealthyGamerGG (@HealthyGamerGG)
+            .id("UCkJEpR7JmS36tajD34Gp4VA"), // Psych2Go (@Psych2go)
+            .id("UCl8TEoIOnMq_5ntJOYMq-Zg"), // Dr Julie (@DrJulie)
+        ],
+        "philosophy": [
+            .id("UC2PA-AKmVpU6NKCGtZq_rKQ"), // Philosophy Tube (@PhilosophyTube)
+            .id("UCpvhlSLzg2LT89FNUuN-Sig"), // Wireless Philosophy (@WirelessPhilosophy)
+            .id("UCiRiQGCHGjDLT9FQXFW0I3A"), // Academy of Ideas (@academyofideas)
+            .id("UC-tLyAaPbRZiYrOJxAGB7dQ"), // Pursuit of Wonder (@PursuitofWonder)
+            .id("UCl9StMQ79LtEvlrskzjoYbQ"), // Closer To Truth (@CloserToTruthTV)
+            .id("UCGVHC4L6gjS13AMe-JMOjHg"), // Kane B (@KaneB)
+            .id("UCimiUgDLbi6P17BdaCZpVbg"), // exurb1a (@exurb1a)
+            .id("UCZViJTyN0OXTTuPQ2mimNWw"), // PhilosophyInsights (@Philosophyinsights)
+            .id("UCybBViio_TH_uiFFDJuz5tg"), // Einzelgänger (@Einzelganger)
+            .id("UCrr7y8rEXb7_RiVniwvzk9w"), // Thought Slime (@ThoughtSlime)
+            .id("UClepFnDpTP3pLKxVsbLNhDA"), // Philosophy Vibe (@PhilosophyVibe)
+            .id("UCkS_HP3m9NXOgswVAKbMeJQ"), // Then & Now (@ThenNow)
+        ],
+        "music": [
+            .id("UCnkp4xDOwqqJD7sSM3xdUiQ"), // Adam Neely (@AdamNeely)
+            .id("UCJquYOG5EL82sKTfH9aMA9Q"), // Rick Beato (@RickBeato)
+            .id("UCXkNod_JcH7PleOjwK_8rYQ"), // Polyphonic (@Polyphonic)
+            .id("UCz2iUx-Imr6HgDC3zAFpjOw"), // David Bennett Music Theory (@DavidBennettPiano)
+            .id("UC4PIiYewI1YGyiZvgNlJNrA"), // Charles Cornell (@CharlesCornellStudios)
+            .id("UC4ihNhN8iN9QPg2XTxiiPJw"), // Inside the Score (@InsidetheScore)
+            .id("UC8R8FRt1KcPiR-rtAflXmeg"), // Nahre Sol (@NahreSol)
+            .id("UCl_dlV_7ofr4qeP1drJQ-qg"), // Tantacrul (@Tantacrul)
+            .id("UCi7l9chXMljpUft67vw78qw"), // Sideways (@Sideways440)
+            .id("UCdcemy56JtVTrsFIOoqvV8g"), // ANDREW HUANG (@andrewhuang)
+            .id("UCRDDHLvQb8HjE2r7_ZuNtWA"), // Signals Music Studio (@SignalsMusicStudio)
+            .id("UCeZLO2VgbZHeDcongKzzfOw"), // 8-bit Music Theory (@8bitMusicTheory)
+            .id("UCAzKFALPuF_EPe-AEI0WFFw"), // TwoSetViolin (@TwoSetViolin)
+        ],
+        "sport": [
+            .id("UCTl3QQTvqHFjurroKxexy2Q"), // Olympic Games (@Olympics)
+            .id("UC3HPbvB6f58X_7SMIp6OPYw"), // Thinking Basketball (@ThinkingBasketball)
+            .id("UCuTaETsuCOkJ0H_GAztWt0Q"), // Global Cycling Network (@gcn)
+            .id("UCpcTrCXblq78GZrTUTLWeBw"), // FIFA (@FIFA)
+            .id("UCWJ2lWNubArHWmf3FIHbfcQ"), // NBA (@NBA)
+            .id("UCB_qr75-ydFVKSF9Dmo6izg"), // FORMULA 1 (@Formula1)
+            .id("UC7u-Dg0jb7g9s7XjmtJrtpg"), // Chain Bear (@ChainBear)
+            .id("UCbcxFkd6B9xUU54InHv4Tig"), // Tennis TV (@TennisTV)
+            .id("UCDVYQ4Zhbm3S2dlz7P1GBDg"), // NFL (@NFL)
+            .id("UCCl9GMgbh3IbMwyMcU3YLjA"), // The Athletic (@TheAthletic)
+            .id("UCJ3u2OkwClq8-dxDVDa2fBg"), // Hoop Reports (@HoopReports)
+            .id("UCQk7fWv15ChjMJLCRVmtApw"), // World Athletics (@WorldAthletics)
+        ],
+        "language": [
+            .id("UCNhX3WQEkraW3VHPyup8jkQ"), // Langfocus (@Langfocus)
+            .id("UCMk_WSPy3EE16aK5HLzCJzw"), // NativLang (@NativLang)
+            .id("UCByBOwwOU5tKddYpsrHiUUw"), // Xidnaf (@Xidnaf)
+            .id("UC4a9LfdavRlVMaSSWFdIciA"), // RobWords (@RobWords)
+            .id("UCy_QZ1EEY4S5YT6cmBTwMwg"), // Name Explain (@NameExplain)
+            .id("UCdZcGRaBV-VRRyU4t6Ur0mw"), // The Ling Space (@TheLingSpace)
+            .id("UCez-2shYlHQY3LfILBuDYqQ"), // Steve Kaufmann - lingosteve (@Thelinguist)
+            .id("UCYNyKRHBzd7UPRUtDhofUKg"), // Language Simp (@languagesimp)
+            .id("UCtFuCBKQTItHCwfHRP9LIjQ"), // Dr Geoff Lindsey (@DrGeoffLindsey)
+            .id("UC7o-UFkoAPCoKxpKOfrs4zQ"), // UsefulCharts (@Usefulcharts)
+            .id("UCBhyw8-uPpiNt0ORyfbSz3w"), // Polyglot Dreams (@PolyglotDreams)
+        ],
+        "curiosities": [
+            .id("UCsXVk37bltHxD1rDPwtNM8Q"), // Kurzgesagt – In a Nutshell (@kurzgesagt)
+            .id("UC6nSFpj9HTCZ5t-N3Rm3-HA"), // Vsauce (@Vsauce)
+            .id("UCsooa4yRKGN_zEE8iknghZA"), // TED-Ed (@TEDEd)
+            .id("UCBa659QWEk1AI4Tg--mrJ2A"), // Tom Scott (@TomScottGo)
+            .id("UCY1kMZp36IQSyNx_9h4mpCg"), // Mark Rober (@MarkRober)
+            .id("UCUHW94eEFW7hkUMVaZz4eDg"), // minutephysics (@minutephysics)
+            .id("UC2C_jShtL725hvbm1arSV9w"), // CGP Grey (@CGPGrey)
+            .id("UCLXo7UDZvByw2ixzpQCufnA"), // Vox (@Vox)
+            .id("UCC552Sd-3nyi_tk2BudLUzA"), // AsapSCIENCE (@AsapSCIENCE)
+            .id("UCRcgy6GzDeccI7dkbbBna3Q"), // LEMMiNO (@LEMMiNO)
+            .id("UCphTF9wHwhCt-BzIq-s4V-g"), // What If (@WhatIfScienceShow)
+            .id("UCkQO3QsgTpNTsOw6ujimT5Q"), // BE AMAZED (@BeAmazed)
+            .id("UCfdNM3NAhaBOXCafH7krzrA"), // The Infographics Show (@TheInfographicsShow)
+            .id("UCqmugCqELzhIMNYnsjScXXw"), // Vsauce2 (@Vsauce2)
+        ],
+        "accounting": [
+            .id("UCYJLdSmyKoXCbnd-pklMn5Q"), // Accounting Stuff (@AccountingStuff)
+            .id("UCzRF-OFuv8os-bGzANpQGqg"), // Edspira (@Edspira)
+            .id("UCQQJnyU8fALcOqqpyyIN4sg"), // The Finance Storyteller (@TheFinanceStoryteller)
+            .id("UCOYjmNfEFcUPDgihxwSSReA"), // Farhat Lectures. The # 1 CPA & Accounting Courses (@FarhatLectures)
+            .id("UCFCEuCsyWP0YkP3CZ3Mr01Q"), // The Plain Bagel (@ThePlainBagel)
+            .id("UCASM0cgfkJxQ1ICmRilfHLw"), // Patrick Boyle (@PBoyle)
+            .id("UCCKpicnIwBP3VPxBAZWDeNA"), // Money & Macro (@MoneyMacro)
+            .id("UCZ4AMrDcNrfy3X6nsU8-rPg"), // Economics Explained (@EconomicsExplained)
+            .id("UCq6ysZYeu-HwhBEV7TuO8wg"), // Accounting Instruction, Help, & How To (Financial & Managerial) (@accountinginstruction)
+            .id("UCDXTQ8nWmx_EhZ2v-kp7QxA"), // Ben Felix (@BenFelixCSI)
+            .id("UCvwFhI0mrIWDiZUabRapS5Q"), // Investopedia (@investopedia)
+            .id("UC00MExfC3vuP9680IUW0jLA"), // Hector Garcia CPA (@hectorgarciacpa)
+        ],
+        "emotional-stability": [
+            .id("UCpuqYFKLkcEryEieomiAv3Q"), // Therapy in a Nutshell (@TherapyinaNutshell)
+            .id("UCzBYOHyEEzlkRdDOSobbpvw"), // Kati Morton (@KatiMorton)
+            .id("UCkJEpR7JmS36tajD34Gp4VA"), // Psych2Go (@Psych2go)
+            .id("UClHVl2N3jPEbkNJVx-ItQIQ"), // HealthyGamerGG (@HealthyGamerGG)
+            .id("UC3JhfsgFPLSLNEROQCdj-GQ"), // Headspace (@headspace)
+            .id("UC-nPM1_kSZf91ZGkcgy_95Q"), // How to ADHD (@HowtoADHD)
+            .id("UC9Qixc77KhCo88E5muxUjmA"), // DoctorRamani (@DoctorRamani)
+            .id("UCCZlDCbFTqHkzV_rUP4V5bg"), // Crappy Childhood Fairy (@CrappyChildhoodFairy)
+            .id("UCl8TEoIOnMq_5ntJOYMq-Zg"), // Dr Julie (@DrJulie)
+            .id("UCL2QpphEeZFYwk6-WXD6hpA"), // Dr. Tracey Marks (@DrTraceyMarks)
+            .id("UChSpME3QaSFAWK8Hpmg-Dyw"), // Calm (@Calm)
+            .id("UC_zQoiPtBDvsThGroagm3ww"), // Psych Hub (@psychhub)
+            .id("UCVKems7KyqcdPDpq2hciKYg"), // Kojo Sarfo, DNP (@DrKojoSarfo)
+        ],
+        "relational-intelligence": [
+            .id("UCU_W0oE_ock8bWKjALiGs8Q"), // Charisma on Command (@Charismaoncommand)
+            .id("UCBIt1VN5j37PVM8LLSuTTlw"), // Improvement Pill (@ImprovementPill)
+            .id("UC-RKpEc4eE9PwJaupN91xYQ"), // Sprouts (@sprouts)
+            .id("UCvQECJukTDE2i6aCoMnS-Vg"), // Big Think (@bigthink)
+            .id("UC9Qixc77KhCo88E5muxUjmA"), // DoctorRamani (@DoctorRamani)
+            .id("UCkJEpR7JmS36tajD34Gp4VA"), // Psych2Go (@Psych2go)
+            .id("UCGwuxdEeCf0TIA2RbPOj-8g"), // Stanford Graduate School of Business (@StanfordGSB)
+            .id("UCtUId5WFnN82GdDy7DgaQ7w"), // Better Ideas (@BetterIdeas)
+            .id("UCnT1R08f7FHLab3nB4f0AGQ"), // The Gottman Institute (@thegottmaninstitute)
+            .id("UC7IcJI8PUf5Z3zKxnZvTBog"), // The School of Life (@theschooloflifetv)
+            .id("UClHVl2N3jPEbkNJVx-ItQIQ"), // HealthyGamerGG (@HealthyGamerGG)
+        ],
+        "relationships": [
+            .id("UCnT1R08f7FHLab3nB4f0AGQ"), // The Gottman Institute (@thegottmaninstitute)
+            .id("UCHQ4lSaKRap5HyrpitrTOhQ"), // Thais Gibson - Personal Development School (@ThePersonalDevelopmentSchool)
+            .id("UC7gCCAhhQvD3MBpKpI_4g6w"), // Marriage Helper (@MarriageHelper)
+            .id("UCU_W0oE_ock8bWKjALiGs8Q"), // Charisma on Command (@Charismaoncommand)
+            .id("UCzBYOHyEEzlkRdDOSobbpvw"), // Kati Morton (@KatiMorton)
+            .id("UC9Qixc77KhCo88E5muxUjmA"), // DoctorRamani (@DoctorRamani)
+            .id("UC7IcJI8PUf5Z3zKxnZvTBog"), // The School of Life (@theschooloflifetv)
+            .id("UCkJEpR7JmS36tajD34Gp4VA"), // Psych2Go (@Psych2go)
+            .id("UCpuqYFKLkcEryEieomiAv3Q"), // Therapy in a Nutshell (@TherapyinaNutshell)
+            .id("UCBIt1VN5j37PVM8LLSuTTlw"), // Improvement Pill (@ImprovementPill)
+            .id("UCCZlDCbFTqHkzV_rUP4V5bg"), // Crappy Childhood Fairy (@CrappyChildhoodFairy)
+        ],
+        "family": [
+            .id("UCQcifo_12x84Uji6h1TVmKg"), // Good Inside (@GoodInside)
+            .id("UCSrVu4egvMdSX3jZ4_tP-6g"), // Dad University (@DadUniversity)
+            .id("UC0qQvYFTg-vss_5AZroonqw"), // Raising Children (@RaisingChildrenNetwork)
+            .id("UCaICuB_dNMBliDawMmoYaaQ"), // Janet Lansbury (@JanetLansbury)
+            .id("UCbVnfbuhpDdLt7K6y-Cqq1w"), // ZERO TO THREE (@ZEROTOTHREE)
+            .id("UCnT1R08f7FHLab3nB4f0AGQ"), // The Gottman Institute (@thegottmaninstitute)
+            .id("UC7IcJI8PUf5Z3zKxnZvTBog"), // The School of Life (@theschooloflifetv)
+            .id("UC-RKpEc4eE9PwJaupN91xYQ"), // Sprouts (@sprouts)
+            .id("UCZceliiH71OLw4t4HcvKKjw"), // UNICEF (@unicef)
+            .id("UCCZlDCbFTqHkzV_rUP4V5bg"), // Crappy Childhood Fairy (@CrappyChildhoodFairy)
+            .id("UCzBYOHyEEzlkRdDOSobbpvw"), // Kati Morton (@KatiMorton)
+        ],
+        "sales": [
+            .id("UCQ5mWx_XYGRbpcV8zjGhorg"), // Jeremy Miner (@JeremyMiner)
+            .id("UCUyDOdBWhC1MCxEjC46d-zw"), // Alex Hormozi (@AlexHormozi)
+            .id("UCl-Zrl0QhF66lu1aGXaTbfw"), // Neil Patel (@neilpatel)
+            .id("UCG98giOsUxIlXV0rNUhxLew"), // Ryan Serhant (@RyanSerhant)
+            .id("UCs_6DXZROU29pLvgQdCx4Ww"), // Dan Lok (@DanLok)
+            .id("UCdlNK1xcy-Sn8liq7feNxWw"), // Grant Cardone (@GrantCardone)
+            .id("UCctXZhXmG-kf3tlIXgVZUlw"), // GaryVee (@GaryVee)
+            .id("UCUVoyyL3KRtiXFXdcWwN8bA"), // Sales Gravy (@SalesGravy)
+            .id("UCVeuau7DLrg7zlAjxxDbdww"), // HubSpot Marketing (@HubSpotMarketing)
+            .id("UCLOzkJ9W9fntCGyYfUwMPew"), // Patrick Dang (@PatrickDang)
+            .id("UCUpquzY878NEaZm5bc7m2sQ"), // Salesforce (@salesforce)
+        ],
+        "negotiation": [
+            .id("UCk7jHqdlFFDBhC1QIFqi54w"), // Chris Voss & The Black Swan Group (@NegotiationMastery)
+            .id("UCJDIGW0ywWw9Kh9_vtwqxXA"), // William Spaniel (@gametheory101)
+            .id("UCKzJFdi57J53Vr_BkTfN3uQ"), // Primer (@PrimerBlobs)
+            .id("UCGwuxdEeCf0TIA2RbPOj-8g"), // Stanford Graduate School of Business (@StanfordGSB)
+            .id("UC7ZddA__ewP3AtDefjl_tWg"), // I Will Teach You To Be Rich (@ramitsethi)
+            .id("UCU9Z1eLsDa_meEfsmx-Ys0w"), // Wharton School (@Wharton)
+            .id("UCWo4IA01TXzBeGJJKWHOG9g"), // Harvard Business Review (@HarvardBusinessReview)
+            .id("UCJQQVLyM6wtPleV4wFBK06g"), // VisualPolitik (@VisualPolitik)
+            .id("UCwnKziETDbHJtx78nIkfYug"), // CaspianReport (@CaspianReport)
+            .id("UCvQECJukTDE2i6aCoMnS-Vg"), // Big Think (@bigthink)
+            .id("UCU_W0oE_ock8bWKjALiGs8Q"), // Charisma on Command (@Charismaoncommand)
+        ],
+        "leadership": [
+            .id("UCPmfPl-BsCd3wmE8i45LAoA"), // Simon Sinek (@SimonSinek)
+            .id("UCWo4IA01TXzBeGJJKWHOG9g"), // Harvard Business Review (@harvardbusinessreview)
+            .id("UCGwuxdEeCf0TIA2RbPOj-8g"), // Stanford Graduate School of Business (@StanfordGSB)
+            .id("UCAuUUnT6oDeKwE6v1NGQxug"), // TED (@TED)
+            .id("UCQMqUlg362Hhar_iCZ9tcjQ"), // McKinsey & Company (@McKinsey)
+            .id("UCU9Z1eLsDa_meEfsmx-Ys0w"), // Wharton School (@Wharton)
+            .id("UCcefcZRL2oaA_uBNeo5UOWg"), // Y Combinator (@ycombinator)
+            .id("UCA-mWX9CvCTVFWRMb9bKc9w"), // Dan Martell (@danmartell)
+            .id("UCH5_L3ytGbBziX0CLuYdQ1Q"), // CNBC Make It (@CNBCMakeIt)
+            .id("UCRPKXKBG8n6r6vIXoxsD2pQ"), // London Business School (@LondonBusinessSchool)
+            .id("UCaUvoQTl3-vcwSgcHQlvGKg"), // MIT Sloan School of Management (@MITSloan)
+        ],
+        "communication": [
+            .id("UCU_W0oE_ock8bWKjALiGs8Q"), // Charisma on Command (@Charismaoncommand)
+            .id("UC4GYJFyJ7cZVfqMNF0JZfTQ"), // Toastmasters International (@Toastmasters)
+            .id("UCAuUUnT6oDeKwE6v1NGQxug"), // TED (@TED)
+            .id("UCBIt1VN5j37PVM8LLSuTTlw"), // Improvement Pill (@ImprovementPill)
+            .id("UCGwuxdEeCf0TIA2RbPOj-8g"), // Stanford Graduate School of Business (@StanfordGSB)
+            .id("UCtUId5WFnN82GdDy7DgaQ7w"), // Better Ideas (@BetterIdeas)
+            .id("UCZg3Z1Cm2qiDDeP0SD6V8WQ"), // TRUTHPLANE® Communication Skills and Presentation Skills Training | Public Speaking and Executive Presence Coach (@TRUTHPLANE)
+            .id("UCsT0YIqwnpJCM-mx7-gSA4Q"), // TEDx Talks (@TEDx)
+            .id("UCvQECJukTDE2i6aCoMnS-Vg"), // Big Think (@bigthink)
+            .id("UC7IcJI8PUf5Z3zKxnZvTBog"), // The School of Life (@theschooloflifetv)
+            .id("UCWo4IA01TXzBeGJJKWHOG9g"), // Harvard Business Review (@HarvardBusinessReview)
+        ],
+        "character": [
+            .id("UCybBViio_TH_uiFFDJuz5tg"), // Einzelgänger (@Einzelganger)
+            .id("UCiRiQGCHGjDLT9FQXFW0I3A"), // Academy of Ideas (@academyofideas)
+            .id("UCQjHA3ly2Qr-5sGi-VVsLJw"), // The Stoic Mind (@TheStoicMind)
+            .id("UCp1mRTkVlqDnxz_9S0YD9YQ"), // Philosophies for Life (@PhilosophiesforLife)
+            .id("UCDETFHKteb-C_EaXmRKvP4w"), // Sisyphus 55 (@Sisyphus55)
+            .id("UC-tLyAaPbRZiYrOJxAGB7dQ"), // Pursuit of Wonder (@PursuitofWonder)
+            .id("UCtUId5WFnN82GdDy7DgaQ7w"), // Better Ideas (@BetterIdeas)
+            .id("UCBIt1VN5j37PVM8LLSuTTlw"), // Improvement Pill (@ImprovementPill)
+            .id("UC7IcJI8PUf5Z3zKxnZvTBog"), // The School of Life (@theschooloflifetv)
+            .id("UClepFnDpTP3pLKxVsbLNhDA"), // Philosophy Vibe (@PhilosophyVibe)
+            .id("UCimiUgDLbi6P17BdaCZpVbg"), // exurb1a (@exurb1a)
+        ],
+        "motivation": [
+            .id("UCrdWRLq10OHuy7HmSckV3Vg"), // Nathaniel Drew (@NathanielDrew)
+            .id("UC-dmJ79518WlKMbsu50eMTQ"), // Clark Kegley (@ClarkKegley)
+            .id("UCWsslCoN3b_wBaFVWK_ye_A"), // Hamza (@Hamza97)
+            .id("UCvcEBQ0K3UsQ8bzWKHKQmbw"), // struthless (@Struthless)
+            .id("UCkbTTGoBpjX8ogXHCt-aegw"), // Sorelle Amore (@SorelleAmore)
+            .id("UCtUId5WFnN82GdDy7DgaQ7w"), // Better Ideas (@BetterIdeas)
+            .id("UCBIt1VN5j37PVM8LLSuTTlw"), // Improvement Pill (@ImprovementPill)
+            .id("UCsT0YIqwnpJCM-mx7-gSA4Q"), // TEDx Talks (@TEDx)
+            .id("UCvQECJukTDE2i6aCoMnS-Vg"), // Big Think (@bigthink)
+            .id("UCkJEpR7JmS36tajD34Gp4VA"), // Psych2Go (@Psych2go)
+            .id("UClHVl2N3jPEbkNJVx-ItQIQ"), // HealthyGamerGG (@HealthyGamerGG)
+        ],
+        "productivity": [
+            .id("UCG-KntY7aVnIGXYEBQvmBAQ"), // Thomas Frank (@Thomasfrank)
+            .id("UCoOae5nYA7VqaXzerajD0lg"), // Ali Abdaal (@aliabdaal)
+            .id("UCJ24N4O0bP7LGLBDvye7oCA"), // Matt D'Avella (@mattdavella)
+            .id("UC02x9yG9ZFF_VZp1VnMoptg"), // Productivity Game (@ProductivityGame)
+            .id("UCmvYCRYPDlzSHVNCI_ViJDQ"), // Tiago Forte (@TiagoForte)
+            .id("UCwAnu01qlnVg1Ai2AbtTMaA"), // Jeff Su (@JeffSu)
+            .id("UCUFFHXvzAMRSD8Bq4bJppxQ"), // Elizabeth Filips (@ElizabethFilips)
+            .id("UC2Zs9v2hL2qZZ7vsAENsg4w"), // Justin Sung (@JustinSung)
+            .id("UCLH7F4dM2fNtxy_Hr1Gtq0Q"), // Matt Ragland (@MattRagland)
+            .id("UC-nPM1_kSZf91ZGkcgy_95Q"), // How to ADHD (@HowtoADHD)
+            .id("UCfqj2oq6LVmR3ybC2nfjqKg"), // August Bradley (@AugustBradley)
+        ],
+        "health": [
+            .id("UC0QHWhjbe5fGJEPz3sVb6nw"), // Doctor Mike (@DoctorMike)
+            .id("UC8fQzKHIhSoZeSq3bwQx4mw"), // Mayo Clinic (@mayoclinic)
+            .id("UCxyiSz4m161Z6frOsFxJpgw"), // Cleveland Clinic (@ClevelandClinic)
+            .id("UC68TLK0mAEzUyHx5x5k-S1Q"), // Jeff Nippard (@JeffNippard)
+            .id("UCe0TLA0EsQbE-MjuHXevj2A"), // ATHLEAN-X™ (@athleanx)
+            .id("UCfQgsKhHjSyRLOp9mnffqVg"), // Renaissance Periodization (@RenaissancePeriodization)
+            .id("UCosmc75v-B2Dk7GWyEyFFMw"), // Nutrition Made Simple! (@NutritionMadeSimple)
+            .id("UCj3p_1jOCJXB_L_we-DjLbA"), // Physionic (@Physionic)
+            .id("UCKOvOaJv4GK-oDqx-sj7VVg"), // Chubbyemu (@chubbyemu)
+            .id("UCgRBRE1DUP2w7HTH9j_L4OQ"), // Medlife Crisis (@MedlifeCrisis)
+            .id("UCmTe0LsfEbpkDpgrxKAWbRA"), // Bob & Brad (@BobandBrad)
+            .id("UCFKE7WVJfvaHW5q283SxchA"), // Yoga With Adriene (@yogawithadriene)
+            .id("UC07-dOwgza1IguKA86jqxNA"), // World Health Organization (WHO) (@WHO)
+        ],
+        "fun": [
+            .id("UCdN4aXTrHAtfgbVG9HjBmxQ"), // Key & Peele (@keyandpeele)
+            .id("UCGm3CO6LPcN-Y7HIuyE0Rew"), // Monty Python (@MontyPython)
+            .id("UCkAGrHCLFmlK3H2kd6isipg"), // Mr Bean (@MrBean)
+            .id("UCqFzWxSCi39LnW1JKFR3efg"), // Saturday Night Live (@SaturdayNightLive)
+            .id("UCfAOh2t5DpxVrgS9NQKjC7A"), // The Onion (@TheOnion)
+            .id("UCVpankR4HtoAVtYnFDUieYA"), // Ze Frank (@zefrank)
+            .id("UC67f2Qf7FYhtoUIF4Sf29cA"), // Bad Lip Reading (@BadLipReading)
+            .id("UCzb-6smlTg5UPirLdsdQ_cQ"), // Foil Arms and Hog (@foilarmsandhog)
+            .id("UCYUQQgogVeQY8cMQamhHJcg"), // CinemaSins (@CinemaSins)
+            .id("UCRijo3ddMTht_IHyNSNXpNQ"), // Dude Perfect (@DudePerfect)
+            .id("UCY30JRSgfhYXA6i6xX1erWg"), // Smosh (@smosh)
+            .id("UCh9IfI45mmk59eDvSWtuuhQ"), // Ryan George (@RyanGeorge)
+        ],
+        "dreaming": [
+            .id("UCFQMO-YL87u-6Rt8hIVsRjA"), // Hello Future Me (@HelloFutureMe)
+            .id("UCodbH5mUeF-m_BsNueRDjcw"), // Overly Sarcastic Productions (@OverlySarcasticProductions)
+            .id("UC20oEMuKgfaNBfpV7JlFRQQ"), // Abbie Emmons (@AbbieEmmons)
+            .id("UCErSSa3CaP_GJxmFpdjG9Jw"), // Lessons from the Screenplay (@LessonsfromtheScreenplay)
+            .id("UCUFoQUaVRt3MVFxqwPUMLCQ"), // StudioBinder (@StudioBinder)
+            .id("UCY11ijKZMzPmUoSzmZkDGKw"), // Charlie Morley - Lucid Dreaming Teacher (@CharlieMorley)
+            .id("UCUdettijNYvLAm4AixZv4RA"), // SciShow Psych (@SciShowPsych)
+            .id("UCe0fHWjFLX6DecThdT_CZyw"), // Sleep Doctor (@TheSleepDoctor)
+            .id("UCVzt0Ltq6VNKRqRMrry3OIA"), // Extra Credits (@ExtraCredits)
+            .id("UCRrvZqCL1YsqRA8IpXrhYQQ"), // Jill Bearup (@JillBearup)
+            .id("UCb-wzF6DrSslXq3qE61YL7A"), // ShaelinWrites (@ShaelinWrites)
+            .id("UCMNO5DyuBpWRlWwTjqaP6RQ"), // Mythology Explained (@MythologyExplained)
+        ],
     ]
 
     /// At least a minute, no upper limit (long lectures are welcome).

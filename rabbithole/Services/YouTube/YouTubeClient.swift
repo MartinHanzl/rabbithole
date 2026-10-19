@@ -69,7 +69,8 @@ nonisolated final class YouTubeClient: YouTubeService {
 
     func playlistPage(_ playlistID: String, page: String?) async throws -> YouTubePlaylistPage {
         var query = [
-            "part": "contentDetails,status", "playlistId": playlistID, "maxResults": "50",
+            // 20 newest per page keeps a topic refresh around 20 quota units with ~15 channels.
+            "part": "contentDetails,status", "playlistId": playlistID, "maxResults": "20",
             "fields": "nextPageToken,items(contentDetails/videoId,status/privacyStatus)",
         ]
         query["pageToken"] = page
