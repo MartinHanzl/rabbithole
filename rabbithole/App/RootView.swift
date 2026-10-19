@@ -9,6 +9,8 @@ struct RootView: View {
         #if DEBUG
         if let article = Self.demoArticle {
             NavigationStack { ArticleDetailScreen(article: article, topicID: "space") }
+        } else if let video = Self.demoVideo {
+            NavigationStack { VideoDetailView(card: VideoCard(video: video, topicID: "space", isExploration: false)) }
         } else {
             content
         }
@@ -41,6 +43,14 @@ struct RootView: View {
             pageID: -1, title: title, extract: "", description: nil, type: .standard,
             articleURL: WikipediaURLs.article(title: title), thumbnailURL: nil, imageFileTitle: nil
         )
+    }
+
+    /// `-demoVideo M7lc1UVf-VE` opens the player directly (needs no API key) – for simulator checks.
+    private static var demoVideo: YouTubeVideo? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: "-demoVideo"), index + 1 < arguments.count else { return nil }
+        return YouTubeVideo(id: arguments[index + 1], title: "Ukázkové video", channelTitle: "YouTube",
+                            duration: 300, thumbnailURL: nil, fetchedAt: .now)
     }
 
     /// `-demoTopics space,history,biology` preselects topics – used for simulator screenshots.

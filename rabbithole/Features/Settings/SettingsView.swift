@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @AppStorage(SettingsKey.breakInterval) private var breakInterval = AppConfig.defaultBreakInterval
     @AppStorage(SettingsKey.topicsVersion) private var topicsVersion = 0
+    @AppStorage(SettingsKey.videoInterval) private var videoInterval = FeedSlotPlanner.defaultVideoInterval
     @State private var confirmation: Confirmation?
 
     private enum Confirmation: Identifiable {
@@ -37,6 +38,26 @@ struct SettingsView: View {
                     Text("Čtení")
                 } footer: {
                     Text("Po daném počtu přečtených článků ti nabídneme krátkou pauzu.")
+                }
+
+                Section {
+                    Picker("Videa ve feedu", selection: $videoInterval) {
+                        ForEach(FeedSlotPlanner.videoIntervalOptions, id: \.self) { interval in
+                            if interval == 0 {
+                                Text("Vypnuto").tag(interval)
+                            } else {
+                                Text("Každá \(interval). karta").tag(interval)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Videa")
+                } footer: {
+                    if YouTubeConfiguration.isAvailable {
+                        Text("Krátká naučná videa z vybraných kanálů YouTube. Nikdy se nespouštějí sama.")
+                    } else {
+                        Text("Videa nejsou v této verzi aplikace k dispozici (chybí klíč k YouTube API).")
+                    }
                 }
 
                 Section {
@@ -83,6 +104,7 @@ struct SettingsView: View {
             TopicPreferencesRepository(context: modelContext).resetWeights()
         case .forgetSeen:
             SeenArticlesRepository(context: modelContext).removeAll()
+            SeenVideosRepository(context: modelContext).removeAll()
         }
         topicsVersion += 1
     }

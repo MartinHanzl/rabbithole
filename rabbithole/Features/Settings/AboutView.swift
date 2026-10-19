@@ -44,7 +44,19 @@ struct AboutView: View {
             }
 
             Section {
-                Text("Vybraná témata, uložené články a historie zobrazených článků zůstávají jen v tomto zařízení. Aplikace nemá účty a nesbírá žádná osobní data.")
+                Text("Videa ve feedu pocházejí z YouTube. Aplikace používá YouTube API Services a videa přehrává jen v oficiálním přehrávači YouTube. Používáním videí souhlasíš s podmínkami služby YouTube; na zpracování údajů se vztahují zásady ochrany soukromí Google.")
+                Link(destination: URL(string: "https://www.youtube.com/t/terms")!) {
+                    Label("Smluvní podmínky YouTube", systemImage: "doc.text")
+                }
+                Link(destination: URL(string: "https://policies.google.com/privacy")!) {
+                    Label("Zásady ochrany soukromí Google", systemImage: "hand.raised")
+                }
+            } header: {
+                Text("Videa (YouTube)")
+            }
+
+            Section {
+                Text("Vybraná témata, uložené články a videa a historie zobrazených položek zůstávají v tomto zařízení. Údaje o videích (název, kanál, délka, náhled) se z YouTube obnovují nejpozději po 30 dnech, jinak se smažou. Pokud se přihlásíš, ukládáme na server jen to, co popisují zásady ochrany osobních údajů.")
             } header: {
                 Text("Soukromí")
             }

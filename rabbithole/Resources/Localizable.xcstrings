@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "cs",
   "strings" : {
+    "%@ · %@" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
     "3–24 znaků: písmena bez diakritiky, číslice, _ a tečka." : {
 
     },
@@ -128,7 +138,13 @@
     "K přihlášení používáme e-mail nebo účet Google. E-mail neukazujeme ostatním uživatelům." : {
 
     },
+    "Každá %lld. karta" : {
+
+    },
     "Kdo data vidí" : {
+
+    },
+    "Krátká naučná videa z vybraných kanálů YouTube. Nikdy se nespouštějí sama." : {
 
     },
     "Krátké a zajímavé články podle tvých zájmů místo nekonečného scrollování." : {
@@ -248,6 +264,9 @@
     "Odmítnout" : {
 
     },
+    "Otevřít na YouTube" : {
+
+    },
     "Otevřít původní článek na Wikipedii" : {
 
     },
@@ -327,6 +346,12 @@
     "Psychologie" : {
 
     },
+    "Přehrát" : {
+
+    },
+    "Přehrát video %@" : {
+
+    },
     "Přestanete být přáteli, nebude ti moct psát ani tě najít. Odblokovat ho můžeš v nastavení." : {
 
     },
@@ -337,6 +362,9 @@
 
     },
     "Přezdívku, avatar, vybraná témata, seznam přátel a blokovaných uživatelů, články, které posíláš přátelům, a zprávy k nim. Uložené články jen tehdy, když povolíš, aby je přátelé viděli." : {
+
+    },
+    "Při přehrávání videa se načítá oficiální přehrávač YouTube, který může zpracovávat údaje podle zásad ochrany soukromí Google. Seznamy videí aplikace načítá přes YouTube API Services; o tobě YouTube API od nás nic nedostává." : {
 
     },
     "Přidat" : {
@@ -393,6 +421,9 @@
     "Smazání" : {
 
     },
+    "Smluvní podmínky YouTube" : {
+
+    },
     "Soukromí" : {
 
     },
@@ -447,6 +478,27 @@
     "Vesmír" : {
 
     },
+    "Videa" : {
+
+    },
+    "Videa (YouTube)" : {
+
+    },
+    "Videa nejsou v této verzi aplikace k dispozici (chybí klíč k YouTube API)." : {
+
+    },
+    "Videa ve feedu" : {
+
+    },
+    "Videa ve feedu pocházejí z YouTube. Aplikace používá YouTube API Services a videa přehrává jen v oficiálním přehrávači YouTube. Používáním videí souhlasíš s podmínkami služby YouTube; na zpracování údajů se vztahují zásady ochrany soukromí Google." : {
+
+    },
+    "Videa z YouTube" : {
+
+    },
+    "Video přehrává oficiální přehrávač YouTube. Platí pro něj podmínky YouTube a zásady ochrany soukromí Google." : {
+
+    },
     "Vyber aspoň tři témata." : {
 
     },
@@ -490,10 +542,13 @@
     "Vybraná témata a jejich váhy, historie zobrazených článků, doba čtení a uložené články (pokud nemáš účet)." : {
 
     },
-    "Vybraná témata, uložené články a historie zobrazených článků zůstávají jen v tomto zařízení. Aplikace nemá účty a nesbírá žádná osobní data." : {
+    "Vybraná témata, uložené články a videa a historie zobrazených položek zůstávají v tomto zařízení. Údaje o videích (název, kanál, délka, náhled) se z YouTube obnovují nejpozději po 30 dnech, jinak se smažou. Pokud se přihlásíš, ukládáme na server jen to, co popisují zásady ochrany osobních údajů." : {
 
     },
     "Vydává se za někoho jiného" : {
+
+    },
+    "Vypnuto" : {
 
     },
     "Výsledky hledání" : {
@@ -565,6 +620,9 @@
     "Zásady ochrany osobních údajů" : {
 
     },
+    "Zásady ochrany soukromí Google" : {
+
+    },
     "· Mimo tvá témata" : {
 
     },
@@ -580,13 +638,13 @@
     "Čas na malou pauzu?" : {
 
     },
+    "Články a videa, které si ve feedu uložíš, najdeš tady. Články i bez připojení." : {
+
+    },
     "Články se načítají z Wikipedie. Zkontroluj připojení k internetu a zkus to znovu." : {
 
     },
     "Články se nepodařilo načíst. Zkus to prosím za chvíli znovu." : {
-
-    },
-    "Články, které si ve feedu uložíš, najdeš tady – i bez připojení." : {
 
     },
     "Čtení" : {

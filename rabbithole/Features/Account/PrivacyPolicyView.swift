@@ -27,6 +27,12 @@ struct PrivacyPolicyView: View {
                 Text("Účet můžeš kdykoli smazat přímo v aplikaci. Smažou se tím všechna data na serveru, včetně tvých zpráv.")
             }
 
+            Section("Videa z YouTube") {
+                Text("Při přehrávání videa se načítá oficiální přehrávač YouTube, který může zpracovávat údaje podle zásad ochrany soukromí Google. Seznamy videí aplikace načítá přes YouTube API Services; o tobě YouTube API od nás nic nedostává.")
+                Link("Zásady ochrany soukromí Google", destination: URL(string: "https://policies.google.com/privacy")!)
+                Link("Smluvní podmínky YouTube", destination: URL(string: "https://www.youtube.com/t/terms")!)
+            }
+
             Section("Zpracovatel") {
                 Text("Data jsou uložena u služby Supabase v datovém centru v EU (Irsko).")
             }

@@ -34,6 +34,57 @@ xcodebuild -project rabbithole.xcodeproj -scheme rabbithole \
 |---|---|
 | `-demoTopics space,history,biology` | přeskočí onboarding s vybranými tématy |
 | `-demoArticle "Mars (planeta)"` | otevře rovnou čtečku daného článku |
+| `-demoVideo M7lc1UVf-VE` | otevře přehrávač s daným videem (nepotřebuje API klíč) |
+| `-demoTab settings` | otevře danou záložku (`feed`, `friends`, `saved`, `settings`) |
+
+## YouTube videa ve feedu
+
+Ve feedu jsou mezi články i krátká naučná videa z YouTube. Výchozí poměr je zhruba každá 4. karta. Poměr jde v Nastavení změnit a videa se dají i úplně vypnout. Videa se přehrávají jen v oficiálním vloženém přehrávači YouTube (IFrame Player API ve WKWebView). Přehrávač se nijak neupravuje a nic se nespouští automaticky.
+
+### Kanály
+
+Kanály se nastavují v souboru **`rabbithole/Config/VideoChannelCatalog.swift`**, který leží vedle `TopicCatalog.swift`. Pro každé téma je tam seznam kanálů:
+
+```swift
+"space": [
+    .handle("@nazevkanalu"),            // z adresy youtube.com/@nazevkanalu
+    .id("UCxxxxxxxxxxxxxxxxxxxxxx"),    // ID kanálu, levnější na kvótu
+],
+```
+
+- Témata bez kanálů dostanou na místě videa článek.
+- Zobrazují se jen veřejná a dokončená videa, která jde vložit do jiných stránek. Vynechávají se živá vysílání, věkově omezená videa a videa mimo `durationRange` (výchozí 1–20 minut).
+
+### API klíč (vývoj)
+
+1. V Google Cloud Console otevři *APIs & Services* a povol **YouTube Data API v3**. Pak v *Credentials* vytvoř **API key**.
+2. Klíč omez: v *Application restrictions* zvol **iOS apps** s bundle ID `webpulse.rabbithole`, v *API restrictions* povol jen **YouTube Data API v3**. Aplikace posílá hlavičku `X-Ios-Bundle-Identifier`.
+3. Klíč zapiš do `Config/Secrets.xcconfig` (je v `.gitignore`) jako `YOUTUBE_API_KEY = …`. Vzor najdeš v `Config/Secrets.example.xcconfig`. Bez klíče se videa nezobrazují.
+
+### Kvóta a podmínky YouTube API
+
+- Aplikace používá jen `channels.list`, `playlistItems.list` (playlist nahraných videí) a `videos.list`. Každý z nich stojí 1 jednotku kvóty. `search.list` za 100 jednotek se nepoužívá.
+- Seznam videí jednoho tématu se obnovuje jednou za 24 hodin. Stojí to zhruba 3 jednotky na kanál a uživatele, výchozí kvóta je 10 000 jednotek denně na projekt.
+- **Ukládá se jen nezbytné minimum:** ID, název, název kanálu, délka a URL náhledu.
+- Údaje starší 30 dní se mažou, i když je zařízení offline (YouTube API Developer Policies). U uložených videí se údaje obnovují po 7 dnech, a když obnovení do 30 dnů neprojde, video se ze seznamu uložených odebere.
+- **Ověř si:** 30denní lhůtu pro „API Data“ jsem převzal z Developer Policies. Nejsem si jistý, jestli se smí trvale uchovávat aspoň samotné ID videa. Proto se mažou i ID.
+- Obrazovka *O aplikaci a licence* odkazuje na [podmínky YouTube](https://www.youtube.com/t/terms) a [zásady ochrany soukromí Google](https://policies.google.com/privacy).
+
+### Návrh: přesun YouTube API na backend (zatím neimplementováno)
+
+Klíč je teď v aplikaci, takže se dá z binárky vytáhnout a všichni uživatelé čerpají ze stejné kvóty. Návrh:
+
+1. **Edge Function `youtube-videos`** (Supabase): `GET ?topic=space&exclude=<id,…>` vrátí seznam videí ve stejném tvaru jako `YouTubeVideo`. Klíč bude v Supabase Secrets (`YOUTUBE_API_KEY`), omezený na *API restrictions*. Aplikační omezení iOS tam nejde použít, volá se ze serveru.
+2. **Sdílená cache** v tabulce `video_cache (topic_id, video_id, title, channel_title, duration, thumbnail_url, fetched_at)`:
+   - plní ji `pg_cron` jednou denně pro každé téma;
+   - záznamy starší 30 dní maže stejný cron;
+   - kvóta pak závisí na počtu kanálů, ne na počtu uživatelů.
+3. **Seznam kanálů** se přesune do tabulky `video_channels (topic_id, channel_ref)`, kterou spravuje admin. `VideoChannelCatalog.swift` zůstane jako výchozí seed.
+4. **Přístup:**
+   - funkce půjde volat publishable klíčem i bez přihlášení, protože feed funguje bez účtu;
+   - omezení počtu požadavků na IP adresu nebo zařízení;
+   - RLS: `video_cache` čte jen funkce (service role), klient tabulku nevidí.
+5. **V aplikaci** se `YouTubeClient` nahradí implementací `YouTubeService`, která volá funkci. `VideoPool` a celý zbytek zůstanou beze změny, protože protokol je stejný.
 
 ## Kde upravit mapování témat na kategorie
 
