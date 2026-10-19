@@ -6,6 +6,18 @@ struct RootView: View {
     @AppStorage(SettingsKey.hasCompletedOnboarding) private var hasCompletedOnboarding = false
 
     var body: some View {
+        #if DEBUG
+        if let article = Self.demoArticle {
+            NavigationStack { ArticleDetailScreen(article: article, topicID: "space") }
+        } else {
+            content
+        }
+        #else
+        content
+        #endif
+    }
+
+    @ViewBuilder private var content: some View {
         if hasCompletedOnboarding {
             MainTabView()
         } else {
@@ -20,6 +32,17 @@ struct RootView: View {
     }
 
     #if DEBUG
+    /// `-demoArticle "Mars (planeta)"` opens the reader directly – used for simulator screenshots.
+    private static var demoArticle: ArticleSummary? {
+        let arguments = ProcessInfo.processInfo.arguments
+        guard let index = arguments.firstIndex(of: "-demoArticle"), index + 1 < arguments.count else { return nil }
+        let title = arguments[index + 1]
+        return ArticleSummary(
+            pageID: -1, title: title, extract: "", description: nil, type: .standard,
+            articleURL: WikipediaURLs.article(title: title), thumbnailURL: nil, imageFileTitle: nil
+        )
+    }
+
     /// `-demoTopics space,history,biology` preselects topics – used for simulator screenshots.
     private func skipOnboardingIfRequested() {
         let arguments = ProcessInfo.processInfo.arguments

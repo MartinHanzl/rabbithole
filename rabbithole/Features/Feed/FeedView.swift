@@ -9,13 +9,12 @@ struct FeedView: View {
                 .background(Theme.screenBackground)
                 .navigationTitle("Objevuj")
                 .navigationDestination(for: FeedCard.self) { card in
-                    ArticleDetailView(article: card.article, topicID: card.topicID) { duration in
-                        viewModel.finishedReading(topicID: card.topicID, duration: duration)
-                    }
+                    ArticleDetailScreen(article: card.article, topicID: card.topicID)
                 }
+                // Also fires when returning from the reader, which can change saved state.
+                .onAppear { viewModel.refreshSavedState() }
         }
         .task { await viewModel.start() }
-        .onAppear { viewModel.refreshSavedState() }
     }
 
     @ViewBuilder private var content: some View {

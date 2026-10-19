@@ -228,12 +228,6 @@ final class FeedViewModel {
         }
     }
 
-    /// Called when the reader closes; long reads boost the topic.
-    func finishedReading(topicID: String, duration: TimeInterval) {
-        guard services.engine.isLongRead(duration: duration) else { return }
-        apply(.longRead, to: topicID)
-    }
-
     private func apply(_ signal: PersonalizationEngine.Signal, to topicID: String) {
         let current = topics.weights()[topicID] ?? services.engine.configuration.initialWeight
         topics.setWeight(services.engine.updatedWeight(current, after: signal), for: topicID)
