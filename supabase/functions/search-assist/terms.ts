@@ -3,6 +3,8 @@
 export interface Terms {
   wikipedia: string;
   youtube: string;
+  /// ISO 639-1 language of the query, null when ambiguous.
+  language: string | null;
 }
 
 export const MAX_QUERY = 200;
@@ -22,9 +24,10 @@ export function parseTerms(text: string): Terms | null {
     return null;
   }
   if (!data || typeof data !== "object") return null;
-  const { wikipedia, youtube } = data as Record<string, unknown>;
+  const { wikipedia, youtube, language } = data as Record<string, unknown>;
   if (typeof wikipedia !== "string" || typeof youtube !== "string") return null;
-  const terms = { wikipedia: wikipedia.trim(), youtube: youtube.trim() };
+  const code = typeof language === "string" ? language.trim().toLowerCase() : "";
+  const terms = { wikipedia: wikipedia.trim(), youtube: youtube.trim(), language: /^[a-z]{2}$/.test(code) ? code : null };
   if (!terms.wikipedia || !terms.youtube || terms.wikipedia.length > MAX_TERM || terms.youtube.length > MAX_TERM) {
     return null;
   }
@@ -34,9 +37,10 @@ export function parseTerms(text: string): Terms | null {
 export function prompt(query: string): string {
   return [
     "Uživatel české vzdělávací aplikace napsal do vyhledávání dotaz. Převeď ho na hledané výrazy.",
-    "- \"wikipedia\": 1–4 klíčová slova pro vyhledávání na české Wikipedii (podstatná jména v 1. pádě, bez tazacích slov), např. „jak funguje kapitalismus“ → „kapitalismus“.",
-    "- \"youtube\": krátký přirozený dotaz pro YouTube v češtině, který najde srozumitelné vysvětlující video.",
-    "Pokud dotaz není otázka, vrať ho téměř beze změny. Vrať pouze JSON {\"wikipedia\": string, \"youtube\": string}.",
+    "- \"wikipedia\": 1–4 klíčová slova V ČEŠTINĚ pro českou Wikipedii (podstatná jména v 1. pádě, bez tazacích slov); dotaz v jiném jazyce přelož, např. „jak funguje kapitalismus“ → „kapitalismus“, „China“ → „Čína“.",
+    "- \"youtube\": krátký přirozený dotaz pro YouTube VE STEJNÉM JAZYCE, v jakém je dotaz napsaný, který najde srozumitelné vysvětlující video. NEPŘEKLÁDEJ ho: „jak funguje kapitalismus“ → „jak funguje kapitalismus“, „China“ → „China explained“. Zachovej téma dotazu a nezužuj ho (ne „history of China“).",
+    "- \"language\": dvoupísmenný kód ISO 639-1 jazyka dotazu (cs, en, de…); pokud jde o slovo, které je stejné ve více jazycích (např. „Mars“), vrať prázdný řetězec.",
+    "Vrať pouze JSON {\"wikipedia\": string, \"youtube\": string, \"language\": string}.",
     "",
     `Dotaz: ${query.slice(0, MAX_QUERY)}`,
   ].join("\n");
@@ -44,8 +48,8 @@ export function prompt(query: string): string {
 
 export const schema = {
   type: "OBJECT",
-  properties: { wikipedia: { type: "STRING" }, youtube: { type: "STRING" } },
-  required: ["wikipedia", "youtube"],
+  properties: { wikipedia: { type: "STRING" }, youtube: { type: "STRING" }, language: { type: "STRING" } },
+  required: ["wikipedia", "youtube", "language"],
 };
 
 /// Privacy: rate-limit buckets store a hash, never the IP itself.

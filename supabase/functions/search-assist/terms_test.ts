@@ -16,8 +16,14 @@ Deno.test("normalize ignores case, punctuation and spacing, keeps diacritics", (
 });
 
 Deno.test("parseTerms accepts a proper answer", () => {
-  assertEquals(parseTerms('{"wikipedia":" kapitalismus ","youtube":"jak funguje kapitalismus"}'),
-    { wikipedia: "kapitalismus", youtube: "jak funguje kapitalismus" });
+  assertEquals(parseTerms('{"wikipedia":" Čína ","youtube":"China explained","language":"EN"}'),
+    { wikipedia: "Čína", youtube: "China explained", language: "en" });
+});
+
+Deno.test("ambiguous or invalid language becomes null", () => {
+  assertEquals(parseTerms('{"wikipedia":"Mars","youtube":"Mars","language":""}')?.language, null);
+  assertEquals(parseTerms('{"wikipedia":"Mars","youtube":"Mars","language":"english"}')?.language, null);
+  assertEquals(parseTerms('{"wikipedia":"Mars","youtube":"Mars"}')?.language, null);
 });
 
 Deno.test("parseTerms rejects broken or empty answers", () => {

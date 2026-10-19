@@ -23,8 +23,9 @@ nonisolated protocol YouTubeService: Sendable {
     func playlistPage(_ playlistID: String, page: String?) async throws -> YouTubePlaylistPage
     /// `playable`: videos that may be shown; `returned`: every id the API still knows.
     func videos(ids: [String]) async throws -> (playable: [YouTubeVideo], returned: Set<String>)
-    /// Video ids matching a query. Costs 100 quota units – callers must cache and limit.
-    func searchVideoIDs(_ query: String) async throws -> [String]
+    /// Video ids matching a query, biased to `language` (nil = any). Costs 100 quota units –
+    /// callers must cache and limit.
+    func searchVideoIDs(_ query: String, language: String?) async throws -> [String]
 }
 
 typealias YouTubePlaylistPage = YouTubeParser.PlaylistPage
@@ -92,12 +93,15 @@ nonisolated final class YouTubeClient: YouTubeService {
         return (playable, returned)
     }
 
-    func searchVideoIDs(_ query: String) async throws -> [String] {
-        let data = try await get("search", [
+    func searchVideoIDs(_ query: String, language: String?) async throws -> [String] {
+        var parameters = [
             "part": "id", "type": "video", "videoEmbeddable": "true", "q": query, "maxResults": "15",
-            "relevanceLanguage": "cs", "regionCode": "CZ", "safeSearch": "moderate",
-            "fields": "items(id/videoId)",
-        ])
+            "safeSearch": "moderate", "fields": "items(id/videoId)",
+        ]
+        let (relevanceLanguage, regionCode) = QueryLanguage.youTubeParameters(for: language)
+        parameters["relevanceLanguage"] = relevanceLanguage
+        parameters["regionCode"] = regionCode
+        let data = try await get("search", parameters)
         return try YouTubeParser.searchVideoIDs(from: data)
     }
 

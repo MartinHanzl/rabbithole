@@ -20,11 +20,54 @@ struct QuerySimplifierTests {
 
     @Test func youtubeGetsTheNaturalQuestion() {
         let terms = QuerySimplifier.terms(for: "  jak funguje kapitalismus ")
-        #expect(terms == SearchTerms(wikipedia: "kapitalismus", youtube: "jak funguje kapitalismus"))
+        #expect(terms == SearchTerms(wikipedia: "kapitalismus", youtube: "jak funguje kapitalismus", language: "cs"))
     }
 
     @Test func normalizationIgnoresCaseAndPunctuation() {
         #expect(QuerySimplifier.normalized("Jak funguje  KAPITALISMUS?!") == "jak funguje kapitalismus")
+    }
+}
+
+struct QueryLanguageTests {
+    @Test(arguments: [
+        ("China", "en"), ("how does capitalism work", "en"), ("black holes", "en"),
+        ("jak funguje kapitalismus", "cs"), ("kvantová fyzika", "cs"), ("Geschichte Roms", "de"),
+    ])
+    func detectsConfidentLanguages(query: String, expected: String) {
+        #expect(QueryLanguage.detect(query) == expected)
+    }
+
+    @Test func ambiguousWordsDoNotForceALanguage() {
+        #expect(QueryLanguage.detect("Mars") == nil)
+    }
+
+    @Test func czechRegionOnlyForCzechAndSlovak() {
+        #expect(QueryLanguage.youTubeParameters(for: "cs") == ("cs", "CZ"))
+        #expect(QueryLanguage.youTubeParameters(for: "sk") == ("sk", "CZ"))
+        #expect(QueryLanguage.youTubeParameters(for: "en") == ("en", nil))
+        #expect(QueryLanguage.youTubeParameters(for: nil) == (nil, nil))
+    }
+}
+
+struct SearchTermsReconcilingTests {
+    @Test func translatedYouTubeQueryFallsBackToWhatTheUserTyped() {
+        let query = "jak funguje kapitalismus"
+        let assisted = SearchTerms(wikipedia: "kapitalismus", youtube: "how capitalism works", language: "cs")
+        let terms = SearchService.reconciled(assisted, query: query, fallback: QuerySimplifier.terms(for: query))
+        #expect(terms == SearchTerms(wikipedia: "kapitalismus", youtube: "jak funguje kapitalismus", language: "cs"))
+    }
+
+    @Test func matchingLanguageIsKept() {
+        let assisted = SearchTerms(wikipedia: "Čína", youtube: "China explained", language: "en")
+        let terms = SearchService.reconciled(assisted, query: "China", fallback: QuerySimplifier.terms(for: "China"))
+        #expect(terms == assisted)
+    }
+
+    @Test func missingLanguageIsFilledLocally() {
+        let assisted = SearchTerms(wikipedia: "kvantová fyzika", youtube: "kvantová fyzika vysvětlení", language: nil)
+        let terms = SearchService.reconciled(assisted, query: "kvantová fyzika", fallback: QuerySimplifier.terms(for: "kvantová fyzika"))
+        #expect(terms.language == "cs")
+        #expect(terms.youtube == "kvantová fyzika vysvětlení")
     }
 }
 
@@ -129,6 +172,23 @@ struct SearchServiceTests {
         #expect(results.videos.map(\.id) == ["v2", "v1"])
         #expect(results.videoStatus == .found)
         #expect(youTube.calls.contains("search:jak funguje kapitalismus"))
+        #expect(youTube.searchLanguages == ["cs"])
+    }
+
+    @Test func englishQueryGetsEnglishVideos() async {
+        let youTube = fakeYouTube()
+        let (service, _) = makeService(youTube: youTube)
+
+        _ = await service.search("China")
+
+        #expect(youTube.searchLanguages == ["en"])
+    }
+
+    @Test func sameWordsInAnotherLanguageAreCachedSeparately() {
+        // The cache key includes the language, so a Czech and an English search don't mix.
+        var cache = VideoSearchCache()
+        cache.store([], for: "en|china", at: .now)
+        #expect(cache.videos(for: "cs|china", at: .now) == nil)
     }
 
     @Test func repeatedSearchUsesCacheAndNoQuota() async {

@@ -1,4 +1,5 @@
 import Foundation
+import NaturalLanguage
 import Supabase
 
 /// Search terms derived from what the user typed.
@@ -7,6 +8,31 @@ nonisolated struct SearchTerms: Codable, Equatable, Sendable {
     let wikipedia: String
     /// Natural phrasing works well on YouTube.
     let youtube: String
+    /// ISO 639-1 language of the query ("en" for "China"); `nil` when ambiguous ("Mars").
+    var language: String? = nil
+}
+
+/// On-device language detection for the offline fallback.
+nonisolated enum QueryLanguage {
+    static let minimumConfidence = 0.55  // "China" ≈ 0.59 en, "Mars" ≈ 0.52 fr
+
+    /// `nil` when no language is confident enough – videos are then not filtered by language.
+    static func detect(_ query: String) -> String? {
+        let recognizer = NLLanguageRecognizer()
+        // Bias towards the languages users here are likely to type.
+        recognizer.languageHints = [.czech: 0.35, .english: 0.35, .slovak: 0.1, .german: 0.1,
+                                    .spanish: 0.05, .french: 0.05]
+        recognizer.processString(query)
+        guard let (language, confidence) = recognizer.languageHypotheses(withMaximum: 1).first,
+              confidence >= minimumConfidence else { return nil }
+        return language.rawValue
+    }
+
+    /// YouTube parameters: language bias, and the Czech region only for Czech/Slovak queries.
+    static func youTubeParameters(for language: String?) -> (relevanceLanguage: String?, regionCode: String?) {
+        guard let language else { return (nil, nil) }
+        return (language, ["cs", "sk"].contains(language) ? "CZ" : nil)
+    }
 }
 
 /// Offline fallback: drops Czech question and filler words ("jak funguje kapitalismus" → "kapitalismus").
@@ -31,7 +57,7 @@ nonisolated enum QuerySimplifier {
 
     static func terms(for query: String) -> SearchTerms {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        return SearchTerms(wikipedia: keywords(trimmed), youtube: trimmed)
+        return SearchTerms(wikipedia: keywords(trimmed), youtube: trimmed, language: QueryLanguage.detect(trimmed))
     }
 
     /// Cache key: case, spacing and trailing punctuation don't matter.
@@ -153,7 +179,7 @@ actor SearchService {
         let terms = await self.terms(for: query)
 
         async let articles = try? wikipedia.search(terms.wikipedia)
-        let (videos, status) = await searchVideos(terms.youtube)
+        let (videos, status) = await searchVideos(terms.youtube, language: terms.language)
         let found = await articles
         return SearchResults(terms: terms, articles: found ?? [], videos: videos, videoStatus: status,
                              articlesFailed: found == nil)
@@ -169,14 +195,26 @@ actor SearchService {
             try await client.functions.invoke("search-assist", options: FunctionInvokeOptions(body: Body(q: query)))
         }
         guard let assisted, !assisted.wikipedia.isEmpty, !assisted.youtube.isEmpty else { return fallback }
-        return assisted
+        return Self.reconciled(assisted, query: query, fallback: fallback)
+    }
+
+    /// Guards against the model translating the YouTube query: if it came back in another
+    /// confidently detected language than the user typed, search YouTube with the original text.
+    nonisolated static func reconciled(_ assisted: SearchTerms, query: String, fallback: SearchTerms) -> SearchTerms {
+        var terms = assisted
+        if terms.language == nil { terms.language = fallback.language }
+        if let typed = fallback.language, let returned = QueryLanguage.detect(terms.youtube), typed != returned {
+            terms = SearchTerms(wikipedia: terms.wikipedia, youtube: query.trimmingCharacters(in: .whitespacesAndNewlines),
+                                language: typed)
+        }
+        return terms
     }
 
     // MARK: Videos
 
-    private func searchVideos(_ query: String) async -> ([YouTubeVideo], SearchResults.VideoStatus) {
+    private func searchVideos(_ query: String, language: String?) async -> ([YouTubeVideo], SearchResults.VideoStatus) {
         guard let youTube else { return ([], .unavailable) }
-        let key = QuerySimplifier.normalized(query)
+        let key = "\(language ?? "any")|" + QuerySimplifier.normalized(query)
         if let cached = cache.videos(for: key, at: now()) {
             return (cached, .found)
         }
@@ -184,7 +222,7 @@ actor SearchService {
         guard quota.consume(at: now()) else { return ([], .dailyLimitReached) }
         self.quota = quota
         do {
-            let ids = try await youTube.searchVideoIDs(query)
+            let ids = try await youTube.searchVideoIDs(query, language: language)
             let videos = ids.isEmpty ? [] : try await youTube.videos(ids: ids).playable
             // Keep relevance order from search.list.
             let order = Dictionary(uniqueKeysWithValues: ids.enumerated().map { ($1, $0) })

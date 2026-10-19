@@ -1,6 +1,6 @@
 // Turns a typed question into search terms for Wikipedia and YouTube using Gemini.
 //
-// POST { "q": "jak funguje kapitalismus" } → { "wikipedia": "kapitalismus", "youtube": "jak funguje kapitalismus" }
+// POST { "q": "China" } → { "wikipedia": "Čína", "youtube": "China explained", "language": "en" }
 //
 // Works without an account (search works without one), so it is protected by a per-IP hourly
 // limit (hashed IP) and a shared cache. On any problem it answers 503 and the app falls back
@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  const { data: cached } = await admin.from("search_terms_cache").select("wikipedia, youtube").eq("query", key).maybeSingle();
+  const { data: cached } = await admin.from("search_terms_cache").select("wikipedia, youtube, language").eq("query", key).maybeSingle();
   if (cached) return json(cached);
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";

@@ -12,6 +12,8 @@ nonisolated final class FakeYouTubeService: YouTubeService, @unchecked Sendable 
     var error: Error?
 
     var calls: [String] { lock.withLock { _calls } }
+    private var _languages: [String?] = []
+    var searchLanguages: [String?] { lock.withLock { _languages } }
     private func record(_ call: String) { lock.withLock { _calls.append(call) } }
 
     func uploadsPlaylists(for channels: [YouTubeChannelRef]) async throws -> [YouTubeChannelRef: String] {
@@ -30,8 +32,9 @@ nonisolated final class FakeYouTubeService: YouTubeService, @unchecked Sendable 
     }
 
     var searchIDs: [String] = []
-    func searchVideoIDs(_ query: String) async throws -> [String] {
+    func searchVideoIDs(_ query: String, language: String?) async throws -> [String] {
         record("search:\(query)")
+        lock.withLock { _languages.append(language) }
         if let error { throw error }
         return searchIDs
     }
