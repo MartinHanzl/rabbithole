@@ -34,6 +34,7 @@ private struct SignedInContent: View {
     }
 
     let sharing: SharingService
+    @Environment(AuthService.self) private var auth
     @State private var friendsModel: FriendsViewModel
     @State private var section: Section = .activity
     @State private var feed: PagedList<FriendActivity>
@@ -72,7 +73,8 @@ private struct SignedInContent: View {
             await threads.loadFirstPageIfNeeded()
         }
         .navigationDestination(for: UUID.self) { shareID in
-            ChatView(viewModel: ChatViewModel(shareID: shareID, service: sharing, friends: friendsModel.service))
+            ChatView(viewModel: ChatViewModel(shareID: shareID, service: sharing, friends: friendsModel.service,
+                                              challenges: auth.challengeService))
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -129,6 +131,8 @@ private struct SignedInContent: View {
 
 private struct ActivityRow: View {
     let item: FriendActivity
+    @Environment(AuthService.self) private var auth
+    private var showsChallenges: Bool { auth.challengeService != nil }
 
     var body: some View {
         HStack(spacing: 12) {
@@ -142,6 +146,12 @@ private struct ActivityRow: View {
                 Text(item.kind == .shared ? "Poslal(a) ti \(item.nickname)" : "Uložil(a) si \(item.nickname)")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+                if showsChallenges, let question = item.challengeQuestion, item.challengeAnswered == false {
+                    Label("\(item.nickname) tě vyzývá: \(question)", systemImage: "questionmark.bubble")
+                        .font(.subheadline)
+                        .foregroundStyle(Color.accentColor)
+                        .lineLimit(2)
+                }
             }
         }
         .padding(.vertical, 4)

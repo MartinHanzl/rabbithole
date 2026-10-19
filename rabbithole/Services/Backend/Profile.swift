@@ -6,12 +6,14 @@ nonisolated struct Profile: Codable, Equatable, Sendable, Identifiable {
     var nickname: String
     var avatarPath: String?
     var shareSavedWithFriends: Bool
+    var acceptsChallenges: Bool = true
 
     enum CodingKeys: String, CodingKey {
         case id
         case nickname
         case avatarPath = "avatar_path"
         case shareSavedWithFriends = "share_saved_with_friends"
+        case acceptsChallenges = "accepts_challenges"
     }
 }
 

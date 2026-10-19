@@ -68,7 +68,8 @@ struct ArticleDetailView: View {
         }
         .sheet(isPresented: $showsShareToFriend) {
             if let sharing = auth.sharingService, let friends = auth.friendsService {
-                ShareToFriendView(article: viewModel.article, sharing: sharing, friends: friends)
+                ShareToFriendView(article: viewModel.article, sharing: sharing, friends: friends,
+                                  challenges: auth.challengeService)
             }
         }
         .task { await viewModel.load() }

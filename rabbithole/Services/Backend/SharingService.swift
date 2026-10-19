@@ -97,6 +97,8 @@ nonisolated struct FriendActivity: Decodable, Hashable, Identifiable, Sendable {
     let thumbnailURL: URL?
     let occurredAt: Date
     let shareID: UUID?
+    let challengeQuestion: String?
+    let challengeAnswered: Bool?
 
     var id: String { "\(kind.rawValue)-\(friendID)-\(pageID)-\(shareID?.uuidString ?? "")" }
 
@@ -107,6 +109,8 @@ nonisolated struct FriendActivity: Decodable, Hashable, Identifiable, Sendable {
         case thumbnailURL = "thumbnail_url"
         case occurredAt = "occurred_at"
         case shareID = "share_id"
+        case challengeQuestion = "challenge_question"
+        case challengeAnswered = "challenge_answered"
     }
 
     var article: ArticleSummary {

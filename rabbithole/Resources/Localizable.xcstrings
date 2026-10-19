@@ -1,6 +1,52 @@
 {
   "sourceLanguage" : "cs",
   "strings" : {
+    " (tip ještě před čtením)" : {
+
+    },
+    "%@ má výzvy vypnuté." : {
+
+    },
+    "%@ odpověděl(a) správně%@!" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ odpověděl(a) správně%2$@!"
+          }
+        }
+      }
+    },
+    "%@ odpověděl(a): „%@“%@" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ odpověděl(a): „%2$@“%3$@"
+          }
+        }
+      }
+    },
+    "%@ tipoval(a) „%@“%@." : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ tipoval(a) „%2$@“%3$@."
+          }
+        }
+      }
+    },
+    "%@ tě vyzývá: %@" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ tě vyzývá: %2$@"
+          }
+        }
+      }
+    },
     "%@ · %@" : {
       "localizations" : {
         "cs" : {
@@ -12,6 +58,19 @@
       }
     },
     "3–24 znaků: písmena bez diakritiky, číslice, _ a tečka." : {
+
+    },
+    "A co si myslel(a) %@: „%@“" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "A co si myslel(a) %1$@: „%2$@“"
+          }
+        }
+      }
+    },
+    "A co sis myslel(a) ty: „%@“" : {
 
     },
     "Akce se nepovedla. Zkontroluj připojení a zkus to znovu." : {
@@ -41,6 +100,9 @@
     "Charakter a hodnoty" : {
 
     },
+    "Co bys odpověděl(a) ty? (nepovinné)" : {
+
+    },
     "Co se stalo?" : {
 
     },
@@ -57,6 +119,9 @@
 
     },
     "Další články se nepodařilo načíst." : {
+
+    },
+    "Další špatná odpověď" : {
 
     },
     "Data jsou uložena u služby Supabase v datovém centru v EU (Irsko)." : {
@@ -126,6 +191,9 @@
     "Hledat podle přezdívky" : {
 
     },
+    "Hledám hotové otázky…" : {
+
+    },
     "Hledám zajímavé články…" : {
 
     },
@@ -148,6 +216,9 @@
 
     },
     "K přihlášení používáme e-mail nebo účet Google. E-mail neukazujeme ostatním uživatelům." : {
+
+    },
+    "K tomuto článku už výzva je." : {
 
     },
     "Každá %lld. karta" : {
@@ -198,7 +269,16 @@
     "Motivace a sebedůvěra" : {
 
     },
+    "Možnosti výzvy" : {
+
+    },
+    "Na výzvu už bylo odpovězeno." : {
+
+    },
     "Nahlásit" : {
+
+    },
+    "Nahlásit výzvu" : {
 
     },
     "Nahlásit zprávu" : {
@@ -208,6 +288,9 @@
 
     },
     "Nahlášení se nepodařilo odeslat." : {
+
+    },
+    "Napiš k tomu něco do chatu ↓" : {
 
     },
     "Napiš zprávu" : {
@@ -223,6 +306,9 @@
 
     },
     "Nebo e-mailem" : {
+
+    },
+    "Nejdřív si přečíst článek" : {
 
     },
     "Nejsi připojený k internetu." : {
@@ -315,13 +401,34 @@
     "Odmítnout" : {
 
     },
+    "Odpovědi se musí lišit." : {
+
+    },
+    "Odpovědět" : {
+
+    },
+    "Odpověď může mít nejvýš 80 znaků." : {
+
+    },
     "Osobní rozvoj a vztahy" : {
+
+    },
+    "Otevřená" : {
 
     },
     "Otevřít na YouTube" : {
 
     },
     "Otevřít původní článek na Wikipedii" : {
+
+    },
+    "Otázka" : {
+
+    },
+    "Otázka %lld/200. Možnosti se příteli zamíchají." : {
+
+    },
+    "Otázka může mít nejvýš 200 znaků." : {
 
     },
     "Pauza po %lld článcích" : {
@@ -379,6 +486,9 @@
     "Pokračovat ve čtení" : {
 
     },
+    "Polož příteli otázku k článku. Odpovědět může hned, nebo až si článek přečte." : {
+
+    },
     "Poslal(a) ti %@" : {
 
     },
@@ -421,6 +531,9 @@
     "Přehrát video %@" : {
 
     },
+    "Přesně tak%@!" : {
+
+    },
     "Přestanete být přáteli a nebude ti moct psát." : {
 
     },
@@ -440,6 +553,9 @@
 
     },
     "Přidat" : {
+
+    },
+    "Přidat výzvu" : {
 
     },
     "Přihlas se, přidej si přátele a posílejte si zajímavé články." : {
@@ -467,6 +583,12 @@
 
     },
     "Přítel" : {
+
+    },
+    "S možnostmi" : {
+
+    },
+    "S tímto uživatelem si výzvy posílat nelze." : {
 
     },
     "S účtem můžeš přidávat přátele a posílat si články." : {
@@ -511,6 +633,15 @@
     "Sport" : {
 
     },
+    "Správná odpověď" : {
+
+    },
+    "Správně je „%@“ – můžete to probrat v chatu." : {
+
+    },
+    "Správně je „%@“." : {
+
+    },
     "Svět kolem nás" : {
 
     },
@@ -518,6 +649,12 @@
 
     },
     "Technika" : {
+
+    },
+    "Tento přítel má výzvy vypnuté." : {
+
+    },
+    "Tentokrát to nevyšlo, ale teď už to víš." : {
 
     },
     "Text pochází z české Wikipedie a je dostupný pod licencí Creative Commons Uveďte původ – Zachovejte licenci 4.0. Zobrazení je zjednodušené – tabulky, vzorce a obrázky v textu najdeš v původním článku." : {
@@ -529,7 +666,26 @@
     "Texty článků pocházejí z české Wikipedie a jsou dostupné pod licencí Creative Commons Uveďte původ – Zachovejte licenci 4.0 (CC BY-SA 4.0). U každého článku je uveden odkaz na původní stránku, kde najdeš i seznam autorů a historii úprav." : {
 
     },
+    "Tipnout si hned" : {
+
+    },
+    "Tvoje odpověď" : {
+
+    },
+    "Tvoje odpověď: „%@“%@" : {
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Tvoje odpověď: „%1$@“%2$@"
+          }
+        }
+      }
+    },
     "Tvůj profil" : {
+
+    },
+    "Typ" : {
 
     },
     "Ukazovat přátelům, co si ukládám" : {
@@ -629,10 +785,16 @@
     "Vybraná témata, uložené články a videa a historie zobrazených položek zůstávají v tomto zařízení. Údaje o videích (název, kanál, délka, náhled) se z YouTube obnovují nejpozději po 30 dnech, jinak se smažou. Pokud se přihlásíš, ukládáme na server jen to, co popisují zásady ochrany osobních údajů." : {
 
     },
+    "Vybrat hotovou otázku" : {
+
+    },
     "Vydává se za někoho jiného" : {
 
     },
     "Vyjednávání" : {
+
+    },
+    "Vyplň všechny tři odpovědi." : {
 
     },
     "Vypnuto" : {
@@ -645,6 +807,18 @@
 
     },
     "Výsledky hledání" : {
+
+    },
+    "Výzva" : {
+
+    },
+    "Výzvu můžeš poslat jen příteli." : {
+
+    },
+    "Výzvu se nepodařilo odeslat." : {
+
+    },
+    "Výzvy od přátel" : {
 
     },
     "Všechna témata budou mít znovu stejnou váhu." : {
@@ -710,6 +884,9 @@
     "Ze serveru se smaže tvůj profil, přátelé, sdílené články i všechny tvoje zprávy. Nejde to vrátit. Témata a uložené články v tomto zařízení zůstanou." : {
 
     },
+    "Zkontroluj otázku a odpovědi." : {
+
+    },
     "Zkusit znovu" : {
 
     },
@@ -761,6 +938,12 @@
     "Čas na malou pauzu?" : {
 
     },
+    "Čeká se, až %@ odpoví." : {
+
+    },
+    "Článek odešel, ale výzva ne: %@ Uprav ji a zkus to znovu." : {
+
+    },
     "Článek se nepodařilo poslat." : {
 
     },
@@ -780,6 +963,9 @@
 
     },
     "Číst článek" : {
+
+    },
+    "Špatná odpověď" : {
 
     },
     "Žádné články" : {

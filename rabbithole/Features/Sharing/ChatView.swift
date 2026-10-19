@@ -15,6 +15,7 @@ struct ChatView: View {
                         ArticleHeader(thread: thread)
                             .padding(.bottom, 8)
                     }
+                    ChallengeCardView(viewModel: viewModel, article: viewModel.thread?.article)
                     if viewModel.hasOlder {
                         Button("Načíst starší zprávy") {
                             Task { await viewModel.loadOlder() }

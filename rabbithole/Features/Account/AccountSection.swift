@@ -56,6 +56,19 @@ struct AccountSection: View {
                         }
                     }
                 ))
+                Toggle("Výzvy od přátel", isOn: Binding(
+                    get: { profile.acceptsChallenges },
+                    set: { value in
+                        Task {
+                            do {
+                                try await auth.setAcceptsChallenges(value)
+                                errorMessage = nil
+                            } catch {
+                                errorMessage = error.localizedDescription
+                            }
+                        }
+                    }
+                ))
                 if let errorMessage {
                     Text(errorMessage)
                         .foregroundStyle(.red)

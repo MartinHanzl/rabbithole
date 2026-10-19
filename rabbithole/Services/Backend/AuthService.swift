@@ -56,6 +56,26 @@ final class AuthService {
         return SharingService(client: client, me: profile.id)
     }
 
+    /// Challenges API; `nil` when signed out or when the user turned challenges off.
+    var challengeService: ChallengeService? {
+        guard let client, let profile, profile.acceptsChallenges else { return nil }
+        return ChallengeService(client: client, me: profile.id)
+    }
+
+    func setAcceptsChallenges(_ value: Bool) async throws {
+        guard let client, var profile else { return }
+        do {
+            try await client.from("profiles")
+                .update(["accepts_challenges": value])
+                .eq("id", value: profile.id)
+                .execute()
+        } catch {
+            throw Self.map(error)
+        }
+        profile.acceptsChallenges = value
+        state = .signedIn(profile)
+    }
+
     /// Mirrors local saves to the server while the user lets friends see them.
     func observeSavedArticleChanges() async {
         for await notification in NotificationCenter.default.notifications(named: .savedArticleChanged) {
@@ -236,7 +256,7 @@ final class AuthService {
         guard let client else { return }
         do {
             let rows: [Profile] = try await client.from("profiles")
-                .select("id, nickname, avatar_path, share_saved_with_friends")
+                .select("id, nickname, avatar_path, share_saved_with_friends, accepts_challenges")
                 .eq("id", value: userID)
                 .limit(1)
                 .execute()

@@ -6,10 +6,13 @@ nonisolated struct PublicProfile: Codable, Hashable, Identifiable, Sendable {
     let id: UUID
     let nickname: String
     let avatarPath: String?
+    /// Present where the query selects it (friend lists); `nil` means unknown.
+    var acceptsChallenges: Bool? = nil
 
     enum CodingKeys: String, CodingKey {
         case id, nickname
         case avatarPath = "avatar_path"
+        case acceptsChallenges = "accepts_challenges"
     }
 }
 
@@ -77,8 +80,8 @@ nonisolated struct FriendsService: Sendable {
 
     private static let friendshipColumns = """
         id, requester_id, addressee_id, status, created_at,
-        requester:profiles!friendships_requester_id_fkey(id, nickname, avatar_path),
-        addressee:profiles!friendships_addressee_id_fkey(id, nickname, avatar_path)
+        requester:profiles!friendships_requester_id_fkey(id, nickname, avatar_path, accepts_challenges),
+        addressee:profiles!friendships_addressee_id_fkey(id, nickname, avatar_path, accepts_challenges)
         """
 
     func search(_ query: String) async throws -> [PublicProfile] {
@@ -134,17 +137,19 @@ nonisolated struct FriendsService: Sendable {
         try await client.from("blocks").delete().eq("blocker_id", value: me).eq("blocked_id", value: userID).execute()
     }
 
-    func report(userID: UUID? = nil, messageID: UUID? = nil, reason: ReportReason, note: String) async throws {
+    func report(userID: UUID? = nil, messageID: UUID? = nil, challengeID: UUID? = nil,
+                reason: ReportReason, note: String) async throws {
         struct Row: Encodable {
             let reporter_id: UUID
             let reported_user_id: UUID?
             let message_id: UUID?
+            let challenge_id: UUID?
             let reason: ReportReason
             let note: String?
         }
         let trimmed = note.trimmingCharacters(in: .whitespacesAndNewlines)
         try await client.from("reports").insert(Row(
-            reporter_id: me, reported_user_id: userID, message_id: messageID,
+            reporter_id: me, reported_user_id: userID, message_id: messageID, challenge_id: challengeID,
             reason: reason, note: trimmed.isEmpty ? nil : String(trimmed.prefix(1000))
         )).execute()
     }
