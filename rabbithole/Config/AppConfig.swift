@@ -5,6 +5,10 @@ enum AppConfig {
     /// TODO: replace with a real address before release.
     static let contactEmail = "CONTACT_EMAIL@example.com"
 
+    /// Show a 6-digit code field after sending the sign-in email. Requires custom SMTP on
+    /// Supabase (free tier can't change templates otherwise) – see supabase/config.toml.
+    static let emailSignInUsesCode = false
+
     static let minimumSelectedTopics = 3
     static let defaultBreakInterval = 20
 

@@ -27,7 +27,11 @@ enum BackendClient {
         SupabaseClient(
             supabaseURL: $0.url,
             supabaseKey: $0.publishableKey,
-            options: SupabaseClientOptions(auth: .init(redirectToURL: BackendConfiguration.authRedirectURL))
+            options: SupabaseClientOptions(auth: .init(
+                redirectToURL: BackendConfiguration.authRedirectURL,
+                // Session is stored in the Keychain; emit it right away and refresh if expired.
+                emitLocalSessionAsInitialSession: true
+            ))
         )
     }
 }

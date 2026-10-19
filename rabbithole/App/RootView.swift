@@ -57,9 +57,16 @@ struct RootView: View {
 struct MainTabView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.services) private var services
+    @Environment(AuthService.self) private var auth
+    @AppStorage(SettingsKey.topicsVersion) private var topicsVersion = 0
+    @State private var selectedTab = MainTabView.initialTab
+
+    enum Tab: String {
+        case feed, saved, settings
+    }
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             FeedView(viewModel: FeedViewModel(
                 services: services,
                 topics: TopicPreferencesRepository(context: modelContext),
@@ -70,15 +77,42 @@ struct MainTabView: View {
                 }
             ))
             .tabItem { Label("Objevuj", systemImage: "rectangle.stack") }
+            .tag(Tab.feed)
             SavedArticlesView()
                 .tabItem { Label("Uložené", systemImage: "bookmark") }
+                .tag(Tab.saved)
             SettingsView()
                 .tabItem { Label("Nastavení", systemImage: "gearshape") }
+                .tag(Tab.settings)
         }
+        .fullScreenCover(isPresented: .constant(needsProfile)) {
+            ProfileSetupView()
+        }
+        .onChange(of: topicsVersion) {
+            let topics = TopicPreferencesRepository(context: modelContext).selectedTopicIDs()
+            Task { try? await auth.syncTopics(topics) }
+        }
+    }
+
+    /// DEBUG: `-demoTab settings` opens a tab directly – used for simulator screenshots.
+    private static var initialTab: Tab {
+        #if DEBUG
+        let arguments = ProcessInfo.processInfo.arguments
+        if let index = arguments.firstIndex(of: "-demoTab"), index + 1 < arguments.count,
+           let tab = Tab(rawValue: arguments[index + 1]) {
+            return tab
+        }
+        #endif
+        return .feed
+    }
+
+    private var needsProfile: Bool {
+        if case .needsProfile = auth.state { true } else { false }
     }
 }
 
 #Preview {
     RootView()
+        .environment(AuthService(client: nil))
         .modelContainer(for: PersistentSchema.models, inMemory: true)
 }
