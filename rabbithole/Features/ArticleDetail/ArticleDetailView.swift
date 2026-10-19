@@ -69,7 +69,10 @@ struct ArticleDetailView: View {
         .sheet(isPresented: $showsShareToFriend) {
             if let sharing = auth.sharingService, let friends = auth.friendsService {
                 ShareToFriendView(article: viewModel.article, sharing: sharing, friends: friends,
-                                  challenges: auth.challengeService)
+                                  challenges: auth.challengeService,
+                                  suggestionsProvider: { [article = viewModel.article, challenges = auth.challengeService] in
+                                      await challenges?.suggestions(for: article) ?? []
+                                  })
             }
         }
         .task { await viewModel.load() }

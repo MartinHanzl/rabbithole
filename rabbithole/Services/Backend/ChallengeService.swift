@@ -126,3 +126,29 @@ nonisolated struct ChallengeService: Sendable {
         }
     }
 }
+
+extension ChallengeService {
+    /// Ready-made questions for an article from the `article-questions` Edge Function
+    /// (cached server-side). Failures just mean "no suggestions".
+    func suggestions(for article: ArticleSummary) async -> [ChallengeDraft] {
+        struct Body: Encodable { let page_id: Int }
+        struct Response: Decodable {
+            struct Item: Decodable {
+                let question: String
+                let correct: String
+                let wrong: [String]
+                let source: Challenge.Source
+            }
+            let questions: [Item]
+        }
+        guard let response: Response = try? await client.functions.invoke(
+            "article-questions", options: FunctionInvokeOptions(body: Body(page_id: article.pageID))
+        ) else { return [] }
+        return response.questions.compactMap { item in
+            guard item.wrong.count == 2 else { return nil }
+            let draft = ChallengeDraft(kind: .multipleChoice, source: item.source, question: item.question,
+                                       correctAnswer: item.correct, wrongAnswers: item.wrong)
+            return draft.isValid ? draft : nil
+        }
+    }
+}

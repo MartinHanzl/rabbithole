@@ -436,3 +436,6 @@ enabled = true
 # The function authenticates the caller from the access token itself.
 [functions.delete-account]
 verify_jwt = false
+
+[functions.article-questions]
+verify_jwt = false
