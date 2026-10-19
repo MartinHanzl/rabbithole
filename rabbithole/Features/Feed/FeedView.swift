@@ -3,6 +3,7 @@ import SwiftUI
 struct FeedView: View {
     @State var viewModel: FeedViewModel
     @AppStorage(SettingsKey.topicsVersion) private var topicsVersion = 0
+    @AppStorage(SettingsKey.videoInterval) private var videoInterval = FeedSlotPlanner.defaultVideoInterval
 
     var body: some View {
         NavigationStack {
@@ -12,12 +13,18 @@ struct FeedView: View {
                 .navigationDestination(for: FeedCard.self) { card in
                     ArticleDetailScreen(article: card.article, topicID: card.topicID)
                 }
+                .navigationDestination(for: VideoCard.self) { card in
+                    VideoDetailView(card: card) { viewModel.videoUnplayable(card) }
+                }
                 // Also fires when returning from the reader, which can change saved state.
                 .onAppear { viewModel.refreshSavedState() }
         }
         .task { await viewModel.start() }
         .onChange(of: topicsVersion) {
-            Task { await viewModel.topicsChanged() }
+            Task { await viewModel.settingsChanged() }
+        }
+        .onChange(of: videoInterval) {
+            Task { await viewModel.settingsChanged() }
         }
     }
 
@@ -83,7 +90,14 @@ struct FeedView: View {
                 card: card,
                 isSaved: viewModel.savedIDs.contains(card.id),
                 onToggleSave: { viewModel.toggleSaved(card) },
-                onNotInterested: { viewModel.notInterested(card) }
+                onNotInterested: { viewModel.notInterested(item) }
+            )
+        case .video(let card):
+            VideoCardView(
+                card: card,
+                isSaved: viewModel.savedVideoIDs.contains(card.id),
+                onToggleSave: { viewModel.toggleSaved(card) },
+                onNotInterested: { viewModel.notInterested(item) }
             )
         case .readingBreak(_, let count):
             ReadingBreakCardView(count: count) {

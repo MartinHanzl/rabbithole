@@ -15,6 +15,10 @@ nonisolated final class FakeWikipediaService: WikipediaService, @unchecked Senda
     var categories: [String: Category]
     var summaries: [String: ArticleSummary] = [:]
     var error: Error?
+    /// When set, unknown categories return this many generated articles (unique per category),
+    /// and their summaries are generated too.
+    var generatedArticlesPerCategory: Int?
+    private var generated: [String: Int] = [:]
 
     init(categories: [String: Category] = [:]) {
         self.categories = categories
@@ -26,13 +30,20 @@ nonisolated final class FakeWikipediaService: WikipediaService, @unchecked Senda
 
     func summary(title: String) async throws -> ArticleSummary {
         if let error { throw error }
-        guard let summary = summaries[title] else { throw WikipediaError.notFound }
-        return summary
+        if let summary = summaries[title] { return summary }
+        if let pageID = lock.withLock({ generated[title] }) { return makeSummary(pageID: pageID, title: title) }
+        throw WikipediaError.notFound
     }
 
     func categoryMembers(category: String, continuation: String?) async throws -> WikipediaParser.CategoryPage {
         lock.withLock { _requestedCategories.append(category) }
         if let error { throw error }
+        if categories[category] == nil, let count = generatedArticlesPerCategory {
+            let base = abs(category.unicodeScalars.reduce(0) { $0 &* 31 &+ Int($1.value) }) % 1_000_000 * 1000
+            let articles = (1...count).map { ArticleReference(pageID: base + $0, title: "\(category) \($0)") }
+            lock.withLock { for article in articles { generated[article.title] = article.pageID } }
+            return .init(articles: articles, subcategories: [], continuation: nil)
+        }
         let node = categories[category] ?? Category()
         guard node.paginated else {
             return .init(articles: node.articles, subcategories: node.subcategories, continuation: nil)

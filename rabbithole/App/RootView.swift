@@ -72,8 +72,13 @@ struct MainTabView: View {
                 topics: TopicPreferencesRepository(context: modelContext),
                 seen: SeenArticlesRepository(context: modelContext),
                 saved: SavedArticlesRepository(context: modelContext),
+                seenVideos: SeenVideosRepository(context: modelContext),
+                savedVideos: SavedVideosRepository(context: modelContext),
                 breakInterval: {
                     UserDefaults.standard.object(forKey: SettingsKey.breakInterval) as? Int ?? AppConfig.defaultBreakInterval
+                },
+                videoInterval: {
+                    UserDefaults.standard.object(forKey: SettingsKey.videoInterval) as? Int ?? FeedSlotPlanner.defaultVideoInterval
                 }
             ))
             .tabItem { Label("Objevuj", systemImage: "rectangle.stack") }

@@ -52,10 +52,54 @@ final class SavedArticle {
     }
 }
 
+/// A video already shown in the feed. Only the YouTube video id is kept.
+@Model
+final class SeenVideo {
+    @Attribute(.unique) var videoID: String
+    var seenAt: Date
+
+    init(videoID: String, seenAt: Date = .now) {
+        self.videoID = videoID
+        self.seenAt = seenAt
+    }
+}
+
+/// A saved video. Metadata must be refreshed from the API within 30 days
+/// (YouTube API Developer Policies) – see `SavedVideosRepository.refreshStale`.
+@Model
+final class SavedVideo {
+    @Attribute(.unique) var videoID: String
+    var title: String
+    var channelTitle: String
+    var duration: TimeInterval
+    var thumbnailURL: URL?
+    var topicID: String
+    var savedAt: Date
+    var metadataFetchedAt: Date
+
+    init(video: YouTubeVideo, topicID: String, savedAt: Date = .now) {
+        videoID = video.id
+        title = video.title
+        channelTitle = video.channelTitle
+        duration = video.duration
+        thumbnailURL = video.thumbnailURL
+        self.topicID = topicID
+        self.savedAt = savedAt
+        metadataFetchedAt = video.fetchedAt
+    }
+
+    var video: YouTubeVideo {
+        YouTubeVideo(id: videoID, title: title, channelTitle: channelTitle, duration: duration,
+                     thumbnailURL: thumbnailURL, fetchedAt: metadataFetchedAt)
+    }
+}
+
 enum PersistentSchema {
     static let models: [any PersistentModel.Type] = [
         TopicPreference.self,
         SeenArticle.self,
         SavedArticle.self,
+        SeenVideo.self,
+        SavedVideo.self,
     ]
 }

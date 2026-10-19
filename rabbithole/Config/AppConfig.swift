@@ -27,4 +27,6 @@ enum SettingsKey {
     static let breakInterval = "breakInterval"
     /// Bumped whenever topic selection changes so the feed reloads.
     static let topicsVersion = "topicsVersion"
+    /// Every n-th feed card is a video; 0 = videos off.
+    static let videoInterval = "videoInterval"
 }

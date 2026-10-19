@@ -9,14 +9,32 @@ nonisolated struct FeedCard: Identifiable, Hashable, Sendable {
     var id: Int { article.pageID }
 }
 
+nonisolated struct VideoCard: Identifiable, Hashable, Sendable {
+    let video: YouTubeVideo
+    let topicID: String
+    let isExploration: Bool
+
+    var id: String { video.id }
+}
+
 enum FeedItem: Identifiable, Hashable {
     case article(FeedCard)
+    case video(VideoCard)
     case readingBreak(id: UUID, count: Int)
 
     var id: String {
         switch self {
         case .article(let card): "a\(card.id)"
+        case .video(let card): "v\(card.id)"
         case .readingBreak(let id, _): "b\(id)"
+        }
+    }
+
+    var topicID: String? {
+        switch self {
+        case .article(let card): card.topicID
+        case .video(let card): card.topicID
+        case .readingBreak: nil
         }
     }
 }
@@ -37,6 +55,7 @@ final class FeedViewModel {
     /// Error while appending more cards to an already visible feed.
     private(set) var loadMoreFailed = false
     private(set) var savedIDs: Set<Int> = []
+    private(set) var savedVideoIDs: Set<String> = []
 
     /// How many cards to keep loaded ahead of the one on screen.
     private let prefetchDistance = 3
@@ -46,10 +65,14 @@ final class FeedViewModel {
     private let topics: TopicPreferencesRepository
     private let seen: SeenArticlesRepository
     private let saved: SavedArticlesRepository
+    private let seenVideos: SeenVideosRepository
+    private let savedVideos: SavedVideosRepository
     private let counterStore: DailyReadingCounterStore
     private let breakInterval: () -> Int
+    private let videoInterval: () -> Int
 
     private var seenIDs: Set<Int> = []
+    private var seenVideoIDs: Set<String> = []
     private var cardNumber = 0
     private var counter: DailyReadingCounter
 
@@ -58,15 +81,21 @@ final class FeedViewModel {
         topics: TopicPreferencesRepository,
         seen: SeenArticlesRepository,
         saved: SavedArticlesRepository,
+        seenVideos: SeenVideosRepository,
+        savedVideos: SavedVideosRepository,
         counterStore: DailyReadingCounterStore = .init(),
-        breakInterval: @escaping () -> Int
+        breakInterval: @escaping () -> Int,
+        videoInterval: @escaping () -> Int
     ) {
         self.services = services
         self.topics = topics
         self.seen = seen
         self.saved = saved
+        self.seenVideos = seenVideos
+        self.savedVideos = savedVideos
         self.counterStore = counterStore
         self.breakInterval = breakInterval
+        self.videoInterval = videoInterval
         counter = counterStore.load()
     }
 
@@ -75,25 +104,30 @@ final class FeedViewModel {
     func start() async {
         guard phase == .idle else { return }
         seenIDs = seen.allIDs()
-        savedIDs = saved.savedIDs()
+        seenVideoIDs = seenVideos.allIDs()
+        refreshSavedState()
         await reload()
     }
 
     func reload() async {
         items = []
+        cardNumber = 0
         phase = .loading
         loadMoreFailed = false
         await loadMore()
     }
 
-    /// Restarts the feed after topic selection changed in settings.
-    func topicsChanged() async {
+    /// Restarts the feed after topic selection or video settings changed.
+    func settingsChanged() async {
         guard phase != .idle else { return }
+        seenIDs = seen.allIDs()
+        seenVideoIDs = seenVideos.allIDs()
         await reload()
     }
 
     func refreshSavedState() {
         savedIDs = saved.savedIDs()
+        savedVideoIDs = savedVideos.savedIDs()
     }
 
     func loadMore() async {
@@ -128,56 +162,79 @@ final class FeedViewModel {
     }
 
     private func loadBatch(selected: Set<String>) async -> (added: Int, error: Error?) {
-        let weights = topics.weights()
-        let allIDs = Set(TopicCatalog.all.map(\.id))
+        let planner = FeedSlotPlanner(
+            engine: services.engine,
+            videoInterval: videoInterval(),
+            videosAvailable: services.videoPool != nil
+        )
         var rng = SystemRandomNumberGenerator()
-        let picks: [PersonalizationEngine.Pick] = (0..<batchSize).compactMap { _ in
-            cardNumber += 1
-            return services.engine.pickTopic(
-                cardNumber: cardNumber, selected: selected, all: allIDs, weights: weights, using: &rng
-            )
-        }
+        let slots = planner.slots(
+            from: cardNumber + 1, count: batchSize, selected: selected,
+            all: Set(TopicCatalog.all.map(\.id)), weights: topics.weights(), using: &rng
+        )
+        cardNumber += batchSize
 
-        let excluded = seenIDs.union(loadedPageIDs)
+        let excludedArticles = seenIDs.union(loadedPageIDs)
+        let excludedVideos = seenVideoIDs.union(loadedVideoIDs)
         let loader = services.feedLoader
-        var added = 0
-        var firstError: Error?
+        let videoPool = services.videoPool
 
-        await withTaskGroup(of: Result<FeedCard?, Error>.self) { group in
-            for pick in picks {
-                guard let topic = TopicCatalog.topic(id: pick.topicID) else { continue }
+        // Load in parallel, append in slot order so the article/video ratio holds.
+        var results: [Int: Result<FeedItem?, Error>] = [:]
+        await withTaskGroup(of: (Int, Result<FeedItem?, Error>).self) { group in
+            for (index, slot) in slots.enumerated() {
+                guard let topic = TopicCatalog.topic(id: slot.pick.topicID) else { continue }
                 group.addTask {
+                    if slot.kind == .video, let videoPool,
+                       let video = try? await videoPool.randomCandidate(for: topic.id, excluding: excludedVideos) {
+                        return (index, .success(.video(VideoCard(video: video, topicID: topic.id, isExploration: slot.pick.isExploration))))
+                    }
+                    // Article slot, or video slot without an available video.
                     do {
-                        let article = try await loader.article(for: topic, excluding: excluded)
-                        return .success(article.map {
-                            FeedCard(article: $0, topicID: topic.id, isExploration: pick.isExploration)
-                        })
+                        let article = try await loader.article(for: topic, excluding: excludedArticles)
+                        return (index, .success(article.map {
+                            .article(FeedCard(article: $0, topicID: topic.id, isExploration: slot.pick.isExploration))
+                        }))
                     } catch {
-                        return .failure(error)
+                        return (index, .failure(error))
                     }
                 }
             }
-            for await result in group {
-                switch result {
-                case .success(let card?):
-                    if !loadedPageIDs.contains(card.id), !seenIDs.contains(card.id) {
-                        items.append(.article(card))
-                        added += 1
-                    }
-                case .success(nil):
-                    break
-                case .failure(let error):
-                    firstError = firstError ?? error
-                }
+            for await (index, result) in group {
+                results[index] = result
+            }
+        }
+
+        var added = 0
+        var firstError: Error?
+        for index in results.keys.sorted() {
+            switch results[index]! {
+            case .success(let item?) where !isDuplicate(item):
+                items.append(item)
+                added += 1
+            case .success:
+                break
+            case .failure(let error):
+                firstError = firstError ?? error
             }
         }
         return (added, firstError)
     }
 
+    private func isDuplicate(_ item: FeedItem) -> Bool {
+        switch item {
+        case .article(let card): loadedPageIDs.contains(card.id) || seenIDs.contains(card.id)
+        case .video(let card): loadedVideoIDs.contains(card.id) || seenVideoIDs.contains(card.id)
+        case .readingBreak: false
+        }
+    }
+
     private var loadedPageIDs: Set<Int> {
-        Set(items.compactMap {
-            if case .article(let card) = $0 { card.id } else { nil }
-        })
+        Set(items.compactMap { if case .article(let card) = $0 { card.id } else { nil } })
+    }
+
+    private var loadedVideoIDs: Set<String> {
+        Set(items.compactMap { if case .video(let card) = $0 { card.id } else { nil } })
     }
 
     private static func isOffline(_ error: Error) -> Bool {
@@ -190,9 +247,20 @@ final class FeedViewModel {
     func cardAppeared(_ item: FeedItem) async {
         guard let index = items.firstIndex(of: item) else { return }
 
-        if case .article(let card) = item, !seenIDs.contains(card.id) {
+        var isNew = false
+        switch item {
+        case .article(let card) where !seenIDs.contains(card.id):
             seenIDs.insert(card.id)
             seen.markSeen(card.id)
+            isNew = true
+        case .video(let card) where !seenVideoIDs.contains(card.id):
+            seenVideoIDs.insert(card.id)
+            seenVideos.markSeen(card.id)
+            isNew = true
+        default:
+            break
+        }
+        if isNew {
             let count = counter.register(at: .now)
             counterStore.save(counter)
             if DailyReadingCounter.shouldSuggestBreak(afterCount: count, interval: breakInterval()) {
@@ -209,12 +277,10 @@ final class FeedViewModel {
         items.removeAll { $0 == item }
     }
 
-    func notInterested(_ card: FeedCard) {
-        apply(.dismissed, to: card.topicID)
-        items.removeAll { $0 == .article(card) }
-        if items.count <= prefetchDistance {
-            Task { await loadMore() }
-        }
+    func notInterested(_ item: FeedItem) {
+        guard let topicID = item.topicID else { return }
+        apply(.dismissed, to: topicID)
+        remove(item)
     }
 
     func toggleSaved(_ card: FeedCard) {
@@ -225,6 +291,30 @@ final class FeedViewModel {
             saved.save(card.article, topicID: card.topicID)
             savedIDs.insert(card.id)
             apply(.saved, to: card.topicID)
+        }
+    }
+
+    func toggleSaved(_ card: VideoCard) {
+        if savedVideoIDs.contains(card.id) {
+            savedVideos.remove(videoID: card.id)
+            savedVideoIDs.remove(card.id)
+        } else {
+            savedVideos.save(card.video, topicID: card.topicID)
+            savedVideoIDs.insert(card.id)
+            apply(.saved, to: card.topicID)
+        }
+    }
+
+    /// The embedded player reported an error (removed, private, not embeddable…): skip quietly.
+    func videoUnplayable(_ card: VideoCard) {
+        remove(.video(card))
+        Task { await services.videoPool?.reject(videoID: card.id, topicID: card.topicID) }
+    }
+
+    private func remove(_ item: FeedItem) {
+        items.removeAll { $0 == item }
+        if items.count <= prefetchDistance {
+            Task { await loadMore() }
         }
     }
 
