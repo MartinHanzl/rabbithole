@@ -29,7 +29,7 @@ struct YouTubeParserTests {
     @Test func keepsOnlyPlayableVideos() throws {
         let videos = try YouTubeParser.playableVideos(from: Fixtures.data("yt_videos"), fetchedAt: now)
 
-        #expect(videos.map(\.id) == ["vid00000001", "vid00000010"])
+        #expect(videos.map(\.id) == ["vid00000001", "vid00000005", "vid00000010"])
         let mars = try #require(videos.first)
         #expect(mars.title == "Proč je Mars červený?")
         #expect(mars.channelTitle == "Vědecký kanál")
@@ -38,6 +38,12 @@ struct YouTubeParserTests {
         #expect(mars.thumbnailURL?.absoluteString == "https://i.ytimg.com/vi/vid00000001/hqdefault.jpg")
         #expect(mars.watchURL.absoluteString == "https://www.youtube.com/watch?v=vid00000001")
         #expect(mars.fetchedAt == now)
+    }
+
+    @Test func shortClipsBelowTheMinimumAreSkipped() throws {
+        let ids = try YouTubeParser.playableVideos(from: Fixtures.data("yt_videos"), fetchedAt: now).map(\.id)
+        #expect(!ids.contains("vid00000004"))  // 45 s
+        #expect(ids.contains("vid00000005"))   // 1 h 2 min – no upper limit
     }
 
     @Test func durationRangeIsConfigurable() throws {

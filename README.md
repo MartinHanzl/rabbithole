@@ -53,7 +53,7 @@ Kanály se nastavují v souboru **`rabbithole/Config/VideoChannelCatalog.swift`*
 ```
 
 - Témata bez kanálů dostanou na místě videa článek.
-- Zobrazují se jen veřejná a dokončená videa, která jde vložit do jiných stránek. Vynechávají se živá vysílání, věkově omezená videa a videa mimo `durationRange` (výchozí 1–20 minut).
+- Zobrazují se jen veřejná a dokončená videa, která jde vložit do jiných stránek. Vynechávají se živá vysílání, věkově omezená videa a videa mimo `durationRange` (výchozí aspoň 1 minuta, bez horního limitu).
 
 ### API klíč (vývoj)
 

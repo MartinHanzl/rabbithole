@@ -44,8 +44,9 @@ enum VideoChannelCatalog {
         "dreaming": [],
     ]
 
-    /// "Short educational videos": 1–20 minutes.
-    static let durationRange: ClosedRange<TimeInterval> = 60...(20 * 60)
+    /// At least a minute, no upper limit (long lectures are welcome).
+    /// Raise the minimum to e.g. `181` to skip YouTube Shorts (they can be up to 3 minutes).
+    static let durationRange: ClosedRange<TimeInterval> = 60...TimeInterval.infinity
 
     static func channels(for topicID: String) -> [YouTubeChannelRef] {
         channelsByTopic[topicID] ?? []
