@@ -70,7 +70,7 @@ struct MainTabView: View {
                 }
             ))
             .tabItem { Label("Objevuj", systemImage: "rectangle.stack") }
-            Text("Uložené")
+            SavedArticlesView()
                 .tabItem { Label("Uložené", systemImage: "bookmark") }
             Text("Nastavení")
                 .tabItem { Label("Nastavení", systemImage: "gearshape") }
