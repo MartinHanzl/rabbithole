@@ -58,6 +58,11 @@ struct AccountSection: View {
                     Text(errorMessage)
                         .foregroundStyle(.red)
                 }
+                if let service = auth.friendsService {
+                    NavigationLink("Blokovaní uživatelé") {
+                        BlockedUsersView(service: service)
+                    }
+                }
                 NavigationLink("Zásady ochrany osobních údajů") {
                     PrivacyPolicyView()
                 }

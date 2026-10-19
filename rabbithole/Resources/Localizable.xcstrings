@@ -1,10 +1,10 @@
 {
   "sourceLanguage" : "cs",
   "strings" : {
-    "· Mimo tvá témata" : {
+    "3–24 znaků: písmena bez diakritiky, číslice, _ a tečka." : {
 
     },
-    "3–24 znaků: písmena bez diakritiky, číslice, _ a tečka." : {
+    "Akce se nepovedla. Zkontroluj připojení a zkus to znovu." : {
 
     },
     "Bez hesla – stačí odkaz z e-mailu." : {
@@ -19,22 +19,13 @@
     "Biologie" : {
 
     },
-    "Čas na malou pauzu?" : {
+    "Blokovaní uživatelé" : {
 
     },
     "Celý článek se nepodařilo načíst." : {
 
     },
-    "Číst dál" : {
-
-    },
-    "Články se načítají z Wikipedie. Zkontroluj připojení k internetu a zkus to znovu." : {
-
-    },
-    "Články se nepodařilo načíst. Zkus to prosím za chvíli znovu." : {
-
-    },
-    "Články, které si ve feedu uložíš, najdeš tady – i bez připojení." : {
+    "Co se stalo?" : {
 
     },
     "Co tě zajímá?" : {
@@ -44,9 +35,6 @@
 
     },
     "Co zůstává jen v zařízení" : {
-
-    },
-    "Čtení" : {
 
     },
     "Další články se nepodařilo načíst." : {
@@ -98,6 +86,9 @@
     "Doporučování probíhá jen v tomto zařízení. Ukládání a delší čtení zvyšují váhu tématu, „Nezajímá mě“ ji snižuje. Zhruba každý desátý článek je z tématu, které nemáš vybrané." : {
 
     },
+    "Důvod" : {
+
+    },
     "E-mail" : {
 
     },
@@ -110,7 +101,13 @@
     "Historie" : {
 
     },
+    "Hledat podle přezdívky" : {
+
+    },
     "Hledám zajímavé články…" : {
+
+    },
+    "Hledám…" : {
 
     },
     "Hudba" : {
@@ -125,16 +122,19 @@
     "Jen písmena bez diakritiky, číslice, podtržítko a tečka." : {
 
     },
+    "Jiný důvod" : {
+
+    },
     "K přihlášení používáme e-mail nebo účet Google. E-mail neukazujeme ostatním uživatelům." : {
 
     },
     "Kdo data vidí" : {
 
     },
-    "Kód z e-mailu" : {
+    "Krátké a zajímavé články podle tvých zájmů místo nekonečného scrollování." : {
 
     },
-    "Krátké a zajímavé články podle tvých zájmů místo nekonečného scrollování." : {
+    "Kód z e-mailu" : {
 
     },
     "Licence CC BY-SA 4.0" : {
@@ -146,19 +146,19 @@
     "Moje témata" : {
 
     },
+    "Nahlásit" : {
+
+    },
+    "Nahlášení posoudíme do 24 hodin. Uživatel se nedozví, kdo ho nahlásil." : {
+
+    },
+    "Nahlášení se nepodařilo odeslat." : {
+
+    },
     "Nastavení" : {
 
     },
-    "Návrh – finální znění zásad ochrany osobních údajů doplníme před vydáním." : {
-
-    },
     "Nebo e-mailem" : {
-
-    },
-    "Něco se nepovedlo. Zkus to prosím znovu." : {
-
-    },
-    "Něco se pokazilo" : {
 
     },
     "Nejsi připojený k internetu." : {
@@ -167,7 +167,25 @@
     "Nejvýš 24 znaků." : {
 
     },
+    "Nevhodný obsah" : {
+
+    },
     "Nezajímá mě" : {
+
+    },
+    "Nikoho jsme nenašli." : {
+
+    },
+    "Nikoho neblokuješ." : {
+
+    },
+    "Návrh – finální znění zásad ochrany osobních údajů doplníme před vydáním." : {
+
+    },
+    "Něco se nepovedlo. Zkus to prosím znovu." : {
+
+    },
+    "Něco se pokazilo" : {
 
     },
     "O aplikaci a licence" : {
@@ -194,16 +212,40 @@
     "Obsah se načítá přes veřejná API Wikimedia (REST API a Action API české Wikipedie). Odpovědi se ukládají do mezipaměti v zařízení, aby aplikace zbytečně nezatěžovala servery." : {
 
     },
+    "Obtěžování nebo šikana" : {
+
+    },
     "Ochrana soukromí" : {
+
+    },
+    "Od přátel" : {
+
+    },
+    "Odblokovat" : {
+
+    },
+    "Odblokování se nepovedlo." : {
 
     },
     "Odebrat" : {
 
     },
+    "Odebrat z přátel" : {
+
+    },
     "Odebrat z uložených" : {
 
     },
+    "Odeslané žádosti" : {
+
+    },
+    "Odeslat" : {
+
+    },
     "Odhlásit se" : {
+
+    },
+    "Odmítnout" : {
 
     },
     "Otevřít původní článek na Wikipedii" : {
@@ -252,6 +294,9 @@
     "Po daném počtu přečtených článků ti nabídneme krátkou pauzu." : {
 
     },
+    "Podrobnosti (nepovinné)" : {
+
+    },
     "Pokračovat" : {
 
     },
@@ -270,7 +315,19 @@
     "Použít jiný e-mail" : {
 
     },
-    "Přátelé pak uvidí tvoje uložené články v záložce Od přátel. Můžeš to kdykoli změnit v nastavení." : {
+    "Pro vybraná témata jsme nenašli nic nového. Zkus v nastavení přidat další témata." : {
+
+    },
+    "Profil se nepodařilo načíst." : {
+
+    },
+    "Proč hlásíš uživatele %@?" : {
+
+    },
+    "Psychologie" : {
+
+    },
+    "Přestanete být přáteli, nebude ti moct psát ani tě najít. Odblokovat ho můžeš v nastavení." : {
 
     },
     "Přezdívka" : {
@@ -282,7 +339,10 @@
     "Přezdívku, avatar, vybraná témata, seznam přátel a blokovaných uživatelů, články, které posíláš přátelům, a zprávy k nim. Uložené články jen tehdy, když povolíš, aby je přátelé viděli." : {
 
     },
-    "Přihlášení" : {
+    "Přidat" : {
+
+    },
+    "Přihlas se, přidej si přátele a posílejte si zajímavé články." : {
 
     },
     "Přihlásit kódem" : {
@@ -291,13 +351,22 @@
     "Přihlásit se" : {
 
     },
-    "Pro vybraná témata jsme nenašli nic nového. Zkus v nastavení přidat další témata." : {
+    "Přihlášení" : {
 
     },
-    "Profil se nepodařilo načíst." : {
+    "Přijmout" : {
 
     },
-    "Psychologie" : {
+    "Přátele se nepodařilo načíst" : {
+
+    },
+    "Přátelé" : {
+
+    },
+    "Přátelé pak uvidí tvoje uložené články v záložce Od přátel. Můžeš to kdykoli změnit v nastavení." : {
+
+    },
+    "Přítel" : {
 
     },
     "S účtem můžeš přidávat přátele a posílat si články." : {
@@ -306,13 +375,34 @@
     "Sdílet" : {
 
     },
+    "Seznam se nepodařilo načíst." : {
+
+    },
+    "Smazaný uživatel" : {
+
+    },
+    "Smazat natrvalo" : {
+
+    },
+    "Smazat účet" : {
+
+    },
+    "Smazat účet?" : {
+
+    },
     "Smazání" : {
 
     },
     "Soukromí" : {
 
     },
+    "Spam" : {
+
+    },
     "Sport" : {
+
+    },
+    "Tady uvidíš články, které ti přátelé pošlou nebo si uloží." : {
 
     },
     "Tahle přezdívka už je obsazená." : {
@@ -333,22 +423,13 @@
     "Tvůj profil" : {
 
     },
-    "Účet" : {
-
-    },
-    "Účet můžeš kdykoli smazat přímo v aplikaci. Smažou se tím všechna data na serveru, včetně tvých zpráv." : {
-
-    },
-    "Účet potřebuješ jen pro přátele a sdílení článků. Feed a uložené články fungují i bez něj." : {
-
-    },
     "Ukazovat přátelům, co si ukládám" : {
 
     },
-    "Uložené" : {
+    "Uloženo" : {
 
     },
-    "Uloženo" : {
+    "Uložené" : {
 
     },
     "Uložit" : {
@@ -364,9 +445,6 @@
 
     },
     "Vesmír" : {
-
-    },
-    "Všechna témata budou mít znovu stejnou váhu." : {
 
     },
     "Vyber aspoň tři témata." : {
@@ -415,13 +493,28 @@
     "Vybraná témata, uložené články a historie zobrazených článků zůstávají jen v tomto zařízení. Aplikace nemá účty a nesbírá žádná osobní data." : {
 
     },
+    "Vydává se za někoho jiného" : {
+
+    },
+    "Výsledky hledání" : {
+
+    },
+    "Všechna témata budou mít znovu stejnou váhu." : {
+
+    },
     "Wikipedie" : {
 
     },
     "Wikipedie® je ochranná známka nadace Wikimedia Foundation. Tato aplikace není s nadací Wikimedia Foundation nijak spojena." : {
 
     },
-    "Žádné články" : {
+    "Zablokovat" : {
+
+    },
+    "Zablokovat %@" : {
+
+    },
+    "Zablokovat uživatele?" : {
 
     },
     "Zajímavosti" : {
@@ -433,10 +526,13 @@
     "Zapomenout zobrazené články" : {
 
     },
-    "Zásady ochrany osobních údajů" : {
+    "Zatím nic uloženého" : {
 
     },
-    "Zatím nic uloženého" : {
+    "Zatím tu nic není" : {
+
+    },
+    "Zatím tu nikdo není. Najdi přátele podle přezdívky v poli nahoře." : {
 
     },
     "Zavřít" : {
@@ -448,6 +544,9 @@
     "Zdroj:" : {
 
     },
+    "Ze serveru se smaže tvůj profil, přátelé, sdílené články i všechny tvoje zprávy. Nejde to vrátit. Témata a uložené články v tomto zařízení zůstanou." : {
+
+    },
     "Zkusit znovu" : {
 
     },
@@ -455,6 +554,54 @@
 
     },
     "Zpracovatel" : {
+
+    },
+    "Zrušit" : {
+
+    },
+    "Zároveň zablokovat" : {
+
+    },
+    "Zásady ochrany osobních údajů" : {
+
+    },
+    "· Mimo tvá témata" : {
+
+    },
+    "Účet" : {
+
+    },
+    "Účet můžeš kdykoli smazat přímo v aplikaci. Smažou se tím všechna data na serveru, včetně tvých zpráv." : {
+
+    },
+    "Účet potřebuješ jen pro přátele a sdílení článků. Feed a uložené články fungují i bez něj." : {
+
+    },
+    "Čas na malou pauzu?" : {
+
+    },
+    "Články se načítají z Wikipedie. Zkontroluj připojení k internetu a zkus to znovu." : {
+
+    },
+    "Články se nepodařilo načíst. Zkus to prosím za chvíli znovu." : {
+
+    },
+    "Články, které si ve feedu uložíš, najdeš tady – i bez připojení." : {
+
+    },
+    "Čtení" : {
+
+    },
+    "Číst dál" : {
+
+    },
+    "Žádné články" : {
+
+    },
+    "Žádost odeslána" : {
+
+    },
+    "Žádosti o přátelství" : {
 
     }
   },

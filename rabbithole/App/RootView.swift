@@ -62,7 +62,7 @@ struct MainTabView: View {
     @State private var selectedTab = MainTabView.initialTab
 
     enum Tab: String {
-        case feed, saved, settings
+        case feed, friends, saved, settings
     }
 
     var body: some View {
@@ -78,6 +78,11 @@ struct MainTabView: View {
             ))
             .tabItem { Label("Objevuj", systemImage: "rectangle.stack") }
             .tag(Tab.feed)
+            if auth.state != .unavailable {
+                FromFriendsView()
+                    .tabItem { Label("Od přátel", systemImage: "person.2") }
+                    .tag(Tab.friends)
+            }
             SavedArticlesView()
                 .tabItem { Label("Uložené", systemImage: "bookmark") }
                 .tag(Tab.saved)

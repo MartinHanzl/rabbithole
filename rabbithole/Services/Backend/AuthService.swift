@@ -44,6 +44,12 @@ final class AuthService {
         if case .signedIn(let profile) = state { profile } else { nil }
     }
 
+    /// Friends API for the signed-in user with a profile.
+    var friendsService: FriendsService? {
+        guard let client, let profile else { return nil }
+        return FriendsService(client: client, me: profile.id)
+    }
+
     private var userID: UUID? {
         switch state {
         case .needsProfile(let id), .profileUnavailable(let id): id
