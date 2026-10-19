@@ -1,0 +1,4 @@
+// Shared build settings for the app target.
+// Local secrets (Supabase URL and publishable key) live in Secrets.xcconfig, which is
+// gitignored. Copy Secrets.example.xcconfig to Secrets.xcconfig and fill it in.
+#include? "Secrets.xcconfig"
