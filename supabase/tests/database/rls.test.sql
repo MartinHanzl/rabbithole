@@ -128,6 +128,14 @@ select throws_ok(
      values ('aaaaaaaa-0000-0000-0000-000000000001', '22222222-2222-2222-2222-222222222222', '   ') $$,
   '23514', null, 'blank messages are rejected');
 
+select ok(
+  (select last_activity_at >= created_at from public.shares where id = 'aaaaaaaa-0000-0000-0000-000000000001'),
+  'new message bumps the share''s last activity');
+update public.shares set last_activity_at = now() + interval '1 year';
+select ok(
+  (select last_activity_at < now() + interval '1 day' from public.shares where id = 'aaaaaaaa-0000-0000-0000-000000000001'),
+  'participants cannot edit shares directly');
+
 update public.profiles set share_saved_with_friends = true where id = '22222222-2222-2222-2222-222222222222';
 select results_eq(
   $$ select count(*)::int from public.friend_activity $$, array[1], 'recipient sees shared article in friend activity');
