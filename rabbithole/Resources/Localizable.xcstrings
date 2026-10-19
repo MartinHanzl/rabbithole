@@ -17,6 +17,9 @@
     "Akce se nepovedla. Zkontroluj připojení a zkus to znovu." : {
 
     },
+    "Aktivita" : {
+
+    },
     "Bez hesla – stačí odkaz z e-mailu." : {
 
     },
@@ -48,6 +51,9 @@
 
     },
     "Co zůstává jen v zařízení" : {
+
+    },
+    "Další možnosti" : {
 
     },
     "Další články se nepodařilo načíst." : {
@@ -150,7 +156,19 @@
     "Kdo data vidí" : {
 
     },
+    "Komu" : {
+
+    },
     "Komunikace" : {
+
+    },
+    "Konverzace" : {
+
+    },
+    "Konverzaci se nepodařilo načíst." : {
+
+    },
+    "Kopírovat" : {
 
     },
     "Krátká naučná videa z vybraných kanálů YouTube. Nikdy se nespouštějí sama." : {
@@ -183,16 +201,25 @@
     "Nahlásit" : {
 
     },
+    "Nahlásit zprávu" : {
+
+    },
     "Nahlášení posoudíme do 24 hodin. Uživatel se nedozví, kdo ho nahlásil." : {
 
     },
     "Nahlášení se nepodařilo odeslat." : {
 
     },
+    "Napiš zprávu" : {
+
+    },
     "Nastavení" : {
 
     },
     "Navazování a udržování vztahů" : {
+
+    },
+    "Načíst starší zprávy" : {
 
     },
     "Nebo e-mailem" : {
@@ -202,6 +229,9 @@
 
     },
     "Nejvýš 24 znaků." : {
+
+    },
+    "Nepřečteno" : {
 
     },
     "Nevhodný obsah" : {
@@ -349,10 +379,16 @@
     "Pokračovat ve čtení" : {
 
     },
+    "Poslal(a) ti %@" : {
+
+    },
     "Poslali jsme e-mail na %@. Klepni v něm na odkaz – otevře se aplikace a budeš přihlášený." : {
 
     },
     "Poslat přihlašovací e-mail" : {
+
+    },
+    "Poslat příteli" : {
 
     },
     "Použít jiný e-mail" : {
@@ -370,6 +406,9 @@
     "Profil se nepodařilo načíst." : {
 
     },
+    "Proč by se mu to mohlo líbit? (nepovinné)" : {
+
+    },
     "Proč hlásíš uživatele %@?" : {
 
     },
@@ -380,6 +419,9 @@
 
     },
     "Přehrát video %@" : {
+
+    },
+    "Přestanete být přáteli a nebude ti moct psát." : {
 
     },
     "Přestanete být přáteli, nebude ti moct psát ani tě najít. Odblokovat ho můžeš v nastavení." : {
@@ -439,6 +481,9 @@
     "Smazaný uživatel" : {
 
     },
+    "Smazat" : {
+
+    },
     "Smazat natrvalo" : {
 
     },
@@ -469,9 +514,6 @@
     "Svět kolem nás" : {
 
     },
-    "Tady uvidíš články, které ti přátelé pošlou nebo si uloží." : {
-
-    },
     "Tahle přezdívka už je obsazená." : {
 
     },
@@ -499,10 +541,16 @@
     "Uložené" : {
 
     },
+    "Uložil(a) si %@" : {
+
+    },
     "Uložit" : {
 
     },
     "Umění" : {
+
+    },
+    "Uživatel je zablokovaný. Do konverzace už nelze psát." : {
 
     },
     "Ve feedu se mohou znovu objevit články, které už jsi viděl/a." : {
@@ -617,6 +665,9 @@
     "Zablokovat uživatele?" : {
 
     },
+    "Zablokování se nepovedlo." : {
+
+    },
     "Zajímavosti" : {
 
     },
@@ -626,13 +677,22 @@
     "Zapomenout zobrazené články" : {
 
     },
+    "Zatím nemáš přátele. Přidej si je v záložce Od přátel." : {
+
+    },
     "Zatím nic uloženého" : {
 
     },
-    "Zatím tu nic není" : {
+    "Zatím tu nejsou žádné zprávy." : {
+
+    },
+    "Zatím tu nic není. Tady uvidíš články, které ti přátelé pošlou nebo si uloží (pokud to mají povolené)." : {
 
     },
     "Zatím tu nikdo není. Najdi přátele podle přezdívky v poli nahoře." : {
+
+    },
+    "Zatím žádné konverzace. Pošli někomu článek tlačítkem „Poslat příteli“ ve čtečce." : {
 
     },
     "Zavřít" : {
@@ -656,7 +716,19 @@
     "Znění licence CC BY-SA 4.0" : {
 
     },
+    "Zobrazit" : {
+
+    },
     "Zpracovatel" : {
+
+    },
+    "Zpráva je příliš dlouhá." : {
+
+    },
+    "Zprávu se nepodařilo odeslat. Možná už nejste přátelé." : {
+
+    },
+    "Zprávu se nepodařilo smazat." : {
 
     },
     "Zrušit" : {
@@ -689,6 +761,9 @@
     "Čas na malou pauzu?" : {
 
     },
+    "Článek se nepodařilo poslat." : {
+
+    },
     "Články a videa, které si ve feedu uložíš, najdeš tady. Články i bez připojení." : {
 
     },
@@ -702,6 +777,9 @@
 
     },
     "Číst dál" : {
+
+    },
+    "Číst článek" : {
 
     },
     "Žádné články" : {

@@ -24,6 +24,8 @@ struct ArticleDetailScreen: View {
 struct ArticleDetailView: View {
     @State var viewModel: ArticleDetailViewModel
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(AuthService.self) private var auth
+    @State private var showsShareToFriend = false
 
     var body: some View {
         ScrollView {
@@ -45,6 +47,13 @@ struct ArticleDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
+                if auth.sharingService != nil {
+                    Button {
+                        showsShareToFriend = true
+                    } label: {
+                        Label("Poslat příteli", systemImage: "paperplane")
+                    }
+                }
                 ShareLink(item: viewModel.article.articleURL) {
                     Label("Sdílet", systemImage: "square.and.arrow.up")
                 }
@@ -55,6 +64,11 @@ struct ArticleDetailView: View {
                           systemImage: viewModel.isSaved ? "bookmark.fill" : "bookmark")
                 }
                 .sensoryFeedback(.selection, trigger: viewModel.isSaved)
+            }
+        }
+        .sheet(isPresented: $showsShareToFriend) {
+            if let sharing = auth.sharingService, let friends = auth.friendsService {
+                ShareToFriendView(article: viewModel.article, sharing: sharing, friends: friends)
             }
         }
         .task { await viewModel.load() }

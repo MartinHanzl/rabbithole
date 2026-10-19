@@ -3,6 +3,7 @@ import SwiftUI
 /// "Účet" section of Settings. Hidden when the app is built without a backend.
 struct AccountSection: View {
     @Environment(AuthService.self) private var auth
+    @Environment(\.modelContext) private var modelContext
     @State private var showsSignIn = false
     @State private var errorMessage: String?
     @State private var confirmsDeletion = false
@@ -46,7 +47,8 @@ struct AccountSection: View {
                     set: { value in
                         Task {
                             do {
-                                try await auth.setShareSavedWithFriends(value)
+                                let local = SavedArticlesRepository(context: modelContext).all().map { ($0.summary, $0.savedAt) }
+                                try await auth.setShareSavedWithFriends(value, localSaved: local)
                                 errorMessage = nil
                             } catch {
                                 errorMessage = error.localizedDescription

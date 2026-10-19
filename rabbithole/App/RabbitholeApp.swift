@@ -10,6 +10,7 @@ struct RabbitholeApp: App {
             RootView()
                 .environment(auth)
                 .task { await auth.observeAuthChanges() }
+                .task { await auth.observeSavedArticleChanges() }
                 .onOpenURL { url in
                     Task { await auth.handle(url: url) }
                 }

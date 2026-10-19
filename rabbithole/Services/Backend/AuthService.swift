@@ -50,6 +50,24 @@ final class AuthService {
         return FriendsService(client: client, me: profile.id)
     }
 
+    /// Sharing and chat API for the signed-in user with a profile.
+    var sharingService: SharingService? {
+        guard let client, let profile else { return nil }
+        return SharingService(client: client, me: profile.id)
+    }
+
+    /// Mirrors local saves to the server while the user lets friends see them.
+    func observeSavedArticleChanges() async {
+        for await notification in NotificationCenter.default.notifications(named: .savedArticleChanged) {
+            guard let change = notification.object as? SavedArticleChange,
+                  let sharing = sharingService, profile?.shareSavedWithFriends == true else { continue }
+            switch change {
+            case .saved(let article, let savedAt): try? await sharing.upsertSaved(article, savedAt: savedAt)
+            case .removed(let pageID): try? await sharing.removeSaved(pageID: pageID)
+            }
+        }
+    }
+
     private var userID: UUID? {
         switch state {
         case .needsProfile(let id), .profileUnavailable(let id): id
@@ -154,7 +172,8 @@ final class AuthService {
         await loadProfile(userID: userID)
     }
 
-    func createProfile(nickname: String, shareSavedWithFriends: Bool, topicIDs: Set<String>) async throws {
+    func createProfile(nickname: String, shareSavedWithFriends: Bool, topicIDs: Set<String>,
+                       localSaved: [(ArticleSummary, Date)] = []) async throws {
         guard let client, let userID else { return }
         let profile = Profile(
             id: userID,
@@ -169,9 +188,15 @@ final class AuthService {
         }
         state = .signedIn(profile)
         try? await syncTopics(topicIDs)
+        if shareSavedWithFriends, let sharing = sharingService {
+            for (article, savedAt) in localSaved {
+                try? await sharing.upsertSaved(article, savedAt: savedAt)
+            }
+        }
     }
 
-    func setShareSavedWithFriends(_ value: Bool) async throws {
+    /// Turning sharing on uploads `localSaved`; turning it off deletes the server copies.
+    func setShareSavedWithFriends(_ value: Bool, localSaved: [(ArticleSummary, Date)] = []) async throws {
         guard let client, var profile else { return }
         do {
             try await client.from("profiles")
@@ -183,6 +208,14 @@ final class AuthService {
         }
         profile.shareSavedWithFriends = value
         state = .signedIn(profile)
+        guard let sharing = sharingService else { return }
+        if value {
+            for (article, savedAt) in localSaved {
+                try? await sharing.upsertSaved(article, savedAt: savedAt)
+            }
+        } else {
+            try? await sharing.removeAllSaved()
+        }
     }
 
     /// Replaces the account's topics with the locally selected ones.

@@ -79,10 +79,12 @@ struct ProfileSetupView: View {
         isSaving = true
         errorMessage = nil
         let topics = TopicPreferencesRepository(context: modelContext).selectedTopicIDs()
+        let local = SavedArticlesRepository(context: modelContext).all().map { ($0.summary, $0.savedAt) }
         Task {
             defer { isSaving = false }
             do {
-                try await auth.createProfile(nickname: nickname, shareSavedWithFriends: shareSaved, topicIDs: topics)
+                try await auth.createProfile(nickname: nickname, shareSavedWithFriends: shareSaved,
+                                             topicIDs: topics, localSaved: local)
             } catch {
                 errorMessage = error.localizedDescription
             }

@@ -25,11 +25,25 @@ final class SeenArticlesRepository {
     }
 }
 
+/// Posted when an article is saved or removed locally (object: `SavedArticleChange`).
+extension Notification.Name {
+    static let savedArticleChanged = Notification.Name("savedArticleChanged")
+}
+
+enum SavedArticleChange {
+    case saved(ArticleSummary, Date)
+    case removed(pageID: Int)
+}
+
 final class SavedArticlesRepository {
     private let context: ModelContext
 
     init(context: ModelContext) {
         self.context = context
+    }
+
+    func all() -> [SavedArticle] {
+        (try? context.fetch(FetchDescriptor<SavedArticle>())) ?? []
     }
 
     func savedIDs() -> Set<Int> {
@@ -48,11 +62,13 @@ final class SavedArticlesRepository {
             imageFileTitle: article.imageFileTitle
         ))
         try? context.save()
+        NotificationCenter.default.post(name: .savedArticleChanged, object: SavedArticleChange.saved(article, .now))
     }
 
     func remove(pageID: Int) {
         try? context.delete(model: SavedArticle.self, where: #Predicate { $0.pageID == pageID })
         try? context.save()
+        NotificationCenter.default.post(name: .savedArticleChanged, object: SavedArticleChange.removed(pageID: pageID))
     }
 }
 
