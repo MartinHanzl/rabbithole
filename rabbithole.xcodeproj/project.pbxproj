@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		98356B023086034F0082D65F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9835608F3086034D0082D65F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 983560963086034D0082D65F;
+			remoteInfo = rabbithole;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		983560973086034D0082D65F /* rabbithole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rabbithole.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		98356B013086034F0082D65F /* rabbitholeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rabbitholeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = rabbithole;
 			sourceTree = "<group>";
 		};
+		98356B033086034F0082D65F /* rabbitholeTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = rabbitholeTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		983560943086034D0082D65F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		98356B053086034F0082D65F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				983560993086034D0082D65F /* rabbithole */,
+				98356B033086034F0082D65F /* rabbitholeTests */,
 				983560983086034D0082D65F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				983560973086034D0082D65F /* rabbithole.app */,
+				98356B013086034F0082D65F /* rabbitholeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = 983560973086034D0082D65F /* rabbithole.app */;
 			productType = "com.apple.product-type.application";
 		};
+		98356B003086034F0082D65F /* rabbitholeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 98356B083086034F0082D65F /* Build configuration list for PBXNativeTarget "rabbitholeTests" */;
+			buildPhases = (
+				98356B043086034F0082D65F /* Sources */,
+				98356B053086034F0082D65F /* Frameworks */,
+				98356B063086034F0082D65F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				98356B073086034F0082D65F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				98356B033086034F0082D65F /* rabbitholeTests */,
+			);
+			name = rabbitholeTests;
+			packageProductDependencies = (
+			);
+			productName = rabbitholeTests;
+			productReference = 98356B013086034F0082D65F /* rabbitholeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -83,13 +131,17 @@
 					983560963086034D0082D65F = {
 						CreatedOnToolsVersion = 26.1.1;
 					};
+					98356B003086034F0082D65F = {
+						CreatedOnToolsVersion = 26.1.1;
+						TestTargetID = 983560963086034D0082D65F;
+					};
 				};
 			};
 			buildConfigurationList = 983560923086034D0082D65F /* Build configuration list for PBXProject "rabbithole" */;
-			developmentRegion = en;
+			developmentRegion = cs;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				cs,
 				Base,
 			);
 			mainGroup = 9835608E3086034D0082D65F;
@@ -100,12 +152,20 @@
 			projectRoot = "";
 			targets = (
 				983560963086034D0082D65F /* rabbithole */,
+				98356B003086034F0082D65F /* rabbitholeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		983560953086034D0082D65F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		98356B063086034F0082D65F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		98356B043086034F0082D65F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		98356B073086034F0082D65F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 983560963086034D0082D65F /* rabbithole */;
+			targetProxy = 98356B023086034F0082D65F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		983560A03086034F0082D65F /* Debug */ = {
@@ -177,7 +252,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -234,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -253,6 +328,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Rabbithole;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -284,6 +361,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Rabbithole;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -306,6 +385,48 @@
 			};
 			name = Release;
 		};
+		98356B093086034F0082D65F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = webpulse.rabbitholeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rabbithole.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/rabbithole";
+			};
+			name = Debug;
+		};
+		98356B0A3086034F0082D65F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = webpulse.rabbitholeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rabbithole.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/rabbithole";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -323,6 +444,15 @@
 			buildConfigurations = (
 				983560A33086034F0082D65F /* Debug */,
 				983560A43086034F0082D65F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		98356B083086034F0082D65F /* Build configuration list for PBXNativeTarget "rabbitholeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				98356B093086034F0082D65F /* Debug */,
+				98356B0A3086034F0082D65F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
