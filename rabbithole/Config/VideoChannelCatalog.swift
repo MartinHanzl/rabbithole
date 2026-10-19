@@ -26,6 +26,22 @@ enum VideoChannelCatalog {
         "sport": [],
         "language": [],
         "curiosities": [],
+        // Osobní rozvoj a vztahy – Wikipedia coverage is thin, channels help most here.
+        "accounting": [],
+        "emotional-stability": [],
+        "relational-intelligence": [],
+        "relationships": [],
+        "family": [],
+        "sales": [],
+        "negotiation": [],
+        "leadership": [],
+        "communication": [],
+        "character": [],
+        "motivation": [],
+        "productivity": [],
+        "health": [],
+        "fun": [],
+        "dreaming": [],
     ]
 
     /// "Short educational videos": 1–20 minutes.

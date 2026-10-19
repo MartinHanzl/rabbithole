@@ -7,13 +7,22 @@ struct TopicPickerGrid: View {
     private let columns = [GridItem(.adaptive(minimum: 140), spacing: 12)]
 
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 12) {
-            ForEach(TopicCatalog.all) { topic in
-                TopicTile(topic: topic, isSelected: selection.contains(topic.id)) {
-                    if selection.contains(topic.id) {
-                        selection.remove(topic.id)
-                    } else {
-                        selection.insert(topic.id)
+        VStack(alignment: .leading, spacing: 24) {
+            ForEach(Topic.Group.allCases, id: \.self) { group in
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(group.title)
+                        .font(.title3.weight(.semibold))
+                        .accessibilityAddTraits(.isHeader)
+                    LazyVGrid(columns: columns, spacing: 12) {
+                        ForEach(TopicCatalog.all.filter { $0.group == group }) { topic in
+                            TopicTile(topic: topic, isSelected: selection.contains(topic.id)) {
+                                if selection.contains(topic.id) {
+                                    selection.remove(topic.id)
+                                } else {
+                                    selection.insert(topic.id)
+                                }
+                            }
+                        }
                     }
                 }
             }
