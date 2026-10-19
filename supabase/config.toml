@@ -439,3 +439,6 @@ verify_jwt = false
 
 [functions.article-questions]
 verify_jwt = false
+
+[functions.search-assist]
+verify_jwt = false

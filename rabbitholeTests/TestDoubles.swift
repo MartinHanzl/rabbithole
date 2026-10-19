@@ -58,6 +58,12 @@ nonisolated final class FakeWikipediaService: WikipediaService, @unchecked Senda
         if let error { throw error }
         return ArticleContent(title: title, sections: [])
     }
+
+    var searchResults: [ArticleSummary] = []
+    func search(_ query: String) async throws -> [ArticleSummary] {
+        if let error { throw error }
+        return searchResults
+    }
 }
 
 nonisolated final class InMemoryPoolPersistence: PoolPersistence, @unchecked Sendable {

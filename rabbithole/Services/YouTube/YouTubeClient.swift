@@ -23,6 +23,8 @@ nonisolated protocol YouTubeService: Sendable {
     func playlistPage(_ playlistID: String, page: String?) async throws -> YouTubePlaylistPage
     /// `playable`: videos that may be shown; `returned`: every id the API still knows.
     func videos(ids: [String]) async throws -> (playable: [YouTubeVideo], returned: Set<String>)
+    /// Video ids matching a query. Costs 100 quota units – callers must cache and limit.
+    func searchVideoIDs(_ query: String) async throws -> [String]
 }
 
 typealias YouTubePlaylistPage = YouTubeParser.PlaylistPage
@@ -87,6 +89,15 @@ nonisolated final class YouTubeClient: YouTubeService {
             returned.formUnion(try YouTubeParser.returnedVideoIDs(from: data))
         }
         return (playable, returned)
+    }
+
+    func searchVideoIDs(_ query: String) async throws -> [String] {
+        let data = try await get("search", [
+            "part": "id", "type": "video", "videoEmbeddable": "true", "q": query, "maxResults": "15",
+            "relevanceLanguage": "cs", "regionCode": "CZ", "safeSearch": "moderate",
+            "fields": "items(id/videoId)",
+        ])
+        return try YouTubeParser.searchVideoIDs(from: data)
     }
 
     private func get(_ endpoint: String, _ query: [String: String]) async throws -> Data {

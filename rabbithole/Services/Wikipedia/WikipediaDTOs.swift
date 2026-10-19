@@ -60,3 +60,28 @@ nonisolated struct ExtractResponse: Decodable, Sendable {
 
     let query: Query?
 }
+
+/// Action API `generator=search` with `prop=extracts|pageimages|pageprops`.
+nonisolated struct SearchResponse: Decodable, Sendable {
+    struct Page: Decodable, Sendable {
+        struct Thumbnail: Decodable, Sendable {
+            let source: URL
+        }
+        struct PageProps: Decodable, Sendable {
+            let disambiguation: String?
+        }
+        let pageid: Int
+        let title: String
+        let index: Int?
+        let extract: String?
+        let thumbnail: Thumbnail?
+        let pageimage: String?
+        let pageprops: PageProps?
+    }
+
+    struct Query: Decodable, Sendable {
+        let pages: [Page]?
+    }
+
+    let query: Query?
+}

@@ -164,6 +164,12 @@
         }
       }
     },
+    "Dnes zbývá hledání videí: %lld" : {
+
+    },
+    "Dnešní limit hledání videí je vyčerpaný. Zítra to půjde znovu – články hledat můžeš dál." : {
+
+    },
     "Dokonči nastavení profilu." : {
 
     },
@@ -191,6 +197,9 @@
     "Historie" : {
 
     },
+    "Hledat" : {
+
+    },
     "Hledat podle přezdívky" : {
 
     },
@@ -198,6 +207,9 @@
 
     },
     "Hledám zajímavé články…" : {
+
+    },
+    "Hledám „%@“…" : {
 
     },
     "Hledám…" : {
@@ -278,6 +290,12 @@
     "Možnosti výzvy" : {
 
     },
+    "Na Wikipedii hledáno jako „%@“." : {
+
+    },
+    "Na co jsi zvědavý?" : {
+
+    },
     "Na výzvu už bylo odpovězeno." : {
 
     },
@@ -300,6 +318,9 @@
 
     },
     "Napiš zprávu" : {
+
+    },
+    "Naposledy" : {
 
     },
     "Nastavení" : {
@@ -534,6 +555,9 @@
     "Psychologie" : {
 
     },
+    "Ptej se celou větou – najdeme články z Wikipedie a vysvětlující videa z YouTube." : {
+
+    },
     "Přehrát" : {
 
     },
@@ -613,6 +637,9 @@
 
     },
     "Smazat" : {
+
+    },
+    "Smazat historii hledání" : {
 
     },
     "Smazat natrvalo" : {
@@ -734,6 +761,12 @@
 
     },
     "Videa nejsou v této verzi aplikace k dispozici (chybí klíč k YouTube API)." : {
+
+    },
+    "Videa nejsou v této verzi k dispozici." : {
+
+    },
+    "Videa se nepodařilo načíst." : {
 
     },
     "Videa ve feedu" : {
@@ -896,6 +929,9 @@
     "Zkontroluj otázku a odpovědi." : {
 
     },
+    "Zkus třeba" : {
+
+    },
     "Zkusit znovu" : {
 
     },
@@ -903,6 +939,9 @@
 
     },
     "Zobrazit" : {
+
+    },
+    "Zobrazit všechny články (%lld)" : {
 
     },
     "Zpracovatel" : {
@@ -956,10 +995,16 @@
     "Článek se nepodařilo poslat." : {
 
     },
+    "Články" : {
+
+    },
     "Články a videa, které si ve feedu uložíš, najdeš tady. Články i bez připojení." : {
 
     },
     "Články se načítají z Wikipedie. Zkontroluj připojení k internetu a zkus to znovu." : {
+
+    },
+    "Články se nepodařilo načíst. Zkontroluj připojení." : {
 
     },
     "Články se nepodařilo načíst. Zkus to prosím za chvíli znovu." : {
@@ -977,7 +1022,13 @@
     "Špatná odpověď" : {
 
     },
+    "Žádná videa." : {
+
+    },
     "Žádné články" : {
+
+    },
+    "Žádné články." : {
 
     },
     "Žádost odeslána" : {

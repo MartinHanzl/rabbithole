@@ -29,6 +29,13 @@ nonisolated final class FakeYouTubeService: YouTubeService, @unchecked Sendable 
         return .init(videoIDs: all[index], nextPage: index + 1 < all.count ? String(index + 1) : nil)
     }
 
+    var searchIDs: [String] = []
+    func searchVideoIDs(_ query: String) async throws -> [String] {
+        record("search:\(query)")
+        if let error { throw error }
+        return searchIDs
+    }
+
     func videos(ids: [String]) async throws -> (playable: [YouTubeVideo], returned: Set<String>) {
         record("videos:\(ids.count)")
         if let error { throw error }

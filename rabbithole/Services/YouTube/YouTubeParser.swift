@@ -71,6 +71,11 @@ nonisolated enum YouTubeParser {
         }
     }
 
+    /// Video ids from `search.list`, in relevance order.
+    static func searchVideoIDs(from data: Data) throws -> [String] {
+        (try decoder.decode(SearchListResponse.self, from: data).items ?? []).compactMap(\.id.videoId)
+    }
+
     /// Ids present in a `videos.list` response – videos missing from it were deleted or made private.
     static func returnedVideoIDs(from data: Data) throws -> Set<String> {
         Set((try decoder.decode(VideoListResponse.self, from: data).items ?? []).map(\.id))

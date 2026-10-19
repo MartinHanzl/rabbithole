@@ -106,6 +106,9 @@ Klíč je teď v aplikaci, takže se dá z binárky vytáhnout a všichni uživa
   - Notifikace může přijít se zpožděním a doručení není zaručené.
   - Zprávy se v notifikacích kvůli soukromí nezobrazují, ukazuje se jen otázka výzvy.
   - Na záložce „Od přátel“ je odznak s počtem novinek.
+- **Vyhledávání** (záložka „Hledat“) najde články z Wikipedie i videa z YouTube.
+  - Edge Function `search-assist` (Gemini) udělá z otázky typu „jak funguje kapitalismus“ hledané výrazy. Volat ji jde i bez účtu, s limitem 30 dotazů za hodinu na IP adresu (ukládá se jen hash IP) a se sdílenou cache. Když není k dispozici, aplikace použije místní filtr tazacích slov.
+  - Hledání na YouTube (`search.list`) stojí 100 jednotek kvóty. Proto se spouští jen po potvrzení, výsledky se ukládají na 24 hodin a jedno zařízení smí 15 hledání denně. Pro veřejné vydání by se hledání mělo přesunout na backend se sdílenou cache, nebo je potřeba požádat Google o vyšší kvótu.
 - **Smazání účtu** řeší Edge Function `delete-account`. Integrační test: `bash supabase/tests/functions/delete-account.sh`.
 
 ## Kde upravit mapování témat na kategorie

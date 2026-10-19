@@ -11,6 +11,7 @@ nonisolated protocol WikipediaService: Sendable {
     func summary(title: String) async throws -> ArticleSummary
     func categoryMembers(category: String, continuation: String?) async throws -> WikipediaParser.CategoryPage
     func content(title: String) async throws -> ArticleContent
+    func search(_ query: String) async throws -> [ArticleSummary]
 }
 
 /// Talks to cs.wikipedia.org. Every request carries a descriptive User-Agent per Wikimedia policy,
@@ -67,6 +68,24 @@ nonisolated final class WikipediaClient: WikipediaService {
             URLQueryItem(name: "titles", value: title),
         ]))
         return try WikipediaParser.content(from: data)
+    }
+
+    func search(_ query: String) async throws -> [ArticleSummary] {
+        let data = try await get(WikipediaURLs.actionQuery([
+            URLQueryItem(name: "generator", value: "search"),
+            URLQueryItem(name: "gsrsearch", value: query),
+            URLQueryItem(name: "gsrnamespace", value: "0"),
+            URLQueryItem(name: "gsrlimit", value: "12"),
+            URLQueryItem(name: "prop", value: "extracts|pageimages|pageprops"),
+            URLQueryItem(name: "exintro", value: "1"),
+            URLQueryItem(name: "explaintext", value: "1"),
+            URLQueryItem(name: "exsentences", value: "3"),
+            URLQueryItem(name: "exlimit", value: "max"),
+            URLQueryItem(name: "piprop", value: "thumbnail|name"),
+            URLQueryItem(name: "pithumbsize", value: "640"),
+            URLQueryItem(name: "ppprop", value: "disambiguation"),
+        ]))
+        return try WikipediaParser.searchResults(from: data)
     }
 
     private func get(_ url: URL) async throws -> Data {

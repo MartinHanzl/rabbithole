@@ -1,0 +1,12 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "hand-written-per-api-reference",
+  "nextPageToken": "CA8QAA",
+  "regionCode": "CZ",
+  "pageInfo": { "totalResults": 1000000, "resultsPerPage": 3 },
+  "items": [
+    { "kind": "youtube#searchResult", "etag": "1", "id": { "kind": "youtube#video", "videoId": "vidSearch01" } },
+    { "kind": "youtube#searchResult", "etag": "2", "id": { "kind": "youtube#channel", "channelId": "UCzzzzzzzzzzzzzzzzzzzzzz" } },
+    { "kind": "youtube#searchResult", "etag": "3", "id": { "kind": "youtube#video", "videoId": "vidSearch02" } }
+  ]
+}

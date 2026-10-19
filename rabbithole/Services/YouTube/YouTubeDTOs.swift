@@ -82,3 +82,14 @@ nonisolated struct YouTubeErrorResponse: Decodable, Sendable {
     }
     let error: Body
 }
+
+/// `search.list?part=id&type=video`
+nonisolated struct SearchListResponse: Decodable, Sendable {
+    struct Item: Decodable, Sendable {
+        struct ID: Decodable, Sendable {
+            let videoId: String?
+        }
+        let id: ID
+    }
+    let items: [Item]?
+}

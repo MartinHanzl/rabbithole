@@ -77,7 +77,8 @@ struct FeedViewModelMixingTests {
             feedLoader: FeedLoader(service: wikipedia, pool: articlePool),
             engine: PersonalizationEngine(),
             videoPool: videoPool,
-            youTube: youTube
+            youTube: youTube,
+            search: SearchService(wikipedia: wikipedia, youTube: youTube, client: nil, cacheURL: nil)
         )
         let defaults = UserDefaults(suiteName: "FeedViewModelMixingTests-\(UUID())")!
         let viewModel = FeedViewModel(

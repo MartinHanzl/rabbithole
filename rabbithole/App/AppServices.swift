@@ -8,6 +8,7 @@ struct AppServices: Sendable {
     /// `nil` without a YouTube API key – the feed then shows articles only.
     let videoPool: VideoPool?
     let youTube: (any YouTubeService)?
+    let search: SearchService
 
     static let live: AppServices = {
         let client = WikipediaClient(userAgent: AppConfig.userAgent)
@@ -18,7 +19,8 @@ struct AppServices: Sendable {
             feedLoader: FeedLoader(service: client, pool: pool),
             engine: PersonalizationEngine(),
             videoPool: youTube.map { VideoPool(service: $0, persistence: FileVideoPoolPersistence()) },
-            youTube: youTube
+            youTube: youTube,
+            search: SearchService(wikipedia: client, youTube: youTube, client: BackendClient.shared)
         )
     }()
 }

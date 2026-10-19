@@ -74,7 +74,7 @@ struct MainTabView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     enum Tab: String {
-        case feed, friends, saved, settings
+        case feed, search, friends, saved, settings
     }
 
     var body: some View {
@@ -91,6 +91,9 @@ struct MainTabView: View {
             ))
             .tabItem { Label("Objevuj", systemImage: "rectangle.stack") }
             .tag(Tab.feed)
+            SearchView()
+                .tabItem { Label("Hledat", systemImage: "magnifyingglass") }
+                .tag(Tab.search)
             if auth.state != .unavailable {
                 FromFriendsView()
                     .tabItem { Label("Od přátel", systemImage: "person.2") }

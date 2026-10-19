@@ -57,6 +57,30 @@ nonisolated enum WikipediaParser {
         return title
     }
 
+    // MARK: - Search
+
+    /// Search results in relevance order; disambiguation pages and pages without an intro are dropped.
+    static func searchResults(from data: Data) throws -> [ArticleSummary] {
+        let dto = try decoder.decode(SearchResponse.self, from: data)
+        return (dto.query?.pages ?? [])
+            .sorted { ($0.index ?? .max) < ($1.index ?? .max) }
+            .compactMap { page in
+                let extract = (page.extract ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+                guard page.pageprops?.disambiguation == nil, !extract.isEmpty,
+                      ArticleFilter.isCandidateTitle(page.title) else { return nil }
+                return ArticleSummary(
+                    pageID: page.pageid,
+                    title: page.title,
+                    extract: extract,
+                    description: nil,
+                    type: .standard,
+                    articleURL: WikipediaURLs.article(title: page.title),
+                    thumbnailURL: page.thumbnail?.source,
+                    imageFileTitle: page.pageimage?.replacingOccurrences(of: "_", with: " ")
+                )
+            }
+    }
+
     // MARK: - Full article
 
     /// Sections that only make sense on the web (references, links, navigation).
