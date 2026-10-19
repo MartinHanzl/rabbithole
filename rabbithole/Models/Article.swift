@@ -26,6 +26,15 @@ nonisolated struct ArticleSummary: Identifiable, Hashable, Sendable {
 
     var id: Int { pageID }
 
+    /// Sharper variant of the REST thumbnail (330px is blurry full-width). Wikimedia only serves
+    /// standard widths, and fails for images narrower than requested – callers fall back to `thumbnailURL`.
+    var largeThumbnailURL: URL? {
+        guard let thumbnailURL else { return nil }
+        let string = thumbnailURL.absoluteString
+        guard let range = string.range(of: #"/\d+px-"#, options: .regularExpression) else { return thumbnailURL }
+        return URL(string: string.replacingCharacters(in: range, with: "/960px-"))
+    }
+
     /// File description page with author and license (redirects to Commons for shared files).
     var imageLicenseURL: URL? {
         guard let imageFileTitle else { return nil }

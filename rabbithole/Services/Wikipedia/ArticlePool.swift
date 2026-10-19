@@ -89,8 +89,8 @@ actor ArticlePool {
         var available = availableEntries(in: pool, excluding: excluded)
 
         while available.count < configuration.minimumAvailable, !pool.pending.isEmpty {
-            try await crawlNextCategory(in: &pool)
-            pools[topic.id] = pool
+            try await crawlNextCategory(topicID: topic.id)
+            pool = pools[topic.id] ?? pool
             available = availableEntries(in: pool, excluding: excluded)
         }
         persistence.save(pool, topicID: topic.id)
@@ -122,9 +122,21 @@ actor ArticlePool {
         return fresh
     }
 
-    private func crawlNextCategory(in pool: inout TopicPool) async throws {
-        var category = pool.pending.removeFirst()
-        let page = try await service.categoryMembers(category: category.name, continuation: category.continuation)
+    /// Actor-reentrancy safe: the category is taken from shared state before suspending and
+    /// results are merged into the then-current state, so concurrent callers crawl different
+    /// categories instead of duplicating requests or overwriting each other.
+    private func crawlNextCategory(topicID: String) async throws {
+        guard var category = pools[topicID]?.pending.first else { return }
+        pools[topicID]?.pending.removeFirst()
+
+        let page: WikipediaParser.CategoryPage
+        do {
+            page = try await service.categoryMembers(category: category.name, continuation: category.continuation)
+        } catch {
+            pools[topicID]?.pending.insert(category, at: 0)
+            throw error
+        }
+        guard var pool = pools[topicID] else { return }
 
         let known = Set(pool.entries.map(\.pageID))
         for member in page.articles where !known.contains(member.pageID) && ArticleFilter.isCandidateTitle(member.title) {
@@ -144,5 +156,6 @@ actor ArticlePool {
             category.continuation = continuation
             pool.pending.append(category)
         }
+        pools[topicID] = pool
     }
 }
