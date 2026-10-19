@@ -12,3 +12,8 @@ build/
 *.xcconfig.local
 Secrets.xcconfig
 .env
+
+# Supabase local
+supabase/.branches
+supabase/.temp
+supabase/.env
