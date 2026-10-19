@@ -8,8 +8,8 @@ struct AttributionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             ViewThatFits(in: .horizontal) {
-                HStack(spacing: 4) { sourceParts }
-                VStack(alignment: .leading, spacing: 2) { sourceParts }
+                HStack(spacing: 4) { sourceParts(separated: true) }
+                VStack(alignment: .leading, spacing: 2) { sourceParts(separated: false) }
             }
             if let imageLicenseURL {
                 Link(destination: imageLicenseURL) {
@@ -22,12 +22,14 @@ struct AttributionView: View {
         .tint(.secondary)
     }
 
-    @ViewBuilder private var sourceParts: some View {
+    @ViewBuilder private func sourceParts(separated: Bool) -> some View {
         Text("Zdroj:")
         Link("Wikipedie", destination: articleURL)
             .underline()
-        Text(verbatim: "·")
-            .accessibilityHidden(true)
+        if separated {
+            Text(verbatim: "·")
+                .accessibilityHidden(true)
+        }
         Link("Licence CC BY-SA 4.0", destination: WikipediaURLs.license)
             .underline()
     }
